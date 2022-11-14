@@ -10,24 +10,35 @@
           prefHeight="600.0" prefWidth="800" vgap="10"
           gridLinesVisible="false"
           xmlns:fx="http://javafx.com/fxml/1"
-          xmlns="http://javafx.com/javafx/19">
+          xmlns="http://javafx.com/javafx/19"
+          fx:controller="z03.pap22z.MainMenuController"
+          stylesheets="@style.css"
+          styleClass="main-menu">
     <padding>
         <Insets bottom="25" left="25" right="25" top="25"/>
     </padding>
     <Text id="menu-text" text="AimTrainer" textAlignment="CENTER"
-          wrappingWidth="200.69140625">
+          wrappingWidth="200">
         <font>
             <Font name="Bauhaus 93" size="36.0"/>
         </font>
     </Text>
     <Button prefHeight="40.0" prefWidth="200.0" text="Play"
-            textAlignment="CENTER" GridPane.rowIndex="1"/>
+            textAlignment="CENTER" GridPane.rowIndex="1"
+            onAction="#handleStartButtonPress"
+    />
     <Button prefHeight="40.0" prefWidth="200.0" text="Scoreboard"
-            GridPane.rowIndex="2"/>
+            textAlignment="CENTER" GridPane.rowIndex="2"
+            onAction="#handleScoreboardButtonPress"
+    />
     <Button prefHeight="40.0" prefWidth="200.0" text="Settings"
-            GridPane.rowIndex="3"/>
+            textAlignment="CENTER" GridPane.rowIndex="3"
+            onAction="#handleSettingsButtonPress"
+    />
     <Button prefHeight="40.0" prefWidth="200.0" text="Exit"
-            GridPane.rowIndex="4"/>
+            textAlignment="CENTER" GridPane.rowIndex="4"
+            onAction="#handleExitButtonPress"
+    />
     <columnConstraints>
         <ColumnConstraints/>
     </columnConstraints>
@@ -38,5 +49,4 @@
         <RowConstraints/>
         <RowConstraints/>
     </rowConstraints>
-
 </GridPane>
