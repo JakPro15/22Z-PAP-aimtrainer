@@ -4,7 +4,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class MainMenuController {
+import java.io.IOException;
+
+public class MainMenuController extends z03.pap22z.SceneController {
     @FXML
     protected void handleStartButtonPress(ActionEvent event) {
         System.out.println("Start button pressed.");
@@ -12,7 +14,12 @@ public class MainMenuController {
 
     @FXML
     protected void handleSettingsButtonPress(ActionEvent event) {
-        System.out.println("Settings button pressed.");
+        try {
+            switchToScene(event, "Settings");
+//            switchToSettings(event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

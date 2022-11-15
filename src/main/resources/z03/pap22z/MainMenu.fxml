@@ -13,7 +13,7 @@
           xmlns="http://javafx.com/javafx/19"
           fx:controller="z03.pap22z.MainMenuController"
           stylesheets="@style.css"
-          styleClass="main-menu">
+          styleClass="background">
     <padding>
         <Insets bottom="25" left="25" right="25" top="25"/>
     </padding>
