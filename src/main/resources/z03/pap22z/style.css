@@ -6,17 +6,21 @@ background {
     -fx-background-color: #404040;
 }
 
+.text {
+    -fx-color: #ff2600;
+    color: #ff2600;
+}
+
 .button {
     -fx-text-fill: black;
     -fx-font-family: "Arial Narrow";
-    -fx-background-color: #c00000;
-    -fx-border-color: black;
+    -fx-background-color: linear-gradient(#404040, #606060);
+    -fx-border-color: #ff2600;
     -fx-border-radius: 1px;
     -fx-border-width: 3px;
     -fx-border-insets: -2px;
-    /*-fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 0, 0, 0, 1);*/
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(#c00000, #400000);
+    -fx-background-color: linear-gradient(#404040, #202020);
 }

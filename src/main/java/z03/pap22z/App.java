@@ -10,8 +10,9 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            primaryStage.setResizable(false);
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+            primaryStage.setMinHeight(600);
+            primaryStage.setMinWidth(800);
             Scene scene = new Scene(root, 800, 600);
             primaryStage.setTitle("AimTrainer");
             primaryStage.setScene(scene);

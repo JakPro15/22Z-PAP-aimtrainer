@@ -1,2 +1,10 @@
+# intellij helper files
 .idea/
+
+# vscode helper files
+.vscode/
+
+# maven related files
 target/
+
+logs/
