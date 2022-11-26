@@ -1,33 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
-            stylesheets="@style.css" styleClass="background"
-            xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="z03.pap22z.SettingsController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.SettingsController">
     <children>
-        <Text layoutX="344.0" layoutY="96.0" strokeType="OUTSIDE"
-              strokeWidth="0.0" text="Settings" textAlignment="CENTER"
-              wrappingWidth="112.0" AnchorPane.leftAnchor="344.0"
-              AnchorPane.rightAnchor="344.0" AnchorPane.topAnchor="80.0">
+        <Text layoutX="344.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" textAlignment="CENTER" wrappingWidth="112.0" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="344.0" AnchorPane.topAnchor="80.0">
             <font>
-                <Font size="24.0"/>
+                <Font size="24.0" />
             </font>
         </Text>
-        <HBox layoutX="647.0" layoutY="554.0" prefHeight="32.0"
-              prefWidth="139.0" spacing="10.0" AnchorPane.bottomAnchor="14.0"
-              AnchorPane.rightAnchor="14.0">
+        <HBox layoutX="647.0" layoutY="554.0" prefHeight="32.0" prefWidth="139.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
             <children>
-                <Button mnemonicParsing="false" prefHeight="32.0"
-                        prefWidth="64.0" text="Save"/>
-                <Button mnemonicParsing="false" onAction="#handleExit"
-                        prefHeight="32.0" prefWidth="64.0" text="Exit"/>
+                <Button mnemonicParsing="false" onAction="#handleSave" prefHeight="32.0" prefWidth="64.0" text="Save" />
+                <Button mnemonicParsing="false" onAction="#handleExit" prefHeight="32.0" prefWidth="64.0" text="Exit" />
             </children>
         </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
+         <children>
+            <VBox alignment="CENTER_RIGHT" minWidth="150.0" prefHeight="200.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Music Volume">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="1000.0">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Slider fx:id="volumeSlider" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="volumeValueLabel" minWidth="100.0" text="0%" textFill="BLACK">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>
