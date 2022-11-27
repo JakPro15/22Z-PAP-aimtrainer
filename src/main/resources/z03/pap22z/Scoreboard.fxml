@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0"
+            minWidth="800.0" prefHeight="600.0" prefWidth="800.0"
+            styleClass="background" stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="z03.pap22z.ScoreboardController">
+    <children>
+        <GridPane alignment="CENTER" layoutX="266.0" layoutY="78.0"
+                  stylesheets="@style.css">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <Label text="Scoreboard"
+                   GridPane.columnIndex="0" GridPane.rowIndex="0"
+                   alignment="CENTER" textAlignment="CENTER"/>
+            <TableView fx:id="tableView" editable="false"
+                       GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <columns>
+                    <TableColumn sortType="DESCENDING" text="Date"/>
+                    <TableColumn text="User"/>
+                    <TableColumn sortType="DESCENDING" text="Score"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+            <columnConstraints>
+                <ColumnConstraints/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints minHeight="60" prefHeight="60" maxHeight="60"/>
+                <RowConstraints/>
+            </rowConstraints>
+        </GridPane>
+        <Button mnemonicParsing="false"
+                onAction="#handleExit" prefHeight="32.0" prefWidth="64.0"
+                text="Exit" AnchorPane.bottomAnchor="15.0"
+                AnchorPane.rightAnchor="20.0"/>
+    </children>
+</AnchorPane>
