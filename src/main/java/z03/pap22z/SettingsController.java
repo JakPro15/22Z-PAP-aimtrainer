@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
@@ -18,6 +19,10 @@ public class SettingsController extends z03.pap22z.SceneController {
                 volumeValueLabel.textProperty().setValue(String.format("%d%%", (int)volumeSlider.getValue()));
             }
         });
+        volumeSlider.setValue(Settings.musicVolume);
+
+        profileComboBox.getItems().addAll("default", "other", "another");
+        profileComboBox.getSelectionModel().select("default");
     }
 
     @FXML
@@ -25,6 +30,9 @@ public class SettingsController extends z03.pap22z.SceneController {
 
     @FXML
     private Label volumeValueLabel;
+
+    @FXML
+    private ComboBox<String> profileComboBox;
 
     @FXML
     protected void handleExit(ActionEvent event) {
@@ -41,7 +49,23 @@ public class SettingsController extends z03.pap22z.SceneController {
     }
 
     @FXML
+    void handleNewProfile(ActionEvent event) {
+        String newProfile = NewProfileDialogController.getNewProfile(stage);
+        System.out.println(newProfile);
+    }
+
+    @FXML
+    void handleDeleteProfile(ActionEvent event) {
+        System.out.println("Delete Profile pressed");
+    }
+
+    @FXML
     void volumeSliderChanged(MouseEvent event) {
         System.out.println("Slider changed");
+    }
+
+    @FXML
+    void profileSelected(ActionEvent event) {
+        System.out.println(String.format("a profile has been set: %s", profileComboBox.getValue()));
     }
 }

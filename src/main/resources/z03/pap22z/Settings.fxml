@@ -11,11 +11,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.SettingsController">
     <children>
-        <Text layoutX="344.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" textAlignment="CENTER" wrappingWidth="112.0" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="344.0" AnchorPane.topAnchor="80.0">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Text>
+      <VBox alignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="100.0">
+         <children>
+              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" textAlignment="CENTER" wrappingWidth="169.0">
+                  <font>
+                      <Font size="36.0" />
+                  </font>
+              </Text>
+         </children>
+      </VBox>
         <HBox layoutX="647.0" layoutY="554.0" prefHeight="32.0" prefWidth="139.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#handleSave" prefHeight="32.0" prefWidth="64.0" text="Save" />
@@ -50,6 +54,18 @@
                   </HBox>
                </children>
             </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile:" textAlignment="RIGHT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="profileComboBox" onAction="#profileSelected" prefWidth="150.0" />
+            <Button mnemonicParsing="false" onAction="#handleNewProfile" text="New Profile" />
+            <Button mnemonicParsing="false" onAction="#handleDeleteProfile" text="Delete Profile" />
          </children>
       </HBox>
     </children>
