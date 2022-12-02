@@ -2,29 +2,15 @@ package z03.pap22z;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-
 import java.io.IOException;
 
 public class SettingsController extends z03.pap22z.SceneController {
-    public void initialize() {
-        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                volumeValueLabel.textProperty().setValue(String.format("%d%%", (int)volumeSlider.getValue()));
-            }
-        });
-        volumeSlider.setValue(Settings.musicVolume);
-
-        profileComboBox.getItems().addAll("default", "other", "another");
-        profileComboBox.getSelectionModel().select("default");
-    }
-
     @FXML
     private Slider volumeSlider;
 
@@ -33,6 +19,20 @@ public class SettingsController extends z03.pap22z.SceneController {
 
     @FXML
     private ComboBox<String> profileComboBox;
+
+    public void initialize() {
+        System.out.println("initialized");
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
+                volumeValueLabel.textProperty().setValue(String.format("%d%%", (int)volumeSlider.getValue()));
+                Settings.setMusicVolume((int)volumeSlider.getValue());
+            }
+        });
+        Settings.setSettingsController(this);
+        profileListChanged();
+        update();
+    }
 
     @FXML
     protected void handleExit(ActionEvent event) {
@@ -51,21 +51,37 @@ public class SettingsController extends z03.pap22z.SceneController {
     @FXML
     void handleNewProfile(ActionEvent event) {
         String newProfile = NewProfileDialogController.getNewProfile(stage);
-        System.out.println(newProfile);
+        if(Settings.getProfileNames().contains(newProfile)) {
+            Warning.warn(String.format("Profile %s already exists.", newProfile));
+        }
+        else {
+            Settings.addNewProfile(newProfile);
+        }
     }
 
     @FXML
     void handleDeleteProfile(ActionEvent event) {
-        System.out.println("Delete Profile pressed");
-    }
-
-    @FXML
-    void volumeSliderChanged(MouseEvent event) {
-        System.out.println("Slider changed");
+        if(Settings.getProfileNames().size() == 1) {
+            Warning.warn("You cannot delete the only profile.");
+        }
+        else {
+            Settings.deleteProfile(Settings.getCurrentProfile());
+        }
     }
 
     @FXML
     void profileSelected(ActionEvent event) {
-        System.out.println(String.format("a profile has been set: %s", profileComboBox.getValue()));
+        if (profileComboBox.getValue() != null) {
+            Settings.setCurrentProfile(profileComboBox.getValue());
+        }
+    }
+
+    public void update() {
+        volumeSlider.setValue(Settings.getMusicVolume());
+    }
+
+    public void profileListChanged() {
+        profileComboBox.setItems(FXCollections.observableArrayList(Settings.getProfileNames()));
+        profileComboBox.getSelectionModel().select(Settings.getCurrentProfile());
     }
 }
