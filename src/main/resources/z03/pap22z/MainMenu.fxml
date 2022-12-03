@@ -23,21 +23,22 @@
     </Text>
     <Button onAction="#handleStartButtonPress" prefHeight="40.0"
             prefWidth="200.0" text="Play" textAlignment="CENTER"
-            GridPane.rowIndex="1"/>
+            GridPane.rowIndex="2"/>
     <Button onAction="#handleScoreboardButtonPress" prefHeight="40.0"
             prefWidth="200.0" text="Scoreboard" textAlignment="CENTER"
-            GridPane.rowIndex="2"/>
+            GridPane.rowIndex="3"/>
     <Button onAction="#handleSettingsButtonPress" prefHeight="40.0"
             prefWidth="200.0" text="Settings" textAlignment="CENTER"
-            GridPane.rowIndex="3"/>
+            GridPane.rowIndex="4"/>
     <Button onAction="#handleExitButtonPress" prefHeight="40.0"
             prefWidth="200.0" text="Exit" textAlignment="CENTER"
-            GridPane.rowIndex="4"/>
+            GridPane.rowIndex="5"/>
     <columnConstraints>
         <ColumnConstraints/>
     </columnConstraints>
     <rowConstraints>
         <RowConstraints/>
+        <RowConstraints minHeight="60" prefHeight="60" maxHeight="60"/>
         <RowConstraints/>
         <RowConstraints/>
         <RowConstraints/>
