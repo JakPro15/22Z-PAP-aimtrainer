@@ -31,6 +31,8 @@
                 <columns>
                     <TableColumn sortType="DESCENDING" text="Date" />
                     <TableColumn text="User" />
+                    <TableColumn text="Game" />
+                    <TableColumn text="Settings" />
                     <TableColumn sortType="DESCENDING" text="Score" />
                 </columns>
                 <columnResizePolicy>

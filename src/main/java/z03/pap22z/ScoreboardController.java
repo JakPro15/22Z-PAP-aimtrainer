@@ -1,9 +1,9 @@
 package z03.pap22z;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import java.io.IOException;
 
 public class ScoreboardController extends z03.pap22z.SceneController {
     @FXML
