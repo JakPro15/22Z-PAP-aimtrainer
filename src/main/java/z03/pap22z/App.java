@@ -6,9 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import z03.pap22z.database.Results;
+
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+        System.out.println(Results.ENTITY_MANAGER_FACTORY);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             primaryStage.setMinHeight(600);
@@ -24,5 +27,10 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void stop(){
+        System.exit(0);
     }
 }
