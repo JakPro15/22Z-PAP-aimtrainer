@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+
 import java.io.IOException;
 
 public class SettingsController extends z03.pap22z.SceneController {
@@ -20,8 +21,10 @@ public class SettingsController extends z03.pap22z.SceneController {
     @FXML
     private ComboBox<String> profileComboBox;
 
+    /**
+     * Initialize the settings UI.
+     */
     public void initialize() {
-        System.out.println("initialized");
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
@@ -29,9 +32,7 @@ public class SettingsController extends z03.pap22z.SceneController {
                 Settings.setMusicVolume((int)volumeSlider.getValue());
             }
         });
-        Settings.setSettingsController(this);
         profileListChanged();
-        update();
     }
 
     @FXML
@@ -44,44 +45,57 @@ public class SettingsController extends z03.pap22z.SceneController {
     }
 
     @FXML
-    void handleSave(ActionEvent event) {
+    protected void handleSave(ActionEvent event) {
         System.out.println("Save pressed");
     }
 
     @FXML
-    void handleNewProfile(ActionEvent event) {
+    protected void handleNewProfile(ActionEvent event) {
         String newProfile = NewProfileDialogController.getNewProfile(stage);
         if(Settings.getProfileNames().contains(newProfile)) {
-            Warning.warn(String.format("Profile %s already exists.", newProfile));
+            Alerts.warn(String.format("Profile %s already exists.", newProfile));
         }
         else {
             Settings.addNewProfile(newProfile);
+            profileListChanged();
         }
     }
 
     @FXML
-    void handleDeleteProfile(ActionEvent event) {
+    protected void handleDeleteProfile(ActionEvent event) {
         if(Settings.getProfileNames().size() == 1) {
-            Warning.warn("You cannot delete the only profile.");
+            Alerts.warn("You cannot delete the only profile.");
         }
         else {
-            Settings.deleteProfile(Settings.getCurrentProfile());
+            if(Alerts.confirm(String.format("Are you sure you want to delete %s profile?",
+                                            Settings.getCurrentProfile()))) {
+                Settings.deleteProfile(Settings.getCurrentProfile());
+                profileListChanged();
+            }
         }
     }
 
     @FXML
-    void profileSelected(ActionEvent event) {
+    protected void profileSelected(ActionEvent event) {
         if (profileComboBox.getValue() != null) {
             Settings.setCurrentProfile(profileComboBox.getValue());
+            update();
         }
     }
 
-    public void update() {
+    /**
+     * Updates the settings UI with the current Settings values.
+     */
+    private void update() {
         volumeSlider.setValue(Settings.getMusicVolume());
     }
 
-    public void profileListChanged() {
+    /**
+     * Updates the settings UI to the current list of profiles. Also calls update().
+     */
+    private void profileListChanged() {
         profileComboBox.setItems(FXCollections.observableArrayList(Settings.getProfileNames()));
         profileComboBox.getSelectionModel().select(Settings.getCurrentProfile());
+        update();
     }
 }
