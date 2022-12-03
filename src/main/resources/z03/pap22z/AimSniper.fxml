@@ -17,7 +17,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="63.0" layoutY="101.0" text="Seconds left:" textFill="WHITE">
+                  <Label layoutX="63.0" layoutY="101.0" text="Time left:" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -28,17 +28,17 @@
                      </font>
                   </Label>
                   <Button layoutX="499.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleExit" text="Back to game selection" />
-                  <Label fx:id="scoreValueLabel" layoutX="126.0" layoutY="31.0" prefHeight="21.0" prefWidth="360.0" textFill="WHITE">
+                  <Label fx:id="scoreValueLabel" layoutX="126.0" layoutY="31.0" prefHeight="21.0" prefWidth="360.0" text="0" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="timeLeftValueLabel" layoutX="189.0" layoutY="101.0" prefHeight="21.0" prefWidth="301.0" textFill="WHITE">
+                  <Label fx:id="timeLeftValueLabel" layoutX="153.0" layoutY="101.0" prefHeight="21.0" prefWidth="337.0" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="accuracyValueLabel" layoutX="595.0" layoutY="31.0" prefHeight="21.0" prefWidth="193.0" textFill="WHITE">
+                  <Label fx:id="accuracyValueLabel" layoutX="595.0" layoutY="31.0" prefHeight="21.0" prefWidth="193.0" text="0%" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
