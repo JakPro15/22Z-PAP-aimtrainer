@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.AimSniperController">
+   <children>
+      <SplitPane dividerPositions="0.7" layoutX="166.0" layoutY="77.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="background" stylesheets="@style.css" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="background" stylesheets="@style.css">
+               <children>
+                  <Label layoutX="63.0" layoutY="26.0" prefHeight="30.0" prefWidth="71.0" text="Score:" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="63.0" layoutY="101.0" text="Time left:" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="499.0" layoutY="31.0" text="Accuracy:" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="499.0" layoutY="98.0" mnemonicParsing="false" onAction="#handleExit" text="Back to game selection" />
+                  <Label fx:id="scoreValueLabel" layoutX="126.0" layoutY="31.0" prefHeight="21.0" prefWidth="360.0" text="0" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="timeLeftValueLabel" layoutX="153.0" layoutY="101.0" prefHeight="21.0" prefWidth="337.0" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="accuracyValueLabel" layoutX="595.0" layoutY="31.0" prefHeight="21.0" prefWidth="193.0" text="0%" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
