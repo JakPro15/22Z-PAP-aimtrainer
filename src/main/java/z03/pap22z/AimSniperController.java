@@ -17,7 +17,7 @@ public class AimSniperController extends z03.pap22z.SceneController
 
     private Timer timer = new Timer();
 
-    private int timeLeft = 1;
+    private int timeLeft = Settings.getGameLength();
 
     @FXML
     private Label scoreValueLabel;
@@ -77,6 +77,7 @@ public class AimSniperController extends z03.pap22z.SceneController
     {
         try
         {
+            timer.cancel();
             switchToMenu(event);
         }
         catch (IOException e)
