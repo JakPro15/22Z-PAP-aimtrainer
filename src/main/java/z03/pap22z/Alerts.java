@@ -15,7 +15,6 @@ public class Alerts extends Alert {
 
     /**
      * Show a warning dialog.
-     *
      * @param text text to be shown on the dialog.
      */
     public static void warn(String text) {
@@ -25,9 +24,7 @@ public class Alerts extends Alert {
 
     /**
      * Show a dialog asking the user to confirm.
-     *
      * @param text text to be shown on the dialog.
-     *
      * @return the user's answer (OK - true, Cancel - false)
      */
     public static boolean confirm(String text) {

@@ -35,17 +35,62 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sound Effects Volume">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Speed">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Single Game Length">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
                </children>
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="1000.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="1000.0" spacing="20.0">
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Slider fx:id="volumeSlider" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="volumeValueLabel" minWidth="100.0" text="0%" textFill="BLACK">
+                        <Slider fx:id="musicVolumeSlider" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="musicVolumeValueLabel" minWidth="100.0" text="0%" textFill="BLACK">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Slider fx:id="sfxVolumeSlider" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="sfxVolumeValueLabel" minWidth="100.0" text="0%" textFill="BLACK">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Slider fx:id="gameSpeedSlider" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="0.0" minorTickCount="0" snapToTicks="true" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="gameSpeedValueLabel" minWidth="100.0" text="1.00x" textFill="BLACK">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Slider fx:id="gameLengthSlider" blockIncrement="1.0" majorTickUnit="1.0" max="60.0" min="5.0" minorTickCount="0" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="gameLengthValueLabel" minWidth="100.0" text="0%" textFill="BLACK">
                            <font>
                               <Font size="16.0" />
                            </font>

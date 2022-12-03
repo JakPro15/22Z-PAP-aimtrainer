@@ -30,9 +30,7 @@ public class NewProfileDialogController {
 
     /**
      * Shows a dialog for the user to input the name of the profile to be created.
-     *
      * @param parentStage stage that calls the dialog (for modality to work)
-     *
      * @return new profile name inputted by the user
      */
     public static String getNewProfile(Stage parentStage) {

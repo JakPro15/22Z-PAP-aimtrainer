@@ -1,5 +1,7 @@
 package z03.pap22z;
 
+import static java.lang.Math.round;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,14 +12,25 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class SettingsController extends z03.pap22z.SceneController {
     @FXML
-    private Slider volumeSlider;
-
+    private Slider musicVolumeSlider;
     @FXML
-    private Label volumeValueLabel;
-
+    private Label musicVolumeValueLabel;
+    @FXML
+    private Slider sfxVolumeSlider;
+    @FXML
+    private Label sfxVolumeValueLabel;
+    @FXML
+    private Slider gameSpeedSlider;
+    @FXML
+    private Label gameSpeedValueLabel;
+    @FXML
+    private Slider gameLengthSlider;
+    @FXML
+    private Label gameLengthValueLabel;
     @FXML
     private ComboBox<String> profileComboBox;
 
@@ -25,11 +38,35 @@ public class SettingsController extends z03.pap22z.SceneController {
      * Initialize the settings UI.
      */
     public void initialize() {
-        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+        // Bind the slider labels to the sliders
+        musicVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                volumeValueLabel.textProperty().setValue(String.format("%d%%", (int)volumeSlider.getValue()));
-                Settings.setMusicVolume((int)volumeSlider.getValue());
+                musicVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int)musicVolumeSlider.getValue()));
+                Settings.setMusicVolume((int)musicVolumeSlider.getValue());
+            }
+        });
+        sfxVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
+                sfxVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int)sfxVolumeSlider.getValue()));
+                Settings.setSfxVolume((int)sfxVolumeSlider.getValue());
+            }
+        });
+        gameSpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
+                Double gameSpeed = Settings.VALID_GAME_SPEEDS[(int) round(gameSpeedSlider.getValue())];
+                gameSpeedValueLabel.textProperty().setValue(String.format("%.2fx", gameSpeed));
+                Settings.setGameSpeed(gameSpeed);
+            }
+        });
+        gameLengthSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
+                Integer gameLength = (int) round(gameLengthSlider.getValue());
+                gameLengthValueLabel.textProperty().setValue(String.format("%d seconds", gameLength));
+                Settings.setGameLength(gameLength);
             }
         });
         profileListChanged();
@@ -87,7 +124,10 @@ public class SettingsController extends z03.pap22z.SceneController {
      * Updates the settings UI with the current Settings values.
      */
     private void update() {
-        volumeSlider.setValue(Settings.getMusicVolume());
+        musicVolumeSlider.setValue(Settings.getMusicVolume());
+        sfxVolumeSlider.setValue(Settings.getSfxVolume());
+        gameSpeedSlider.setValue(Arrays.asList(Settings.VALID_GAME_SPEEDS).indexOf(Settings.getGameSpeed()));
+        gameLengthSlider.setValue(Settings.getGameLength());
     }
 
     /**
