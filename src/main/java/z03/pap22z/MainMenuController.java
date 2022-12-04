@@ -15,15 +15,20 @@ public class MainMenuController extends z03.pap22z.SceneController {
     @FXML
     protected void handleSettingsButtonPress(ActionEvent event) {
         try {
-            switchToScene(event, "Settings");
-//            switchToSettings(event);
+            switchToSettings(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Settings button pressed.");
     }
 
     @FXML
     protected void handleScoreboardButtonPress(ActionEvent event) {
+        try {
+            switchToScoreboard(event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("Scoreboard button pressed.");
     }
 
