@@ -5,13 +5,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import z03.pap22z.database.Results;
+import z03.pap22z.database.Database;
 
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println(Results.ENTITY_MANAGER_FACTORY);
+        try {
+            Database.connect();
+        }
+        catch (Exception e) {
+            System.out.println("Failed to connect to the MySQL database.");
+        }
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             primaryStage.setMinHeight(600);
@@ -22,6 +27,8 @@ public class App extends Application {
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            Database.closeConnection();
+            System.exit(0);
         }
     }
 
@@ -31,6 +38,7 @@ public class App extends Application {
 
     @Override
     public void stop(){
+        Database.closeConnection();
         System.exit(0);
     }
 }
