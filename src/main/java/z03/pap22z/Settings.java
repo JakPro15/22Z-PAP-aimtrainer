@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.scene.chart.PieChart.Data;
+import z03.pap22z.database.Database;
+
+import z03.pap22z.database.ProfileSettings;
+
 
 public class Settings {
     private static Integer currentProfile;
@@ -29,14 +34,45 @@ public class Settings {
         sfxVolumes = new ArrayList<Integer>();
         gameSpeeds = new ArrayList<Double>();
         gameLengths = new ArrayList<Integer>();
-        // temporary values
-        // in the end this will load data from the last active profile from the database
+
+        if(Database.isConnected()) {
+            List<ProfileSettings> profiles = Database.readAllSettings();
+            if(profiles.size() == 0) {
+                Database.createDefaultProfile();
+                profiles = Database.readAllSettings();
+            }
+            setAllProfiles(profiles);
+        }
+        else {
+            // can't read from database - create a default profile instead
+            profileNames.add("default");
+            musicVolumes.add(50);
+            sfxVolumes.add(50);
+            gameSpeeds.add(1.0);
+            gameLengths.add(20);
+        }
         currentProfile = 0;
-        profileNames.add("default");
-        musicVolumes.add(50);
-        sfxVolumes.add(50);
-        gameSpeeds.add(1.0);
-        gameLengths.add(20);
+    }
+
+    /**
+     * Set all profiles and settings to the given list of profiles with their settings.
+     * Current profiles are replaced with the given ones.
+     * @param profiles list of profiles to be set
+     */
+    public static void setAllProfiles(List<ProfileSettings> profiles) {
+        profileNames = new ArrayList<String>();
+        musicVolumes = new ArrayList<Integer>();
+        sfxVolumes = new ArrayList<Integer>();
+        gameSpeeds = new ArrayList<Double>();
+        gameLengths = new ArrayList<Integer>();
+        for(ProfileSettings profile: profiles) {
+            profileNames.add(profile.getName());
+            musicVolumes.add(profile.getMusicVolume());
+            sfxVolumes.add(profile.getSfxVolume());
+            gameSpeeds.add(profile.getGameSpeed());
+            gameLengths.add(profile.getGameLength());
+        }
+        currentProfile = 0;
     }
 
     /**

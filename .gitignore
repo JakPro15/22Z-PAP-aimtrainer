@@ -6,5 +6,9 @@
 
 # maven related files
 target/
+dependency-reduced-pom.xml
 
 logs/
+
+# jar of the program
+AimTrainer.jar

@@ -15,6 +15,7 @@ public class App extends Application {
         }
         catch (Exception e) {
             System.out.println("Failed to connect to the MySQL database.");
+            e.printStackTrace();
         }
 
         try {
