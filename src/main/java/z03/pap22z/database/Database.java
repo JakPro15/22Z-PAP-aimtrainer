@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class Database {
             if (transaction != null) {
                 transaction.rollback();
             }
-            ex.printStackTrace();;
+            System.out.println(ex.getMessage());
         }
         finally {
             manager.close();
@@ -83,11 +84,39 @@ public class Database {
         catch (Exception ex) {
             if (transaction != null)
                 transaction.rollback();
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
         finally {
             manager.close();
         }
         return result;
+    }
+
+    /**
+     * Replaces the database settings list with the given one.
+     * @param profiles list of profiles to be written to the database
+     */
+    public static void writeAllSettings(List<ProfileSettings> profiles) {
+        EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
+            Query query = manager.createQuery("DELETE FROM ProfileSettings s");
+            if(query.executeUpdate() == 0) {
+                System.out.println("Failed to delete data from Settings table.");
+                return;
+            }
+            for(ProfileSettings profile: profiles) {
+                manager.persist(profile);
+            }
+            transaction.commit();
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            manager.close();
+        }
     }
 }

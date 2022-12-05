@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javafx.scene.chart.PieChart.Data;
 import z03.pap22z.database.Database;
 
 import z03.pap22z.database.ProfileSettings;
@@ -27,6 +26,7 @@ public class Settings {
 
     /**
      * Initialize the settings.
+     * Will also reset the settings to loaded from database or default if called later.
      */
     private static void initialize() {
         profileNames = new ArrayList<String>();
@@ -227,5 +227,41 @@ public class Settings {
             throw new IllegalArgumentException("Single game length must be between 5 and 60 (inclusive)");
         }
         gameLengths.set(currentProfile, newGameLength);
+    }
+
+    /**
+     * Writes all changes to settings to the database (if connected).
+     */
+    public static void writeToDatabase() {
+        if(Database.isConnected()) {
+            List<ProfileSettings> profiles = new ArrayList<ProfileSettings>();
+            for(int i = 0; i < profileNames.size(); i++) {
+                ProfileSettings profile = new ProfileSettings();
+                profile.setId(i);
+                profile.setName(profileNames.get(i));
+                profile.setMusicVolume(musicVolumes.get(i));
+                profile.setSfxVolume(sfxVolumes.get(i));
+                profile.setGameSpeed(gameSpeeds.get(i));
+                profile.setGameLength(gameLengths.get(i));
+                profiles.add(profile);
+            }
+            Database.writeAllSettings(profiles);
+        }
+    }
+
+    /**
+     * Reads all settings from the database, replacing the current ones
+     * (if there are any).
+     * If not connected to the database, does nothing.
+     */
+    public static void readFromDatabase() {
+        if(Database.isConnected()) {
+            List<ProfileSettings> profiles = Database.readAllSettings();
+            if(profiles.size() == 0) {
+                Database.createDefaultProfile();
+                profiles = Database.readAllSettings();
+            }
+            setAllProfiles(profiles);
+        }
     }
 }

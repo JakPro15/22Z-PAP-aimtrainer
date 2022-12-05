@@ -74,6 +74,7 @@ public class SettingsController extends z03.pap22z.SceneController {
 
     @FXML
     protected void handleExit(ActionEvent event) {
+        Settings.readFromDatabase();
         try {
             switchToMenu(event);
         } catch (IOException e) {
@@ -83,7 +84,7 @@ public class SettingsController extends z03.pap22z.SceneController {
 
     @FXML
     protected void handleSave(ActionEvent event) {
-        System.out.println("Save pressed");
+        Settings.writeToDatabase();
     }
 
     @FXML
