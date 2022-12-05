@@ -109,8 +109,8 @@ public class SettingsController extends z03.pap22z.SceneController {
         }
         else {
             if(Alerts.confirm(String.format("Are you sure you want to delete %s profile?",
-                                            Settings.getCurrentProfile()))) {
-                Settings.deleteProfile(Settings.getCurrentProfile());
+                                            Settings.getCurrentProfileName()))) {
+                Settings.deleteProfile(Settings.getCurrentProfileName());
                 profileListChanged();
             }
         }
@@ -139,7 +139,7 @@ public class SettingsController extends z03.pap22z.SceneController {
      */
     private void profileListChanged() {
         profileComboBox.setItems(FXCollections.observableArrayList(Settings.getProfileNames()));
-        profileComboBox.getSelectionModel().select(Settings.getCurrentProfile());
+        profileComboBox.getSelectionModel().select(Settings.getCurrentProfileName());
         update();
     }
 }

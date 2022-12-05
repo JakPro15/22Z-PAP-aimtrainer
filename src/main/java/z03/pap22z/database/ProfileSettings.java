@@ -1,7 +1,11 @@
 package z03.pap22z.database;
+
+import java.util.List;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,6 +13,7 @@ import javax.persistence.Table;
 @Table(name = "Settings")
 public class ProfileSettings implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProfileID", unique = true, nullable = false)
     private int id;
 
@@ -73,5 +78,46 @@ public class ProfileSettings implements Serializable {
 
     public void setGameLength(int gameLength) {
         this.gameLength = gameLength;
+    }
+
+    /**
+     * @return newly created default profile object
+     */
+    public static ProfileSettings getDefaultProfile() {
+        ProfileSettings defaultProfile = new ProfileSettings();
+        defaultProfile.setId(0);
+        defaultProfile.setName("default");
+        defaultProfile.setMusicVolume(50);
+        defaultProfile.setSfxVolume(50);
+        defaultProfile.setGameSpeed(1.0);
+        defaultProfile.setGameLength(20);
+        return defaultProfile;
+    }
+
+    /**
+     * Finds a profile with the given name in the given list
+     * @param profiles list of profiles to search
+     * @param profileName name of the profile to find
+     * @return the found profile; null if not found
+     */
+    public static ProfileSettings findProfile(List<ProfileSettings> profiles, String profileName) {
+        for(ProfileSettings profile: profiles) {
+            if(profile.name.equals(profileName)) {
+                return profile;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Sets all attributes except ID to other's attributes.
+     * @param other profile to copy from
+     */
+    public void copyFromOther(ProfileSettings other) {
+        name = other.getName();
+        musicVolume = other.getMusicVolume();
+        sfxVolume = other.getSfxVolume();
+        gameSpeed = other.getGameSpeed();
+        gameLength = other.getGameLength();
     }
 }

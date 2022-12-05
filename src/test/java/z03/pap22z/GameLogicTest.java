@@ -12,11 +12,11 @@ public class GameLogicTest extends TestCase
 
         assertTrue(logic.accuracyProperty().getValue().equals((double)0));
     }
-    
+
     public void testGetters()
     {
         GameLogic logic = new GameLogic();
-        
+
         assertTrue(logic.getPoints() == 0);
 
         assertTrue(logic.getAccuracy() == 0);

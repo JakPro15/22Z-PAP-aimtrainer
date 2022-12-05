@@ -16,6 +16,7 @@ public class App extends Application {
         catch (Exception e) {
             System.out.println("Failed to connect to the MySQL database.");
             System.out.println("Will use default profile settings.");
+            e.printStackTrace();
         }
 
         try {

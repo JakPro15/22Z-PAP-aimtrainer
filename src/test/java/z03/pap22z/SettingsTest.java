@@ -3,9 +3,7 @@ package z03.pap22z;
 import static org.junit.Assert.assertThrows;
 
 import java.util.List;
-
 import org.junit.Test;
-
 import junit.framework.TestCase;
 
 public class SettingsTest extends TestCase {
@@ -41,13 +39,13 @@ public class SettingsTest extends TestCase {
         Settings.addNewProfile(newProfile2);
 
         Settings.setCurrentProfile(newProfile1);
-        assertEquals(Settings.getCurrentProfile(), newProfile1);
+        assertEquals(Settings.getCurrentProfileName(), newProfile1);
 
         Settings.setCurrentProfile(newProfile2);
-        assertEquals(Settings.getCurrentProfile(), newProfile2);
+        assertEquals(Settings.getCurrentProfileName(), newProfile2);
 
         Settings.setCurrentProfile(Settings.getProfileNames().get(0));
-        assertEquals(Settings.getCurrentProfile(), Settings.getProfileNames().get(0));
+        assertEquals(Settings.getCurrentProfileName(), Settings.getProfileNames().get(0));
     }
 
     @Test
@@ -82,7 +80,7 @@ public class SettingsTest extends TestCase {
         Settings.deleteProfile(newProfile1);
 
         assertEquals(currentProfiles, Settings.getProfileNames());
-        assertEquals(currentProfiles.get(0), Settings.getCurrentProfile());
+        assertEquals(currentProfiles.get(0), Settings.getCurrentProfileName());
     }
 
     @Test
