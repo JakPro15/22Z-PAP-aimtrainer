@@ -30,20 +30,47 @@ background {
 }
 
 .dialog-pane:header .header-panel {
-    /*-fx-padding: 0.833em 1.166em 0.833em 1.166em; *//* 10px 14px 10px 14px */
-    -fx-padding: 0.833em; /* 10px */
+    /*-fx-padding: 0.833em 1.166em 0.833em 1.166em; */
+    /* 10px 14px 10px 14px */
+    -fx-padding: 0.833em;
+    /* 10px */
     -fx-background-color: #404040, linear-gradient(#404040, derive(#404040, 30%));
     -fx-background-insets: 0, 0 0 1 0;
 }
 
 .dialog-pane:header .header-panel .label {
-    -fx-font-size: 1.167em; /* 14px */
+    -fx-font-size: 1.167em;
+    /* 14px */
     -fx-text-fill: black;
     -fx-wrap-text: true;
 }
 
-.dialog-pane > .content.label {
+.dialog-pane>.content.label {
     -fx-alignment: top-left;
     -fx-text-fill: black;
-    -fx-padding: 1.333em 0.833em 0 0.833em; /* 16px 10px 0px 10px */
+    -fx-padding: 1.333em 0.833em 0 0.833em;
+    /* 16px 10px 0px 10px */
+}
+
+.text-area {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff2600;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
+.circle {
+    -fx-fill: #ff2600;
+    -fx-stroke: #000000;
 }

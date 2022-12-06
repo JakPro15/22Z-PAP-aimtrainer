@@ -1,14 +1,19 @@
 package z03.pap22z;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import java.io.IOException;
-
 public class MainMenuController extends z03.pap22z.SceneController {
     @FXML
     protected void handleStartButtonPress(ActionEvent event) {
+        try {
+            switchToScene(event, "GameMenu");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("Start button pressed.");
     }
 

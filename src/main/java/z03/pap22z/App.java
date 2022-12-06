@@ -12,8 +12,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             Database.connect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Failed to connect to the MySQL database.");
             System.out.println("Will use default profile settings.");
             e.printStackTrace();
@@ -39,7 +38,7 @@ public class App extends Application {
     }
 
     @Override
-    public void stop(){
+    public void stop() {
         Database.closeConnection();
         System.exit(0);
     }

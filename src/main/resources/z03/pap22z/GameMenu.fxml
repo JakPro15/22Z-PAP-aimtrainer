@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.GameMenuController">
+   <children>
+      <Button layoutX="726.0" layoutY="556.0" maxHeight="30.0" maxWidth="60.0" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="60.0" text="Back" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+      <Label layoutX="250.0" layoutY="45.0" prefHeight="30.0" prefWidth="300.0" text="Choose the game mode" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" onAction="#switchToAimSniper" layoutX="50.0" layoutY="120.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="200.0" text="Aim Sniper" textAlignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="170.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pictures/aimSniperIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" onAction="#handleToBeImplemented" layoutX="300.0" layoutY="120.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="200.0" text="Keyboard Warrior" textAlignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="170.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pictures/keyboardWarriorIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" onAction="#handleToBeImplemented" layoutX="550.0" layoutY="120.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="200.0" text="Game 3" textAlignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="131.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pictures/game3Icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextArea fx:id="text_hint" editable="false" layoutX="250.0" layoutY="450.0" prefHeight="119.0" prefWidth="300.0" visible="false" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </TextArea>
+      <Button fx:id="hint_1" layoutX="98.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleHint" text="How to play?" />
+      <Button fx:id="hint_2" layoutX="348.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleHint" text="How to play?" />
+      <Button fx:id="hint_3" layoutX="598.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleHint" text="How to play?" />
+   </children>
+</AnchorPane>
