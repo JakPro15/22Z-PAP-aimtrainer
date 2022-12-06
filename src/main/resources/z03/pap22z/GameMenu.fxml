@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.GameMenuController">
+<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.GameMenuController">
     <children>
         <Button layoutX="726.0" layoutY="556.0" maxHeight="30.0" maxWidth="60.0" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="60.0" text="Back" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
         <Label layoutX="250.0" layoutY="45.0" prefHeight="30.0" prefWidth="300.0" text="Choose the game mode" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="45.0">
@@ -44,7 +44,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextArea fx:id="text_hint" layoutX="250.0" layoutY="450.0" prefHeight="119.0" prefWidth="300.0" visible="false" wrapText="true">
+      <TextArea fx:id="text_hint" editable="false" layoutX="250.0" layoutY="450.0" prefHeight="119.0" prefWidth="300.0" visible="false" wrapText="true">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
