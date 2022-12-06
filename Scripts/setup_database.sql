@@ -1,4 +1,4 @@
-use pap22Z_z03;
+USE `pap22Z_z03`;
 
 DROP TABLE IF EXISTS CurrentProfile;
 DROP TABLE IF EXISTS Settings;
