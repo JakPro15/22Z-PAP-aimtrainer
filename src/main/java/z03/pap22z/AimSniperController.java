@@ -141,28 +141,37 @@ public class AimSniperController extends z03.pap22z.SceneController {
     }
 
     @FXML
-    protected void handleCircleClick(MouseEvent event) {
-        try {
-            if (this.is_game_on) {
+    protected void handlePlayfieldClick(MouseEvent event) {
+        if (this.is_game_on) {
+            if (isInCircle(event)) {
                 System.out.println("Hit.");
                 teleportCircle();
                 this.logic.registerTargetHit();
             } else {
-                System.out.println("Game not on.");
+                System.out.println("Miss.");
+                this.logic.registerTargetMiss();
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } else {
+            System.out.println("Game not on.");
         }
     }
 
-    @FXML
-    protected void handleCircleMiss(MouseEvent event) {
-        if (this.is_game_on) {
-            System.out.println("Miss.");
-            this.logic.registerTargetMiss();
-        } else {
-            System.out.println("Game not on. You missed still.");
-        }
+    private boolean isInCircle(MouseEvent event) {
+        double pos_x = event.getX();
+        double pos_y = event.getY();
+        double circle_x = this.circle.getCenterX();
+        double circle_y = this.circle.getCenterY();
+        double center_distance = calculateDistance(pos_x, pos_y, circle_x, circle_y);
+        System.out.println(center_distance);
+        return center_distance <= this.circle.getRadius();
+    }
+
+    private double calculateDistance(double x1, double y1, double x2, double y2) {
+        double delta_x = x2 - x1;
+        double delta_y = x2 - x1;
+
+        return Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+
     }
 
 }

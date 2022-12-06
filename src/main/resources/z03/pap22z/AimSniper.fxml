@@ -12,14 +12,13 @@
    <children>
       <SplitPane dividerPositions="0.7" layoutX="166.0" layoutY="77.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <AnchorPane fx:id="playfield" minHeight="420.0" minWidth="800.0" onMouseClicked="#handleCircleMiss" prefHeight="420.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css">
+            <AnchorPane fx:id="playfield" minHeight="420.0" minWidth="800.0" onMouseClicked="#handlePlayfieldClick" prefHeight="420.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css">
                <children>
-                  <Circle fx:id="circle" centerX="400.0" centerY="200.0" fill="DODGERBLUE" onMouseClicked="#handleCircleClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle" />
+                  <Circle fx:id="circle" centerX="400.0" centerY="200.0" fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle" />
                </children>
             </AnchorPane>
             <AnchorPane maxHeight="160.0" minHeight="160.0" minWidth="800.0" prefHeight="160.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css">
                <children>
-                  <Button layoutX="664.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleExit" text="Back to game selection" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                   <HBox layoutX="63.0" layoutY="31.0" spacing="10.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="31.0">
                      <children>
                         <Label text="Score:" textFill="WHITE">
@@ -60,6 +59,12 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="585.0" layoutY="121.0" spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="New game" />
+                        <Button mnemonicParsing="false" onAction="#handleExit" text="Back to game selection" />
                      </children>
                   </HBox>
                </children>
