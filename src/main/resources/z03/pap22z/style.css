@@ -69,3 +69,8 @@ background {
 .text-area .scroll-pane .content {
     -fx-background-color: transparent;
 }
+
+.circle {
+    -fx-fill: #ff2600;
+    -fx-stroke: #000000;
+}
