@@ -1,12 +1,21 @@
 use pap22Z_z03;
 
+DROP TABLE IF EXISTS CurrentProfile;
 DROP TABLE IF EXISTS Settings;
+
 CREATE TABLE Settings (
     ProfileID INT UNIQUE NOT NULL AUTO_INCREMENT,
     Name VARCHAR(40) UNIQUE NOT NULL,
     MusicVolume INT NOT NULL,
     SFXVolume INT NOT NULL,
     GameSpeed DECIMAL(3, 2) NOT NULL,
-    GameLength INTEGER NOT NULL
+    GameLength INTEGER NOT NULL,
+    PRIMARY KEY(ProfileID)
 );
 INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 1.0, 20);
+
+CREATE TABLE CurrentProfile (
+    CurrentProfileID INT UNIQUE NOT NULL AUTO_INCREMENT,
+    ProfileID INT UNIQUE NOT NULL REFERENCES Settings(ProfileID)
+);
+INSERT INTO CurrentProfile VALUES(NULL, 1);

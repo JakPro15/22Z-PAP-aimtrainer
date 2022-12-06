@@ -27,14 +27,15 @@ public class Settings {
     private static void initialize() {
         if(Database.isConnected()) {
             readFromDatabase();
+            currentProfile = ProfileSettings.findProfileById(profiles, Database.readCurrentProfile());
         }
         else {
             // can't read from database - create a default profile instead
             profiles = new ArrayList<ProfileSettings>();
             profiles.add(ProfileSettings.getDefaultProfile());
             deletedProfileIds = new ArrayList<Integer>();
+            currentProfile = profiles.get(0);
         }
-        currentProfile = profiles.get(0);
     }
 
     /**
@@ -50,7 +51,7 @@ public class Settings {
      * @throws IllegalArgumentException when the given profile does not exist
      */
     public static void setCurrentProfile(String profileName) {
-        ProfileSettings profile = ProfileSettings.findProfile(profiles, profileName);
+        ProfileSettings profile = ProfileSettings.findProfileByName(profiles, profileName);
         if(profile == null) {
             throw new IllegalArgumentException("Tried to set a nonexistent profile.");
         }
@@ -65,7 +66,7 @@ public class Settings {
      * @throws RuntimeException when the given profile already exists
      */
     public static void addNewProfile(String newProfileName) {
-        if(ProfileSettings.findProfile(profiles, newProfileName) != null) {
+        if(ProfileSettings.findProfileByName(profiles, newProfileName) != null) {
             throw new RuntimeException("Tried to add an existing profile.");
         }
         ProfileSettings profile = new ProfileSettings();
@@ -84,7 +85,7 @@ public class Settings {
      * @throws RuntimeException when the given profile is the only one
      */
     public static void deleteProfile(String profileName) {
-        ProfileSettings profile = ProfileSettings.findProfile(profiles, profileName);
+        ProfileSettings profile = ProfileSettings.findProfileByName(profiles, profileName);
         if(profile == null) {
             throw new IllegalArgumentException("Tried to delete a nonexistent profile.");
         }
@@ -95,6 +96,7 @@ public class Settings {
 
         // if deleting current profile, switch to 0th profile
         if(currentProfile == profile) {
+            // not using setCurrentProfile, no need to search the profile by name
             currentProfile = profiles.get(0);
             update();
         }
@@ -196,8 +198,9 @@ public class Settings {
      */
     public static void writeToDatabase() {
         if(Database.isConnected()) {
-            Database.writeAllSettings(profiles, deletedProfileIds);
+            Database.updateAllSettings(profiles, deletedProfileIds);
             deletedProfileIds = new ArrayList<Integer>();
+            Database.writeCurrentProfile(currentProfile);
         }
     }
 
@@ -210,10 +213,17 @@ public class Settings {
         if(Database.isConnected()) {
             profiles = Database.readAllSettings();
             deletedProfileIds = new ArrayList<Integer>();
-            if(currentProfile != null) {
-                currentProfile = ProfileSettings.findProfile(profiles, getCurrentProfileName());
-            }
+            currentProfile = ProfileSettings.findProfileById(profiles, Database.readCurrentProfile());
             update();
+        }
+    }
+
+    /**
+     * Writes the current profile to the database.
+     */
+    public static void saveCurrentProfile() {
+        if(Database.isConnected()) {
+            Database.writeCurrentProfile(currentProfile);
         }
     }
 

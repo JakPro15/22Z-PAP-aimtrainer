@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +32,9 @@ public class ProfileSettings implements Serializable {
 
     @Column(name = "GameLength", nullable = false)
     private int gameLength;
+
+    @OneToOne(mappedBy = "profile")
+    private CurrentProfile user;
 
     public int getId() {
         return id;
@@ -100,9 +104,24 @@ public class ProfileSettings implements Serializable {
      * @param profileName name of the profile to find
      * @return the found profile; null if not found
      */
-    public static ProfileSettings findProfile(List<ProfileSettings> profiles, String profileName) {
+    public static ProfileSettings findProfileByName(List<ProfileSettings> profiles, String profileName) {
         for(ProfileSettings profile: profiles) {
             if(profile.name.equals(profileName)) {
+                return profile;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Finds a profile with the given id in the given list
+     * @param profiles list of profiles to search
+     * @param profileId id of the profile to find
+     * @return the found profile; null if not found
+     */
+    public static ProfileSettings findProfileById(List<ProfileSettings> profiles, int profileId) {
+        for(ProfileSettings profile: profiles) {
+            if(profile.id == profileId) {
                 return profile;
             }
         }

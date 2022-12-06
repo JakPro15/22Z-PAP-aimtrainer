@@ -90,15 +90,17 @@ public class SettingsController extends z03.pap22z.SceneController {
     @FXML
     protected void handleNewProfile(ActionEvent event) {
         String newProfile = NewProfileDialogController.getNewProfile(stage);
-        if(newProfile.length() > 40) {
-            Alerts.warn(String.format("Profile name %s is too long.", newProfile));
-        }
-        if(Settings.getProfileNames().contains(newProfile)) {
-            Alerts.warn(String.format("Profile %s already exists.", newProfile));
-        }
-        else {
-            Settings.addNewProfile(newProfile);
-            profileListChanged();
+        if(newProfile != null) {
+            if(newProfile.length() > 40) {
+                Alerts.warn(String.format("Profile name %s is too long.", newProfile));
+            }
+            if(Settings.getProfileNames().contains(newProfile)) {
+                Alerts.warn(String.format("Profile %s already exists.", newProfile));
+            }
+            else {
+                Settings.addNewProfile(newProfile);
+                profileListChanged();
+            }
         }
     }
 

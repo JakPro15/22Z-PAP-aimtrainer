@@ -1,4 +1,5 @@
 module AimTrainer {
+    requires java.sql;
     requires javafx.fxml;
     requires javafx.controls;
     requires hibernate.jpa;
