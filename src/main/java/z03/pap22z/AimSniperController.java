@@ -44,6 +44,9 @@ public class AimSniperController extends z03.pap22z.SceneController {
     @FXML
     private Label timeLeftValueLabel;
 
+    @FXML
+    private Label messageLabel;
+
     private SimpleDoubleProperty play_width = new SimpleDoubleProperty();
     private SimpleDoubleProperty play_height = new SimpleDoubleProperty();
     private SimpleDoubleProperty circle_radius = new SimpleDoubleProperty();
@@ -74,6 +77,8 @@ public class AimSniperController extends z03.pap22z.SceneController {
     }
 
     public void playGame() {
+        circle.setVisible(false);
+        messageLabel.setText(String.format("%d", delay_time));
         synchronized (this.timer) {
             // ready period before a game
             this.timer.scheduleAtFixedRate(new TimerTask() {
@@ -84,8 +89,11 @@ public class AimSniperController extends z03.pap22z.SceneController {
 
                     is_game_on = false;
                     System.out.println(time_left);
+                    Platform.runLater(() -> messageLabel.setText(String.format("%d", time_left + 1)));
                     time_left -= 1;
                     if (time_left < 0) {
+                        Platform.runLater(() -> messageLabel.setText(""));
+                        circle.setVisible(true);
                         this.cancel();
                     }
 
@@ -102,6 +110,8 @@ public class AimSniperController extends z03.pap22z.SceneController {
                             timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                             timeLeft -= 1;
                             if (timeLeft == -1) {
+                                circle.setVisible(false);
+                                messageLabel.setText("GAME OVER");
                                 timer.cancel();
                                 is_game_on = false;
                             }
@@ -128,6 +138,20 @@ public class AimSniperController extends z03.pap22z.SceneController {
 
     public void initializeCircle() {
         teleportCircle();
+    }
+
+    @FXML
+    void handleSave(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleNewGame(ActionEvent event) {
+        try {
+            switchToScene(event, "AimSniper");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
