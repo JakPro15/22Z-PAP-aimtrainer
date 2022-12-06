@@ -70,39 +70,46 @@ public class AimSniperController extends z03.pap22z.SceneController {
 
         });
 
-        // ready period before a game
-        this.timer.scheduleAtFixedRate(new TimerTask() {
-            int time_left = delay_time;
+        playGame();
+    }
 
-            @Override
-            public void run() {
+    public void playGame() {
+        synchronized (this.timer) {
+            // ready period before a game
+            this.timer.scheduleAtFixedRate(new TimerTask() {
+                int time_left = delay_time;
 
-                System.out.println(time_left);
-                time_left -= 1;
-                if (time_left < 0) {
-                    this.cancel();
-                }
+                @Override
+                public void run() {
 
-            }
-        }, 0, 1000);
-        this.is_game_on = true;
-
-        this.timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                        timeLeft -= 1;
-                        if (timeLeft == -1) {
-                            timer.cancel();
-                        }
+                    is_game_on = false;
+                    System.out.println(time_left);
+                    time_left -= 1;
+                    if (time_left < 0) {
+                        this.cancel();
                     }
-                });
-            }
-        }, delay_time * 1000, 1000);
-        this.is_game_on = false;
+
+                }
+            }, 0, 1000);
+
+            this.timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            is_game_on = true;
+                            timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
+                            timeLeft -= 1;
+                            if (timeLeft == -1) {
+                                timer.cancel();
+                                is_game_on = false;
+                            }
+                        }
+                    });
+                }
+            }, delay_time * 1000, 1000);
+        }
     }
 
     public void teleportCircle() {
