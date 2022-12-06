@@ -1,6 +1,7 @@
 USE `pap22Z_z03`;
 
 DROP TABLE IF EXISTS CurrentProfile;
+DROP TABLE IF EXISTS Results;
 DROP TABLE IF EXISTS Settings;
 
 CREATE TABLE Settings (
@@ -13,6 +14,19 @@ CREATE TABLE Settings (
     PRIMARY KEY(ProfileID)
 );
 INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 1.0, 20);
+
+CREATE TABLE Results (
+    ResultID INT UNIQUE NOT NULL AUTO_INCREMENT,
+    Score INT NOT NULL,
+    Accuracy DECIMAL(5, 4) NOT NULL,
+    GameTime TIMESTAMP NOT NULL,
+    GameType VARCHAR(20) NOT NULL,
+    GameSpeed DECIMAL(3, 2) NOT NULL,
+    GameLength INTEGER NOT NULL,
+    ProfileID INT NOT NULL REFERENCES Settings(ProfileID)
+);
+INSERT INTO Results VALUES (NULL, 2, 1.0, CURRENT_TIMESTAMP(), "abx", 2.0, 20, 1);
+INSERT INTO Results VALUES (NULL, 23, 1.0, CURRENT_TIMESTAMP(), "abxD", 2.0, 25, 1);
 
 CREATE TABLE CurrentProfile (
     CurrentProfileID INT UNIQUE NOT NULL AUTO_INCREMENT,

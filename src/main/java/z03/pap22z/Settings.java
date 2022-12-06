@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import z03.pap22z.database.Database;
-
+import z03.pap22z.database.SavedSettings;
 import z03.pap22z.database.ProfileSettings;
 
 
@@ -27,7 +27,9 @@ public class Settings {
     private static void initialize() {
         if(Database.isConnected()) {
             readFromDatabase();
-            currentProfile = ProfileSettings.findProfileById(profiles, Database.readCurrentProfile());
+            currentProfile = ProfileSettings.findProfileById(
+                profiles, SavedSettings.readCurrentProfile()
+            );
         }
         else {
             // can't read from database - create a default profile instead
@@ -36,6 +38,13 @@ public class Settings {
             deletedProfileIds = new ArrayList<Integer>();
             currentProfile = profiles.get(0);
         }
+    }
+
+    /**
+     * @return current profile object
+     */
+    public static ProfileSettings getCurrentProfile() {
+        return currentProfile;
     }
 
     /**
@@ -198,9 +207,9 @@ public class Settings {
      */
     public static void writeToDatabase() {
         if(Database.isConnected()) {
-            Database.updateAllSettings(profiles, deletedProfileIds);
+            SavedSettings.updateAllSettings(profiles, deletedProfileIds);
             deletedProfileIds = new ArrayList<Integer>();
-            Database.writeCurrentProfile(currentProfile);
+            SavedSettings.writeCurrentProfile(currentProfile);
         }
     }
 
@@ -211,9 +220,11 @@ public class Settings {
      */
     public static void readFromDatabase() {
         if(Database.isConnected()) {
-            profiles = Database.readAllSettings();
+            profiles = SavedSettings.readAllSettings();
             deletedProfileIds = new ArrayList<Integer>();
-            currentProfile = ProfileSettings.findProfileById(profiles, Database.readCurrentProfile());
+            currentProfile = ProfileSettings.findProfileById(
+                profiles, SavedSettings.readCurrentProfile()
+            );
             update();
         }
     }
@@ -223,7 +234,7 @@ public class Settings {
      */
     public static void saveCurrentProfile() {
         if(Database.isConnected()) {
-            Database.writeCurrentProfile(currentProfile);
+            SavedSettings.writeCurrentProfile(currentProfile);
         }
     }
 

@@ -1,15 +1,21 @@
 package z03.pap22z.database;
 
 import java.util.List;
+import java.util.Set;
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "Settings")
 public class ProfileSettings implements Serializable {
@@ -36,53 +42,8 @@ public class ProfileSettings implements Serializable {
     @OneToOne(mappedBy = "profile")
     private CurrentProfile user;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getMusicVolume() {
-        return musicVolume;
-    }
-
-    public void setMusicVolume(int musicVolume) {
-        this.musicVolume = musicVolume;
-    }
-
-    public int getSfxVolume() {
-        return sfxVolume;
-    }
-
-    public void setSfxVolume(int sfxVolume) {
-        this.sfxVolume = sfxVolume;
-    }
-
-    public double getGameSpeed() {
-        return gameSpeed;
-    }
-
-    public void setGameSpeed(double gameSpeed) {
-        this.gameSpeed = gameSpeed;
-    }
-
-    public int getGameLength() {
-        return gameLength;
-    }
-
-    public void setGameLength(int gameLength) {
-        this.gameLength = gameLength;
-    }
+    @OneToMany(mappedBy = "profile")
+    private Set<Result> results;
 
     /**
      * @return newly created default profile object

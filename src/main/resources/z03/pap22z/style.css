@@ -47,3 +47,7 @@ background {
     -fx-text-fill: black;
     -fx-padding: 1.333em 0.833em 0 0.833em; /* 16px 10px 0px 10px */
 }
+
+.table-column {
+    -fx-alignment: CENTER;
+}
