@@ -2,6 +2,12 @@ package z03.pap22z;
 
 import static java.lang.Math.round;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,9 +16,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 public class SettingsController extends z03.pap22z.SceneController {
     @FXML
@@ -33,6 +36,10 @@ public class SettingsController extends z03.pap22z.SceneController {
     private Label gameLengthValueLabel;
     @FXML
     private ComboBox<String> profileComboBox;
+    @FXML
+    private Label saveButtonLabel;
+
+    Timer timer;
 
     /**
      * Initialize the settings UI.
@@ -42,15 +49,16 @@ public class SettingsController extends z03.pap22z.SceneController {
         musicVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                musicVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int)musicVolumeSlider.getValue()));
-                Settings.setMusicVolume((int)musicVolumeSlider.getValue());
+                musicVolumeValueLabel.textProperty()
+                        .setValue(String.format("%d%%", (int) musicVolumeSlider.getValue()));
+                Settings.setMusicVolume((int) musicVolumeSlider.getValue());
             }
         });
         sfxVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                sfxVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int)sfxVolumeSlider.getValue()));
-                Settings.setSfxVolume((int)sfxVolumeSlider.getValue());
+                sfxVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int) sfxVolumeSlider.getValue()));
+                Settings.setSfxVolume((int) sfxVolumeSlider.getValue());
             }
         });
         gameSpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -85,35 +93,36 @@ public class SettingsController extends z03.pap22z.SceneController {
     @FXML
     protected void handleSave(ActionEvent event) {
         Settings.writeToDatabase();
+        showFeedback("Changes saved.");
     }
 
     @FXML
     protected void handleNewProfile(ActionEvent event) {
         String newProfile = NewProfileDialogController.getNewProfile(stage);
-        if(newProfile != null) {
-            if(newProfile.length() > 40) {
+        if (newProfile != null) {
+            if (newProfile.length() > 40) {
                 Alerts.warn(String.format("Profile name %s is too long.", newProfile));
             }
-            if(Settings.getProfileNames().contains(newProfile)) {
+            if (Settings.getProfileNames().contains(newProfile)) {
                 Alerts.warn(String.format("Profile %s already exists.", newProfile));
-            }
-            else {
+            } else {
                 Settings.addNewProfile(newProfile);
                 profileListChanged();
+                showFeedback("New profile added.");
             }
         }
     }
 
     @FXML
     protected void handleDeleteProfile(ActionEvent event) {
-        if(Settings.getProfileNames().size() == 1) {
+        if (Settings.getProfileNames().size() == 1) {
             Alerts.warn("You cannot delete the only profile.");
-        }
-        else {
-            if(Alerts.confirm(String.format("Are you sure you want to delete %s profile?",
-                                            Settings.getCurrentProfileName()))) {
+        } else {
+            if (Alerts.confirm(String.format("Are you sure you want to delete %s profile?",
+                    Settings.getCurrentProfileName()))) {
                 Settings.deleteProfile(Settings.getCurrentProfileName());
                 profileListChanged();
+                showFeedback("Profile deleted.");
             }
         }
     }
@@ -134,6 +143,22 @@ public class SettingsController extends z03.pap22z.SceneController {
         sfxVolumeSlider.setValue(Settings.getSfxVolume());
         gameSpeedSlider.setValue(Arrays.asList(Settings.VALID_GAME_SPEEDS).indexOf(Settings.getGameSpeed()));
         gameLengthSlider.setValue(Settings.getGameLength());
+    }
+
+    private void showFeedback(String message) {
+        saveButtonLabel.setText(message);
+        saveButtonLabel.setVisible(true);
+        this.timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        saveButtonLabel.setVisible(false);
+                    }
+                });
+            }
+        }, 1000);
     }
 
     /**
