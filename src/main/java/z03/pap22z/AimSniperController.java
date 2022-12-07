@@ -1,6 +1,7 @@
 package z03.pap22z;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import z03.pap22z.database.SavedResults;
 
 public class AimSniperController extends z03.pap22z.SceneController {
     private final int delay_time = 3;
@@ -28,6 +30,8 @@ public class AimSniperController extends z03.pap22z.SceneController {
     private Random random;
 
     private Boolean is_game_on = false;
+
+    private LocalDateTime gameEndTime;
 
     @FXML
     private AnchorPane playfield;
@@ -114,6 +118,7 @@ public class AimSniperController extends z03.pap22z.SceneController {
                                 messageLabel.setText("GAME OVER");
                                 timer.cancel();
                                 is_game_on = false;
+                                gameEndTime = LocalDateTime.now();
                             }
                         }
                     });
@@ -142,7 +147,11 @@ public class AimSniperController extends z03.pap22z.SceneController {
 
     @FXML
     void handleSave(ActionEvent event) {
-
+        if(!is_game_on && gameEndTime != null) {
+            SavedResults.writeResult(
+                logic.getPoints(), logic.getAccuracy(), gameEndTime, "AimSniper"
+            );
+        }
     }
 
     @FXML

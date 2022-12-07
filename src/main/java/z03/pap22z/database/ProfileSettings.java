@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
@@ -39,10 +41,12 @@ public class ProfileSettings implements Serializable {
     @Column(name = "GameLength", nullable = false)
     private int gameLength;
 
+    @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "profile")
     private CurrentProfile user;
 
-    @OneToMany(mappedBy = "profile")
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "profile", fetch = FetchType.EAGER)
     private Set<Result> results;
 
     /**

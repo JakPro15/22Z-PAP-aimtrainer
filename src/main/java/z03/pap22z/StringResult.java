@@ -19,6 +19,6 @@ public class StringResult {
         speed = String.format("%.2fx", result.getGameSpeed());
         length = String.format("%ds", result.getGameLength());
         score = String.valueOf(result.getScore());
-        accuracy = String.format("%.2f%%", result.getAccuracy() * 100);
+        accuracy = String.format("%.2f%%", result.getAccuracy());
     }
 }

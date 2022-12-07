@@ -26,22 +26,19 @@ public class ScoreboardController extends z03.pap22z.SceneController {
         resultsTable.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("length"));
         resultsTable.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("score"));
         resultsTable.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("accuracy"));
-        List<Result> results = SavedResults.readAllResults();
-        if(results != null) {
-            for(Result result: results) {
-                resultsTable.getItems().add(new StringResult(result));
-            }
-        }
+        setResults(SavedResults.readAllResults());
     }
 
     @FXML
     protected void handleViewAllResults(ActionEvent event) {
-        System.out.println("View all results button pressed.");
+        setResults(SavedResults.readAllResults());
     }
 
     @FXML
     protected void handleViewYourResults(ActionEvent event) {
-        System.out.println("View my results button pressed.");
+        System.out.println("Current profile name: " + Settings.getCurrentProfile().getName());
+        System.out.println("Current profile id: " + Settings.getCurrentProfile().getId());
+        setResults(SavedResults.readCurrentProfileResults());
     }
 
     @FXML
@@ -51,6 +48,18 @@ public class ScoreboardController extends z03.pap22z.SceneController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Exit button pressed.");
+    }
+
+    /**
+     * Sets the TableView of the scoreboard scene to the given results.
+     * @param results results to be set
+     */
+    private void setResults(List<Result> results) {
+        resultsTable.getItems().clear();
+        if(results != null) {
+            for(Result result: results) {
+                resultsTable.getItems().add(new StringResult(result));
+            }
+        }
     }
 }

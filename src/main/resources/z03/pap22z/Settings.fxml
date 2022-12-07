@@ -90,7 +90,7 @@
                   <HBox alignment="CENTER">
                      <children>
                         <Slider fx:id="gameLengthSlider" blockIncrement="1.0" majorTickUnit="1.0" max="60.0" min="5.0" minorTickCount="0" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="gameLengthValueLabel" minWidth="100.0" text="0%" textFill="BLACK">
+                        <Label fx:id="gameLengthValueLabel" minWidth="100.0" text="5 seconds" textFill="BLACK">
                            <font>
                               <Font size="16.0" />
                            </font>

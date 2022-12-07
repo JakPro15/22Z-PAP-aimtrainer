@@ -56,6 +56,7 @@ public class SavedSettings {
                 }
                 savedProfile.copyFromOther(profile);
                 manager.persist(savedProfile);
+                profile.setId(savedProfile.getId()); // profile added - save the id
             }
             transaction.commit();
         }

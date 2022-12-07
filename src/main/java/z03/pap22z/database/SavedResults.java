@@ -16,20 +16,22 @@ public class SavedResults {
      * @param accuracy accuracy achieved in the game
      */
     public static void writeResult(int score, double accuracy, LocalDateTime gameTime, String gameType) {
-        Result result = new Result();
-        result.setProfile(Settings.getCurrentProfile());
-        result.setScore(score);
-        result.setAccuracy(accuracy);
-        result.setGameTime(gameTime);
-        result.setGameType(gameType);
-        result.setGameSpeed(Settings.getGameSpeed());
-        result.setGameLength(Settings.getGameLength());
-
         EntityManager manager = Database.ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = manager.getTransaction();
             transaction.begin();
+            Result result = new Result();
+            ProfileSettings currentProfile = manager.find(
+                ProfileSettings.class, Settings.getCurrentProfile().getId()
+            );
+            result.setProfile(currentProfile);
+            result.setScore(score);
+            result.setAccuracy(accuracy);
+            result.setGameTime(gameTime);
+            result.setGameType(gameType);
+            result.setGameSpeed(Settings.getGameSpeed());
+            result.setGameLength(Settings.getGameLength());
             manager.persist(result);
             transaction.commit();
         }
@@ -37,7 +39,7 @@ public class SavedResults {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in registerResult: " + ex.getMessage());
+            System.out.println("Exception in writeResult: " + ex.getMessage());
         }
         finally {
             manager.close();
@@ -73,16 +75,35 @@ public class SavedResults {
 
     /**
      * @return a list of all the results from the database
-     *         belonging to the current profile
+     *         belonging to the current profile, ordered in descending order by score
      */
     public static List<Result> readCurrentProfileResults() {
-        ArrayList<Result> results = new ArrayList<Result>(Settings.getCurrentProfile().getResults());
-        results.sort((first, second) -> {
+        ProfileSettings currentProfile = null;
+        EntityManager manager = Database.ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
+            // update current profile to load new results
+            currentProfile = manager.find(ProfileSettings.class, Settings.getCurrentProfile().getId());
+            transaction.commit();
+        }
+        catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            System.out.println("Exception in readCurrentProfileResults: " + ex.getMessage());
+        }
+        finally {
+            manager.close();
+        }
+        ArrayList<Result> results = new ArrayList<Result>(currentProfile.getResults());
+        results.sort((first, second) -> {  // descending order
             if(first.getScore() < second.getScore()) {
-                return -1;
+                return 1;
             }
             else if(first.getScore() > second.getScore()) {
-                return 1;
+                return -1;
             }
             else {
                 return 0;
