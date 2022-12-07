@@ -34,7 +34,7 @@ background {
     /* 10px 14px 10px 14px */
     -fx-padding: 0.833em;
     /* 10px */
-    -fx-background-color: #404040, linear-gradient(#404040, derive(#404040, 30%));
+    -fx-background-color: #404040, linear-gradient(derive(#404040, 30%), #404040);
     -fx-background-insets: 0, 0 0 1 0;
 }
 
