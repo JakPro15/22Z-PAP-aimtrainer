@@ -1,4 +1,4 @@
-package z03.pap22z;
+package z03.pap22z.controllers;
 
 import static java.lang.Math.round;
 
@@ -16,8 +16,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import z03.pap22z.Alerts;
+import z03.pap22z.Settings;
 
-public class SettingsController extends z03.pap22z.SceneController {
+public class SettingsController extends z03.pap22z.controllers.SceneController {
     @FXML
     private Slider musicVolumeSlider;
     @FXML
@@ -39,7 +41,7 @@ public class SettingsController extends z03.pap22z.SceneController {
     @FXML
     private Label saveButtonLabel;
 
-    Timer timer;
+    Timer timer = new Timer();
 
     /**
      * Initialize the settings UI.

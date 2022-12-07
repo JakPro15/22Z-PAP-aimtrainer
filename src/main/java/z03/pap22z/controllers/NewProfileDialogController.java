@@ -1,4 +1,4 @@
-package z03.pap22z;
+package z03.pap22z.controllers;
 
 import java.io.IOException;
 

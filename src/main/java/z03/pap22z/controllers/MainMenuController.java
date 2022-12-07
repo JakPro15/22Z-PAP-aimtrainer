@@ -1,4 +1,4 @@
-package z03.pap22z;
+package z03.pap22z.controllers;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class MainMenuController extends z03.pap22z.SceneController {
+public class MainMenuController extends z03.pap22z.controllers.SceneController {
     @FXML
     protected void handleStartButtonPress(ActionEvent event) {
         try {

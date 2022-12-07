@@ -1,4 +1,4 @@
-package z03.pap22z;
+package z03.pap22z.controllers;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,11 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import z03.pap22z.Settings;
+import z03.pap22z.StringResult;
 import z03.pap22z.database.Result;
 import z03.pap22z.database.SavedResults;
 
-
-public class ScoreboardController extends z03.pap22z.SceneController {
+public class ScoreboardController extends z03.pap22z.controllers.SceneController {
     @FXML
     private TableView<StringResult> resultsTable;
 
@@ -52,12 +53,13 @@ public class ScoreboardController extends z03.pap22z.SceneController {
 
     /**
      * Sets the TableView of the scoreboard scene to the given results.
+     * 
      * @param results results to be set
      */
     private void setResults(List<Result> results) {
         resultsTable.getItems().clear();
-        if(results != null) {
-            for(Result result: results) {
+        if (results != null) {
+            for (Result result : results) {
                 resultsTable.getItems().add(new StringResult(result));
             }
         }

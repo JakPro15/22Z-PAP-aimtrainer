@@ -1,4 +1,4 @@
-package z03.pap22z;
+package z03.pap22z.controllers;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,9 +16,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import z03.pap22z.AimSniperLogic;
+import z03.pap22z.Settings;
 import z03.pap22z.database.SavedResults;
 
-public class AimSniperController extends z03.pap22z.SceneController {
+public class AimSniperController extends z03.pap22z.controllers.SceneController {
     private final int delay_time = 3;
 
     private AimSniperLogic logic = new AimSniperLogic();
@@ -147,10 +149,9 @@ public class AimSniperController extends z03.pap22z.SceneController {
 
     @FXML
     void handleSave(ActionEvent event) {
-        if(!is_game_on && gameEndTime != null) {
+        if (!is_game_on && gameEndTime != null) {
             SavedResults.writeResult(
-                logic.getPoints(), logic.getAccuracy(), gameEndTime, "AimSniper"
-            );
+                    logic.getPoints(), logic.getAccuracy(), gameEndTime, "AimSniper");
         }
     }
 

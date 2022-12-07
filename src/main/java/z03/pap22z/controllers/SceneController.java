@@ -1,4 +1,6 @@
-package z03.pap22z;
+package z03.pap22z.controllers;
+
+import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,16 +10,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class SceneController {
     protected Stage stage;
     protected Scene scene;
     protected Parent root;
+    protected final static String FXML_PATH = "/z03/pap22z/";
 
     @FXML
     protected void switchToScene(ActionEvent event, String scene_name) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(scene_name + ".fxml"));
+        root = FXMLLoader.load(getClass().getResource(FXML_PATH + scene_name + ".fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
