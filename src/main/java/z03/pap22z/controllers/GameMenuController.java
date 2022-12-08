@@ -1,4 +1,4 @@
-package z03.pap22z;
+package z03.pap22z.controllers;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
-public class GameMenuController extends z03.pap22z.SceneController {
+public class GameMenuController extends z03.pap22z.controllers.SceneController {
     @FXML
     protected void handleExit(ActionEvent event) {
         try {

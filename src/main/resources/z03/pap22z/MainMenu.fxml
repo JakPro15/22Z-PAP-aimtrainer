@@ -10,21 +10,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" gridLinesVisible="false" hgap="10" maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800" styleClass="background" stylesheets="@style.css" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.MainMenuController">
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="10" maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800" styleClass="background" stylesheets="@style.css" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.controllers.MainMenuController">
     <padding>
         <Insets bottom="25" left="25" right="25" top="25" />
     </padding>
-   <children>
-       <Text id="menu-text" text="AimTrainer" textAlignment="CENTER" wrappingWidth="200">
-           <font>
-               <Font name="Bauhaus 93" size="36.0" />
-           </font>
-       </Text>
-       <Button onAction="#handleStartButtonPress" prefHeight="40.0" prefWidth="200.0" text="Play" textAlignment="CENTER" GridPane.rowIndex="2" />
-       <Button onAction="#handleScoreboardButtonPress" prefHeight="40.0" prefWidth="200.0" text="Scoreboard" textAlignment="CENTER" GridPane.rowIndex="3" />
-       <Button onAction="#handleSettingsButtonPress" prefHeight="40.0" prefWidth="200.0" text="Settings" textAlignment="CENTER" GridPane.rowIndex="4" />
-       <Button onAction="#handleExitButtonPress" prefHeight="40.0" prefWidth="200.0" text="Exit" textAlignment="CENTER" GridPane.rowIndex="5" />
-   </children>
+    <children>
+        <Text id="menu-text" text="AimTrainer" textAlignment="CENTER" wrappingWidth="200">
+            <font>
+                <Font name="Bauhaus 93" size="36.0" />
+            </font>
+        </Text>
+        <Button onAction="#handleStartButtonPress" prefHeight="40.0" prefWidth="200.0" text="Play" textAlignment="CENTER" GridPane.rowIndex="2" />
+        <Button onAction="#handleScoreboardButtonPress" prefHeight="40.0" prefWidth="200.0" text="Scoreboard" textAlignment="CENTER" GridPane.rowIndex="3" />
+        <Button onAction="#handleSettingsButtonPress" prefHeight="40.0" prefWidth="200.0" text="Settings" textAlignment="CENTER" GridPane.rowIndex="4" />
+        <Button onAction="#handleExitButtonPress" prefHeight="40.0" prefWidth="200.0" text="Exit" textAlignment="CENTER" GridPane.rowIndex="5" />
+    </children>
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>

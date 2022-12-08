@@ -6,6 +6,7 @@ module AimTrainer {
     requires lombok;
     requires transitive javafx.base;
     requires transitive javafx.graphics;
-    opens z03.pap22z to javafx.fxml;
-    exports z03.pap22z;
+
+    opens z03.pap22z to javafx.fxml, z03.pap22z.controllers, z03.pap22z.database;
+    opens z03.pap22z.controllers to javafx.fxml, z03.pap22z;
 }
