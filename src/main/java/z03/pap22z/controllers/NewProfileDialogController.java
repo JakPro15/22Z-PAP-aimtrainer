@@ -13,7 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class NewProfileDialogController {
+public class NewProfileDialogController extends SceneController {
     Stage stage;
 
     @FXML
@@ -49,7 +49,8 @@ public class NewProfileDialogController {
         dialogStage.initOwner(parentStage);
         dialogStage.initModality(Modality.WINDOW_MODAL);
 
-        FXMLLoader loader = new FXMLLoader(NewProfileDialogController.class.getResource("NewProfileDialog.fxml"));
+        FXMLLoader loader = new FXMLLoader(
+                NewProfileDialogController.class.getResource(FXML_PATH + "NewProfileDialog.fxml"));
         Parent root;
         try {
             root = loader.load();
