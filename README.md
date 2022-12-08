@@ -25,6 +25,7 @@ trudności.
 
 ### Instalacja i uruchomienie
 * Należy zainstalować Javę w wersji co najmniej 17, np. komendą `sudo apt-get install openjdk-17-jre`
+* Należy zainstalować pakiet libncurses5 potrzebny do MySQLa, np. komendą `sudo apt-get install libncurses5`  
 * Należy pobrać MySQL ze strony https://dev.mysql.com/downloads/mysql/ (wariant Linux Generic).  
   Otrzymane archiwum należy zapisać w katalogu ~/pap22Z_z03_mysql pod nazwą mysql.tar.xz  
     Bezpośredni link do pobrania:  
