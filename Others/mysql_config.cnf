@@ -1,0 +1,12 @@
+[server]
+user=USER
+basedir=HOME/pap22Z_z03_mysql/mysql
+datadir=HOME/pap22Z_z03_mysql/mysql/data
+
+[mysqld]
+pid-file=HOME/pap22Z_z03_mysql/mysqld.pid
+socket=HOME/pap22Z_z03_mysql/mysqld.sock
+port=31666
+
+[client]
+socket=HOME/pap22Z_z03_mysql/socket

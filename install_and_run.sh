@@ -1,42 +1,50 @@
 #!/bin/bash
-
-if test $UID -ne 0 >> /dev/null
-then
-    echo "This script should be launched with root privileges"
-    exit 1
-fi
+# Install and set up MySQL databse and run the AimTrainer program.
 
 cd $(dirname "$0")
-source Scripts/find_package_manager.sh
 
 if ! which java >> /dev/null
 then
-    $package_manager install openjdk-17-jre
+    echo "Java needs to be installed to launch the program."
+    exit 1
 fi
 
-if ! which mysql >> /dev/null
-then
-    $package_manager install mysql-server
-fi
+source Scripts/mysql_variables.sh
 
-service mysql start
-if [ -z "$1" ];
+if [ ! -f $mysqld ];
 then
-    mysql -u root < "Scripts/setup_user.sql"
-else
-    if [ -z "$2" ];
+    if [ ! -f "$HOME/pap22Z_z03_mysql/mysql.tar.xz" ];
     then
-        mysql -u $1 < "Scripts/setup_user.sql"
-    else
-        mysql -u $1 "-p$2" < "Scripts/setup_user.sql"
+        echo "MySQL archive needs to be downloaded to '~/pap22Z_z03_mysql' under the name 'mysql.tar.xz'"
+        exit 1
     fi
+    echo "Unzipping MySQL archive"
+    tar -xf "$HOME/pap22Z_z03_mysql/mysql.tar.xz" -C "$HOME/pap22Z_z03_mysql"
+    if [ -d "$HOME/pap22Z_z03_mysql/mysql-8.0.31-linux-glibc2.12-i686" ];
+    then
+        mv "$HOME/pap22Z_z03_mysql/mysql-8.0.31-linux-glibc2.12-i686" "$HOME/pap22Z_z03_mysql/mysql"
+    else
+        mv "$HOME/pap22Z_z03_mysql/mysql-8.0.31-linux-glibc2.12-x86_64" "$HOME/pap22Z_z03_mysql/mysql"
+    fi
+    echo "Finished"
+    if [ ! -f $mysqld ];
+    then
+        echo "Failed to unzip the MySQL archive."
+        exit 1
+    fi
+    echo "Setting up MySQL"
+    $mysqld --initialize-insecure --datadir="$HOME/pap22Z_z03_mysql/mysql/data"
+    # prepare MySQL configuration file
+    cp Others/mysql_config.cnf "$HOME/pap22Z_z03_mysql"
+    sed -i "s#HOME#$HOME#" "$HOME/pap22Z_z03_mysql/mysql_config.cnf"
+    sed -i "s#USER#$USER#" "$HOME/pap22Z_z03_mysql/mysql_config.cnf"
 fi
-mysql -u "pap22Z_z03" "-ppap.2022.PAP" "pap22Z_z03" < "Scripts/setup_database.sql"
+# launch MySQL
+$mysqld --defaults-file="$HOME/pap22Z_z03_mysql/mysql_config.cnf" &
+sleep 2
+# set up user and database
+$mysql -u root < Scripts/setup_user.sql
+$mysql -u pap22Z_z03 -ppap.2022.PAP < Scripts/setup_database.sql
 
-Others/maven/bin/mvn package
-chown -R $SUDO_USER: target  # so that the non-root user is the owner of target
-rm dependency-reduced-pom.xml
-mv target/AimTrainer-1.0.0.jar .
-mv AimTrainer-1.0.0.jar AimTrainer.jar
-
-./run.sh
+java --module-path Others/openjfx/lib --add-modules=javafx.controls,javafx.fxml --add-opens java.base/java.lang=ALL-UNNAMED -cp AimTrainer.jar z03.pap22z.App
+$mysqladmin -u root shutdown
