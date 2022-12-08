@@ -35,8 +35,8 @@ public class ProfileSettings implements Serializable {
     @Column(name = "SFXVolume", nullable = false)
     private int sfxVolume;
 
-    @Column(name = "GameSpeed", nullable = false)
-    private double gameSpeed;
+    @Column(name = "GameDifficulty", nullable = false)
+    private int gameDifficulty;
 
     @Column(name = "GameLength", nullable = false)
     private int gameLength;
@@ -58,7 +58,7 @@ public class ProfileSettings implements Serializable {
         defaultProfile.setName("default");
         defaultProfile.setMusicVolume(50);
         defaultProfile.setSfxVolume(50);
-        defaultProfile.setGameSpeed(1.0);
+        defaultProfile.setGameDifficulty(2);
         defaultProfile.setGameLength(20);
         return defaultProfile;
     }
@@ -101,7 +101,7 @@ public class ProfileSettings implements Serializable {
         name = other.getName();
         musicVolume = other.getMusicVolume();
         sfxVolume = other.getSfxVolume();
-        gameSpeed = other.getGameSpeed();
+        gameDifficulty = other.getGameDifficulty();
         gameLength = other.getGameLength();
     }
 }

@@ -176,39 +176,39 @@ public class SettingsTest extends TestCase {
     }
 
     @Test
-    public void testGameSpeed() {
-        Settings.setGameSpeed(0.5);
-        assertEquals(Settings.getGameSpeed(), Double.valueOf(0.5));
-        // New profiles with game speed multiplier 0.5
+    public void testGameDifficulty() {
+        Settings.setGameDifficulty(1);
+        assertEquals(Settings.getGameDifficulty(), Integer.valueOf(1));
+        // New profiles with game difficulty 1
         String newProfile1 = Settings.getProfileNames().toString();
         Settings.addNewProfile(newProfile1);
         String newProfile2 = Settings.getProfileNames().toString();
         Settings.addNewProfile(newProfile2);
 
         Settings.setCurrentProfile(newProfile1);
-        assertEquals(Settings.getGameSpeed(), Double.valueOf(0.5));
-        Settings.setGameSpeed(1.0);
-        assertEquals(Settings.getGameSpeed(), Double.valueOf(1.0));
+        assertEquals(Settings.getGameDifficulty(), Integer.valueOf(1));
+        Settings.setGameDifficulty(2);
+        assertEquals(Settings.getGameDifficulty(), Integer.valueOf(2));
 
         Settings.setCurrentProfile(newProfile2);
-        assertEquals(Settings.getGameSpeed(), Double.valueOf(0.5));
-        Settings.setGameSpeed(4.0);
-        assertEquals(Settings.getGameSpeed(), Double.valueOf(4.0));
+        assertEquals(Settings.getGameDifficulty(), Integer.valueOf(1));
+        Settings.setGameDifficulty(4);
+        assertEquals(Settings.getGameDifficulty(), Integer.valueOf(4));
 
         Settings.setCurrentProfile(newProfile1);
-        assertEquals(Settings.getGameSpeed(), Double.valueOf(1.0));
+        assertEquals(Settings.getGameDifficulty(), Integer.valueOf(2));
     }
 
     @Test
-    public void testGameSpeedIllegalValues() {
+    public void testGameDifficultyIllegalValues() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Settings.setGameSpeed(0.0);
+            Settings.setGameDifficulty(-1);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            Settings.setGameSpeed(0.7);
+            Settings.setGameDifficulty(5);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            Settings.setGameSpeed(4.5);
+            Settings.setGameDifficulty(20);
         });
     }
 

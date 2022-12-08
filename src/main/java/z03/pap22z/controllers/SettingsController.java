@@ -29,9 +29,9 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
     @FXML
     private Label sfxVolumeValueLabel;
     @FXML
-    private Slider gameSpeedSlider;
+    private Slider gameDifficultySlider;
     @FXML
-    private Label gameSpeedValueLabel;
+    private Label gameDifficultyValueLabel;
     @FXML
     private Slider gameLengthSlider;
     @FXML
@@ -63,12 +63,12 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
                 Settings.setSfxVolume((int) sfxVolumeSlider.getValue());
             }
         });
-        gameSpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
+        gameDifficultySlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                Double gameSpeed = Settings.VALID_GAME_SPEEDS[(int) round(gameSpeedSlider.getValue())];
-                gameSpeedValueLabel.textProperty().setValue(String.format("%.2fx", gameSpeed));
-                Settings.setGameSpeed(gameSpeed);
+                int gameDifficulty = (int) round(gameDifficultySlider.getValue());
+                gameDifficultyValueLabel.textProperty().setValue(Settings.VALID_DIFFICULTIES[gameDifficulty]);
+                Settings.setGameDifficulty(gameDifficulty);
             }
         });
         gameLengthSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -143,10 +143,14 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
     private void update() {
         musicVolumeSlider.setValue(Settings.getMusicVolume());
         sfxVolumeSlider.setValue(Settings.getSfxVolume());
-        gameSpeedSlider.setValue(Arrays.asList(Settings.VALID_GAME_SPEEDS).indexOf(Settings.getGameSpeed()));
+        gameDifficultySlider.setValue(Settings.getGameDifficulty());
         gameLengthSlider.setValue(Settings.getGameLength());
     }
 
+    /**
+     * Shows the given string as a label to the left of the Save button.
+     * @param message string to be shown
+     */
     private void showFeedback(String message) {
         saveButtonLabel.setText(message);
         saveButtonLabel.setVisible(true);
@@ -160,7 +164,7 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
                     }
                 });
             }
-        }, 1000);
+        }, 2000);
     }
 
     /**

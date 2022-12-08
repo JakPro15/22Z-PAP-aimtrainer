@@ -30,7 +30,7 @@ public class SavedResults {
             result.setAccuracy(accuracy);
             result.setGameTime(gameTime);
             result.setGameType(gameType);
-            result.setGameSpeed(Settings.getGameSpeed());
+            result.setGameDifficulty(Settings.getGameDifficulty());
             result.setGameLength(Settings.getGameLength());
             manager.persist(result);
             transaction.commit();

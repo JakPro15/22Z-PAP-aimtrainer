@@ -37,8 +37,8 @@ public class Result implements Serializable {
     @Column(name = "GameType", nullable = false)
     private String gameType;
 
-    @Column(name = "GameSpeed", nullable = false)
-    private double gameSpeed;
+    @Column(name = "GameDifficulty", nullable = false)
+    private int gameDifficulty;
 
     @Column(name = "GameLength", nullable = false)
     private int gameLength;

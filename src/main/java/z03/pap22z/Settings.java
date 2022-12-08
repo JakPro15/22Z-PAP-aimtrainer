@@ -14,7 +14,7 @@ public class Settings {
     private static List<ProfileSettings> profiles;
     private static List<Integer> deletedProfileIds;
 
-    public static final Double[] VALID_GAME_SPEEDS = {0.25, 0.5, 1.0, 2.0, 4.0};
+    public static final String[] VALID_DIFFICULTIES = {"Very Easy", "Easy", "Normal", "Hard", "Very Hard"};
 
     static {
         initialize();
@@ -82,7 +82,7 @@ public class Settings {
         profile.setName(newProfileName);
         profile.setMusicVolume(getMusicVolume());
         profile.setSfxVolume(getSfxVolume());
-        profile.setGameSpeed(getGameSpeed());
+        profile.setGameDifficulty(getGameDifficulty());
         profile.setGameLength(getGameLength());
         profiles.add(profile);
     }
@@ -167,20 +167,20 @@ public class Settings {
     /**
      * @return game speed multiplier for the current profile
      */
-    public static Double getGameSpeed() {
-        return currentProfile.getGameSpeed();
+    public static Integer getGameDifficulty() {
+        return currentProfile.getGameDifficulty();
     }
 
     /**
      * Set game speed multiplier for the current profile.
-     * @param newGameSpeed game speed multiplier to be set
+     * @param newGameDifficulty game speed multiplier to be set
      * @throws IllegalArgumentException when the given number is not in Settings.VALID_GAME_SPEEDS
      */
-    public static void setGameSpeed(Double newGameSpeed) {
-        if(!Arrays.asList(VALID_GAME_SPEEDS).contains(newGameSpeed)) {
-            throw new IllegalArgumentException("Invalid game speed modifier value");
+    public static void setGameDifficulty(Integer newGameDifficulty) {
+        if(newGameDifficulty < 0 || newGameDifficulty > 4) {
+            throw new IllegalArgumentException("Invalid game difficulty");
         }
-        currentProfile.setGameSpeed(newGameSpeed);
+        currentProfile.setGameDifficulty(newGameDifficulty);
     }
 
     /**

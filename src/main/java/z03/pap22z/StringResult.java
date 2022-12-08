@@ -16,7 +16,7 @@ public class StringResult {
         gameTime = result.getGameTime().format(dateFormatter);
         user = result.getProfile().getName();
         gameType = result.getGameType();
-        speed = String.format("%.2fx", result.getGameSpeed());
+        speed = Settings.VALID_DIFFICULTIES[result.getGameDifficulty()];
         length = String.format("%ds", result.getGameLength());
         score = String.valueOf(result.getScore());
         accuracy = String.format("%.2f%%", result.getAccuracy());

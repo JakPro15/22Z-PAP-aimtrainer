@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.controllers.SettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.controllers.SettingsController">
    <children>
       <VBox alignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="100.0">
          <children>
@@ -29,7 +34,7 @@
                   <Insets />
                </HBox.margin>
                <children>
-                  <Label fx:id="saveButtonLabel" alignment="CENTER" text="Changes saved." textAlignment="CENTER" visible="false">
+                  <Label fx:id="saveButtonLabel" alignment="CENTER" text="Changes saved." textAlignment="CENTER" visible="false" textFill="BLACK">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -54,7 +59,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Speed">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Difficulty">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -93,8 +98,8 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Slider fx:id="gameSpeedSlider" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="0.0" minorTickCount="0" snapToTicks="true" HBox.hgrow="ALWAYS" />
-                        <Label fx:id="gameSpeedValueLabel" minWidth="100.0" text="1.00x" textFill="BLACK">
+                        <Slider fx:id="gameDifficultySlider" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="0.0" minorTickCount="0" snapToTicks="true" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="gameDifficultyValueLabel" minWidth="100.0" text="1.00x" textFill="BLACK">
                            <font>
                               <Font size="16.0" />
                            </font>

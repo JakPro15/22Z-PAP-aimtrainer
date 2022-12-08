@@ -9,11 +9,11 @@ CREATE TABLE Settings (
     Name VARCHAR(60) UNIQUE NOT NULL,
     MusicVolume INT NOT NULL,
     SFXVolume INT NOT NULL,
-    GameSpeed DECIMAL(3, 2) NOT NULL,
-    GameLength INTEGER NOT NULL,
+    GameDifficulty INT NOT NULL,
+    GameLength INT NOT NULL,
     PRIMARY KEY(ProfileID)
 );
-INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 1.0, 20);
+INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 2, 20);
 
 CREATE TABLE Results (
     ResultID INT UNIQUE NOT NULL AUTO_INCREMENT,
@@ -21,8 +21,8 @@ CREATE TABLE Results (
     Accuracy NUMERIC NOT NULL,
     GameTime TIMESTAMP NOT NULL,
     GameType VARCHAR(20) NOT NULL,
-    GameSpeed DECIMAL(3, 2) NOT NULL,
-    GameLength INTEGER NOT NULL,
+    GameDifficulty INT NOT NULL,
+    GameLength INT NOT NULL,
     ProfileID INT NOT NULL REFERENCES Settings(ProfileID)
 );
 
