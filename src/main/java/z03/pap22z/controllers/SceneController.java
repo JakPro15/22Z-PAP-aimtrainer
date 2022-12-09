@@ -12,15 +12,13 @@ import javafx.stage.Stage;
 
 public class SceneController {
     protected Stage stage;
-    protected Scene scene;
-    protected Parent root;
     protected final static String FXML_PATH = "/z03/pap22z/";
 
     @FXML
     protected void switchToScene(ActionEvent event, String scene_name) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(FXML_PATH + scene_name + ".fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource(FXML_PATH + scene_name + ".fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

@@ -20,8 +20,12 @@ import z03.pap22z.AimSniperLogic;
 import z03.pap22z.Settings;
 import z03.pap22z.database.SavedResults;
 
+// TODO: add a label that prints info on score save
+// TODO: make the circle change it's size depending on settings
+// TODO: make the game calculate points differently depending on circle radius
 public class AimSniperController extends z03.pap22z.controllers.SceneController {
     private final int delay_time = 3;
+    private final int DEFAULT_RADIUS = 15;
 
     private AimSniperLogic logic = new AimSniperLogic();
 
@@ -60,6 +64,8 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     public void initialize() {
         this.random = new Random();
 
+        circle.setRadius(this.calculateCircleRadius());
+
         circle_radius.bind(this.circle.radiusProperty());
         play_width.bind(this.playfield.widthProperty());
         play_height.bind(this.playfield.heightProperty());
@@ -70,7 +76,6 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
                 scoreValueLabel.textProperty().setValue(String.format("%d", logic.getPoints()));
             }
         });
-
         this.logic.accuracyProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
@@ -145,6 +150,12 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
     public void initializeCircle() {
         teleportCircle();
+    }
+
+    public double calculateCircleRadius() {
+        int game_diff = Settings.getGameDifficulty();
+        double new_radius = DEFAULT_RADIUS - (game_diff - 2) * 2.5;
+        return new_radius;
     }
 
     @FXML
