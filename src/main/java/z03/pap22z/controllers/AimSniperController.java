@@ -12,6 +12,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +21,6 @@ import z03.pap22z.AimSniperLogic;
 import z03.pap22z.Settings;
 import z03.pap22z.database.SavedResults;
 
-// TODO: add a label that prints info on score save
 // TODO: make the game calculate points differently depending on circle radius
 public class AimSniperController extends z03.pap22z.controllers.SceneController {
     private final int delay_time = 3;
@@ -37,6 +37,8 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     private Boolean is_game_on = false;
 
     private LocalDateTime gameEndTime;
+
+    private boolean is_score_saved = false;
 
     @FXML
     private AnchorPane playfield;
@@ -55,6 +57,9 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
     @FXML
     private Label messageLabel;
+
+    @FXML
+    private Button save_button;
 
     private SimpleDoubleProperty play_width = new SimpleDoubleProperty();
     private SimpleDoubleProperty play_height = new SimpleDoubleProperty();
@@ -159,9 +164,11 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
     @FXML
     void handleSave(ActionEvent event) {
-        if (!is_game_on && gameEndTime != null) {
+        if (!is_game_on && gameEndTime != null && !is_score_saved) {
             SavedResults.writeResult(
                     logic.getPoints(), logic.getAccuracy(), gameEndTime, "AimSniper");
+            save_button.setText("Score saved.");
+            is_score_saved = true;
         }
     }
 
