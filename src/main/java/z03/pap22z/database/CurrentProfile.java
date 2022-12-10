@@ -26,12 +26,4 @@ public class CurrentProfile implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ProfileID", referencedColumnName = "ProfileID")
     private ProfileSettings profile;
-
-    public ProfileSettings getProfile() {
-        return profile;
-    }
-
-    public void setProfile(ProfileSettings profile) {
-        this.profile = profile;
-    }
 }

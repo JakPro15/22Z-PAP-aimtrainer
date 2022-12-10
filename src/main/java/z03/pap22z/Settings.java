@@ -53,7 +53,6 @@ public class Settings {
 
     /**
      * Switch profile to the one with the given name.
-     *
      * @param profileName name of the profile to switch to
      * @throws IllegalArgumentException when the given profile does not exist
      */
@@ -69,7 +68,6 @@ public class Settings {
     /**
      * Create a new profile. The name must be different from all current profiles.
      * The new profile is a copy of the current profile.
-     *
      * @param newProfileName name of the new profile
      * @throws RuntimeException when the given profile already exists
      */
@@ -88,7 +86,6 @@ public class Settings {
 
     /**
      * Delete the given profile. There must be another profile to switch to.
-     *
      * @param profile name of the profile to be deleted
      * @throws IllegalArgumentException when the given profile does not exist
      * @throws RuntimeException         when the given profile is the only one
@@ -114,7 +111,6 @@ public class Settings {
 
     /**
      * Get a copy of the list of names of all profiles.
-     *
      * @return list of the profile names
      */
     public static List<String> getProfileNames() {
@@ -134,7 +130,6 @@ public class Settings {
 
     /**
      * Set music volume for the current profile.
-     *
      * @param newMusicVolume music volume to be set
      * @throws IllegalArgumentException when the given volume is out of range
      *                                  [0,100] (inclusive)
@@ -156,7 +151,6 @@ public class Settings {
 
     /**
      * Set sound effects volume for the current profile.
-     *
      * @param newSfxVolume music volume to be set
      * @throws IllegalArgumentException when the given volume is out of range
      *                                  [0,100] (inclusive)
@@ -178,7 +172,6 @@ public class Settings {
 
     /**
      * Set game speed multiplier for the current profile.
-     *
      * @param newGameDifficulty game speed multiplier to be set
      * @throws IllegalArgumentException when the given number is not in
      *                                  Settings.VALID_GAME_SPEEDS
@@ -199,7 +192,6 @@ public class Settings {
 
     /**
      * Set sound effects volume for the current profile.
-     *
      * @param newGameLength single game length in seconds to be set
      * @throws IllegalArgumentException when the given game length is out of range
      *                                  [5,60] (inclusive)

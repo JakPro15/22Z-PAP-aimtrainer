@@ -60,7 +60,6 @@ public class ScoreboardController extends z03.pap22z.controllers.SceneController
 
     /**
      * Sets the TableView of the scoreboard scene to the given results.
-     *
      * @param results results to be set
      */
     private void setResults(List<Result> results) {

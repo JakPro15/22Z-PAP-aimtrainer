@@ -27,7 +27,7 @@ public class GameLogic {
     }
 
     /**
-     * Updates all logic values as if a target were hit
+     * Updates all logic values as if a target was hit
      */
     public void registerTargetHit() {
         this.totalClicks.set(this.totalClicks.get() + 1);
@@ -46,7 +46,6 @@ public class GameLogic {
 
     /**
      * Returns the current ratio of targets hit to all targets
-     * 
      * @return ratio of number of targets hit to total number off all targets
      */
     public double getAccuracy() {
@@ -55,7 +54,6 @@ public class GameLogic {
 
     /**
      * Returns current score
-     * 
      * @return number of points gained throughout the game
      */
     public int getPoints() {
@@ -64,7 +62,6 @@ public class GameLogic {
 
     /**
      * Returns the IntegerProperty of current score to be used in updating labels
-     * 
      * @return IntegerProperty of the number of points gained throughout the game
      */
     public IntegerProperty pointsProperty() {
@@ -73,7 +70,6 @@ public class GameLogic {
 
     /**
      * Returns the DoubleProperty of the current ratio of targets hit to all targets
-     * 
      * @return DoubleProperty of the ratio of number of targets hit to total number
      *         off all targets
      */

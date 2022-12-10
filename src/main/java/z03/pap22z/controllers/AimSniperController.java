@@ -23,6 +23,7 @@ import z03.pap22z.database.SavedResults;
 
 // TODO: add a label that prints info on score save
 // TODO: make the game calculate points differently depending on circle radius
+// TODO: add docs on AimSniperController non-fxml methods
 public class AimSniperController extends z03.pap22z.controllers.SceneController {
     private final int delay_time = 3;
     private final int DEFAULT_RADIUS = 15;

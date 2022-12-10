@@ -102,6 +102,10 @@ public class SavedSettings {
         return resultId;
     }
 
+    /**
+     * Saves the choice of the current profile to the database.
+     * @param profile profile to write as current
+     */
     public static void writeCurrentProfile(ProfileSettings profile) {
         EntityManager manager = Database.ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
