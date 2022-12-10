@@ -1,7 +1,6 @@
 package z03.pap22z;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import z03.pap22z.database.Database;
@@ -14,7 +13,7 @@ public class Settings {
     private static List<ProfileSettings> profiles;
     private static List<Integer> deletedProfileIds;
 
-    public static final String[] VALID_DIFFICULTIES = {"Very Easy", "Easy", "Normal", "Hard", "Very Hard"};
+    public static final String[] DIFFICULTIES = {"Very Easy", "Easy", "Normal", "Hard", "Very Hard"};
 
     static {
         initialize();

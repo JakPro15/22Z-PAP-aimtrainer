@@ -3,7 +3,6 @@ package z03.pap22z.controllers;
 import static java.lang.Math.round;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -67,7 +66,7 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
             @Override
             public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
                 int gameDifficulty = (int) round(gameDifficultySlider.getValue());
-                gameDifficultyValueLabel.textProperty().setValue(Settings.VALID_DIFFICULTIES[gameDifficulty]);
+                gameDifficultyValueLabel.textProperty().setValue(Settings.DIFFICULTIES[gameDifficulty]);
                 Settings.setGameDifficulty(gameDifficulty);
             }
         });
