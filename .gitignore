@@ -10,9 +10,6 @@ dependency-reduced-pom.xml
 
 logs/
 
-# generated jar file
-AimTrainer.jar
-
 # Makefile for custom purposes
 Makefile
 
