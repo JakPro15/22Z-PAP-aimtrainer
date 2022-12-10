@@ -21,7 +21,6 @@ import z03.pap22z.Settings;
 import z03.pap22z.database.SavedResults;
 
 // TODO: add a label that prints info on score save
-// TODO: make the circle change it's size depending on settings
 // TODO: make the game calculate points differently depending on circle radius
 public class AimSniperController extends z03.pap22z.controllers.SceneController {
     private final int delay_time = 3;
@@ -213,7 +212,7 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
     private double calculateDistance(double x1, double y1, double x2, double y2) {
         double delta_x = x2 - x1;
-        double delta_y = x2 - x1;
+        double delta_y = y2 - y1;
 
         return Math.sqrt(delta_x * delta_x + delta_y * delta_y);
 

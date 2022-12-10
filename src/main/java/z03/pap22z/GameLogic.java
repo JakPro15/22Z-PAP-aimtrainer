@@ -43,9 +43,6 @@ public class GameLogic {
         this.totalClicks.set(this.totalClicks.get() + 1);
         this.currentCombo.set(0);
     }
-    public void unregisterTargetMiss() {
-
-    }
 
     /**
      * Returns the current ratio of targets hit to all targets
