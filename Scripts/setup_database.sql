@@ -18,7 +18,7 @@ INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 2, 20);
 CREATE TABLE Results (
     ResultID INT UNIQUE NOT NULL AUTO_INCREMENT,
     Score INT NOT NULL,
-    Accuracy NUMERIC NOT NULL,
+    Accuracy DECIMAL(5, 2) NOT NULL,
     GameTime TIMESTAMP NOT NULL,
     GameType VARCHAR(20) NOT NULL,
     GameDifficulty INT NOT NULL,
