@@ -41,8 +41,8 @@
                   </Label>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#handleSave" prefHeight="32.0" prefWidth="64.0" text="Save" />
-            <Button mnemonicParsing="false" onAction="#handleExit" prefHeight="32.0" prefWidth="64.0" text="Exit" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSave" prefHeight="32.0" prefWidth="64.0" text="Save" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExit" prefHeight="32.0" prefWidth="64.0" text="Exit" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
@@ -128,8 +128,8 @@
                </font>
             </Text>
             <ComboBox fx:id="profileComboBox" onAction="#profileSelected" prefWidth="150.0" />
-            <Button mnemonicParsing="false" onAction="#handleNewProfile" text="New Profile" />
-            <Button mnemonicParsing="false" onAction="#handleDeleteProfile" text="Delete Profile" />
+            <Button fx:id="newProfileButton" mnemonicParsing="false" onAction="#handleNewProfile" text="New Profile" />
+            <Button fx:id="deleteProfileButton" mnemonicParsing="false" onAction="#handleDeleteProfile" text="Delete Profile" />
          </children>
       </HBox>
    </children>

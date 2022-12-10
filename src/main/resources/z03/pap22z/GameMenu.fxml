@@ -11,13 +11,13 @@
 
 <AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.controllers.GameMenuController">
    <children>
-      <Button layoutX="726.0" layoutY="556.0" maxHeight="30.0" maxWidth="60.0" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="60.0" text="Back" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+      <Button fx:id="exitButton" layoutX="726.0" layoutY="556.0" maxHeight="30.0" maxWidth="60.0" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="30.0" prefWidth="60.0" text="Back" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
       <Label layoutX="250.0" layoutY="45.0" prefHeight="30.0" prefWidth="300.0" text="Choose the game mode" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="45.0">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" onAction="#switchToAimSniper" layoutX="50.0" layoutY="120.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="200.0" text="Aim Sniper" textAlignment="CENTER">
+      <Button fx:id="aimSniperButton" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" onAction="#switchToAimSniper" layoutX="50.0" layoutY="120.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="200.0" text="Aim Sniper" textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="170.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>

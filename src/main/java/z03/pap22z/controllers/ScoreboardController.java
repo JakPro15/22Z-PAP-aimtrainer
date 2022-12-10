@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import z03.pap22z.Settings;
 import z03.pap22z.StringResult;
+import z03.pap22z.database.Database;
 import z03.pap22z.database.Result;
 import z03.pap22z.database.SavedResults;
 
@@ -27,19 +28,25 @@ public class ScoreboardController extends z03.pap22z.controllers.SceneController
         resultsTable.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("length"));
         resultsTable.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("score"));
         resultsTable.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("accuracy"));
-        setResults(SavedResults.readAllResults());
+        if(Database.isConnected()) {
+            setResults(SavedResults.readAllResults());
+        }
     }
 
     @FXML
     protected void handleViewAllResults(ActionEvent event) {
-        setResults(SavedResults.readAllResults());
+        if(Database.isConnected()) {
+            setResults(SavedResults.readAllResults());
+        }
     }
 
     @FXML
     protected void handleViewYourResults(ActionEvent event) {
         System.out.println("Current profile name: " + Settings.getCurrentProfile().getName());
         System.out.println("Current profile id: " + Settings.getCurrentProfile().getId());
-        setResults(SavedResults.readCurrentProfileResults());
+        if(Database.isConnected()) {
+            setResults(SavedResults.readCurrentProfileResults());
+        }
     }
 
     @FXML

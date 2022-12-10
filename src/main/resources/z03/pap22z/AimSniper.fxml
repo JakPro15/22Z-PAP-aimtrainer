@@ -31,7 +31,7 @@
                <children>
                   <HBox layoutX="63.0" layoutY="31.0" spacing="10.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="31.0">
                      <children>
-                        <Label text="Score:" textFill="WHITE">
+                        <Label fx:id="scoreTextLabel" text="Score:" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -45,7 +45,7 @@
                   </HBox>
                   <HBox layoutX="399.0" layoutY="31.0" spacing="10.0" AnchorPane.rightAnchor="289.0" AnchorPane.topAnchor="31.0">
                      <children>
-                        <Label text="Accuracy:" textFill="WHITE">
+                        <Label fx:id="accuracyTextLabel" text="Accuracy:" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -59,7 +59,7 @@
                   </HBox>
                   <HBox layoutX="63.0" layoutY="110.0" spacing="10.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="63.0">
                      <children>
-                        <Label text="Time left:" textFill="WHITE">
+                        <Label fx:id="timeLeftTextLabel" text="Time left:" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -75,7 +75,7 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#handleSave" text="Save Results" />
                         <Button mnemonicParsing="false" onAction="#handleNewGame" text="New game" />
-                        <Button mnemonicParsing="false" onAction="#handleExit" text="Back to game selection" />
+                        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExit" text="Back to game selection" />
                      </children>
                   </HBox>
                </children>

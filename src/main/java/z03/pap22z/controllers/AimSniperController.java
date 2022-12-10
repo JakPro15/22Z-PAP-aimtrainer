@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import z03.pap22z.AimSniperLogic;
 import z03.pap22z.Settings;
+import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedResults;
 
 public class AimSniperController extends z03.pap22z.controllers.SceneController {
@@ -149,9 +150,10 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
     @FXML
     void handleSave(ActionEvent event) {
-        if (!is_game_on && gameEndTime != null) {
+        if (!is_game_on && gameEndTime != null && Database.isConnected()) {
             SavedResults.writeResult(
-                    logic.getPoints(), logic.getAccuracy(), gameEndTime, "AimSniper");
+                logic.getPoints(), logic.getAccuracy(), gameEndTime, "AimSniper"
+            );
         }
     }
 
@@ -168,7 +170,7 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     protected void handleExit(ActionEvent event) {
         try {
             timer.cancel();
-            switchToMenu(event);
+            switchToGameMenu(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -8,8 +8,11 @@ import javafx.stage.Stage;
 import z03.pap22z.database.Database;
 
 public class App extends Application {
+    public static Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        App.primaryStage = primaryStage;
         try {
             Database.connect();
         } catch (Exception e) {
@@ -22,6 +25,7 @@ public class App extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             primaryStage.setMinHeight(600);
             primaryStage.setMinWidth(800);
+            primaryStage.setResizable(false);
             Scene scene = new Scene(root, 800, 600);
             primaryStage.setTitle("AimTrainer");
             primaryStage.setScene(scene);

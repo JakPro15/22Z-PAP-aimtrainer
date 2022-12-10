@@ -36,6 +36,11 @@ public class SceneController {
     }
 
     @FXML
+    protected void switchToGameMenu(ActionEvent event) throws IOException {
+        switchToScene(event, "GameMenu");
+    }
+
+    @FXML
     protected void switchToScoreboard(ActionEvent event) throws IOException {
         switchToScene(event, "Scoreboard");
     }
