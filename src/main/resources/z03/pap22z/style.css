@@ -1,32 +1,33 @@
-background {
-    display: block;
+.root {
+    -fx-color-outline: #ff2600;
+    -fx-color-background: #404040;
 }
 
 .background {
-    -fx-background-color: #404040;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 100%, -fx-color-background, derive(-fx-color-background, -50%));
 }
 
 .text {
-    -fx-color: #ff2600;
-    color: #ff2600;
+    -fx-color: -fx-color-outline;
+    color: -fx-color-outline;
 }
 
 .button {
     -fx-text-fill: black;
     -fx-font-family: "Arial Narrow";
-    -fx-background-color: linear-gradient(#404040, #606060);
-    -fx-border-color: #ff2600;
+    -fx-background-color: linear-gradient(-fx-color-background, derive(-fx-color-background, 25%));
+    -fx-border-color: -fx-color-outline;
     -fx-border-radius: 1px;
     -fx-border-width: 3px;
     -fx-border-insets: -2px;
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(#404040, #202020);
+    -fx-background-color: linear-gradient(-fx-color-background, derive(-fx-color-background, -50%));
 }
 
 .dialog-pane {
-    -fx-background-color: #404040;
+    -fx-background-color: -fx-color-background;
 }
 
 .dialog-pane:header .header-panel {
@@ -34,7 +35,7 @@ background {
     /* 10px 14px 10px 14px */
     -fx-padding: 0.833em;
     /* 10px */
-    -fx-background-color: #404040, linear-gradient(derive(#404040, 30%), #404040);
+    -fx-background-color: -fx-color-background, linear-gradient(derive(-fx-color-background, 30%), -fx-color-background);
     -fx-background-insets: 0, 0 0 1 0;
 }
 
@@ -54,7 +55,7 @@ background {
 
 .text-area {
     -fx-background-color: transparent;
-    -fx-text-fill: #ff2600;
+    -fx-text-fill: -fx-color-outline;
 }
 
 .text-area .scroll-pane {
@@ -71,10 +72,15 @@ background {
 }
 
 .circle {
-    -fx-fill: #ff2600;
-    -fx-stroke: #000000;
+    -fx-fill: -fx-color-outline;
+    -fx-stroke: black;
 }
 
 .table-column {
     -fx-alignment: CENTER;
+}
+
+.split-pane>.split-pane-divider {
+    -fx-padding: 2;
+    -fx-background-color: -fx-color-outline;
 }
