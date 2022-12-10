@@ -73,7 +73,7 @@
                   </HBox>
                   <HBox layoutX="585.0" layoutY="121.0" spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleSave" text="Save Results" />
+                        <Button fx:id="save_button" mnemonicParsing="false" onAction="#handleSave" text="Save Results" />
                         <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#handleNewGame" text="New game" />
                         <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExit" text="Back to game selection" />
                      </children>
