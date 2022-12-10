@@ -50,7 +50,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="accuracyValueLabel" text="0%" textFill="WHITE">
+                        <Label fx:id="accuracyValueLabel" text="0.00%" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -74,7 +74,7 @@
                   <HBox layoutX="585.0" layoutY="121.0" spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#handleSave" text="Save Results" />
-                        <Button mnemonicParsing="false" onAction="#handleNewGame" text="New game" />
+                        <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#handleNewGame" text="New game" />
                         <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExit" text="Back to game selection" />
                      </children>
                   </HBox>

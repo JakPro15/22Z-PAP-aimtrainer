@@ -25,7 +25,7 @@ public class SceneSelectionTest extends ApplicationTest {
     }
 
     @Test
-    public void test_select_game() {
+    public void testSelectGame() {
         // enter game selection menu
         verifyThat("#startButton", hasText("Play"));
         clickOn("#startButton");
@@ -45,7 +45,7 @@ public class SceneSelectionTest extends ApplicationTest {
     }
 
     @Test
-    public void test_scoreboard() {
+    public void testScoreboard() {
         verifyThat("#scoreboardButton", hasText("Scoreboard"));
         clickOn("#scoreboardButton");
         // enter scoreboard scene
@@ -58,7 +58,7 @@ public class SceneSelectionTest extends ApplicationTest {
     }
 
     @Test
-    public void test_settings() {
+    public void testSettings() {
         verifyThat("#settingsButton", hasText("Settings"));
         clickOn("#settingsButton");
         // enter settings scene

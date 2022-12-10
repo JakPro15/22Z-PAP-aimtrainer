@@ -12,7 +12,7 @@ public class Settings {
     private static List<ProfileSettings> profiles;
     private static List<Integer> deletedProfileIds;
 
-    public static final String[] VALID_DIFFICULTIES = { "Very Easy", "Easy", "Normal", "Hard", "Very Hard" };
+    public static final String[] DIFFICULTIES = { "Very Easy", "Easy", "Normal", "Hard", "Very Hard" };
 
     static {
         initialize();
