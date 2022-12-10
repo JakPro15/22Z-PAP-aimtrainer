@@ -11,6 +11,11 @@ public class StringResult {
     private String gameTime, user, gameType, speed, length, score, accuracy;
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
+    /**
+     * Creates a StringResult containing all fields of the given result converted to strings.
+     * Only id is not converted, but saved as an integer.
+     * @param result
+     */
     public StringResult(Result result) {
         id = result.getId();
         gameTime = result.getGameTime().format(dateFormatter);
