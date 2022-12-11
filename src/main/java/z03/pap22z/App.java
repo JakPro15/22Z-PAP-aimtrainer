@@ -25,7 +25,7 @@ public class App extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             primaryStage.setMinHeight(600);
             primaryStage.setMinWidth(800);
-            primaryStage.setResizable(false);
+            // primaryStage.setResizable(false);
             Scene scene = new Scene(root, 800, 600);
             primaryStage.setTitle("AimTrainer");
             primaryStage.setScene(scene);
