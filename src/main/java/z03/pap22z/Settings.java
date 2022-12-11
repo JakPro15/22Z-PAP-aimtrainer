@@ -28,7 +28,8 @@ public class Settings {
             readFromDatabase();
             currentProfile = ProfileSettings.findProfileById(
                     profiles, SavedSettings.readCurrentProfile());
-        } else {
+        }
+        else {
             // can't read from database - create a default profile instead
             profiles = new ArrayList<ProfileSettings>();
             profiles.add(ProfileSettings.getDefaultProfile());

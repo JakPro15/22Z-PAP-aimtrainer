@@ -56,7 +56,7 @@ public class AimSniperTest extends ApplicationTest {
         verifyThat("#accuracyValueLabel", hasText("100.00%"));
         // now miss a click
         moveTo("#circle");
-        moveBy(0, 50);
+        moveBy(0, 20);
         press(MouseButton.PRIMARY);
         release(MouseButton.PRIMARY);
         verifyThat("#scoreValueLabel", hasText("30"));

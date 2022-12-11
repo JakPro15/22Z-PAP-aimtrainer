@@ -43,7 +43,7 @@ public class Result implements Serializable {
     @Column(name = "GameLength", nullable = false)
     private int gameLength;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(name = "ProfileID", referencedColumnName = "ProfileID")
     private ProfileSettings profile;
 }

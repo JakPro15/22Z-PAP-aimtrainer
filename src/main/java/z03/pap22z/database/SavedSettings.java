@@ -48,6 +48,9 @@ public class SavedSettings {
                 if(profile != null) {
                     manager.remove(profile);
                 }
+                else {
+                    System.out.println("Failed to find a profile to delete.");
+                }
             }
             for(ProfileSettings profile: profiles) {
                 ProfileSettings savedProfile = manager.find(ProfileSettings.class, profile.getId());

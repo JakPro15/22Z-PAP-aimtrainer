@@ -13,7 +13,7 @@
                       value="jdbc:mysql://localhost:31666/pap22Z_z03" />
             <property name="javax.persistence.jdbc.user" value="pap22Z_z03" />
             <property name="javax.persistence.jdbc.password" value="pap.2022.PAP"/>
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="none" />
         </properties>
     </persistence-unit>
 </persistence>

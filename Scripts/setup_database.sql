@@ -12,7 +12,7 @@ CREATE TABLE Settings (
     GameDifficulty INT NOT NULL,
     GameLength INT NOT NULL,
     PRIMARY KEY(ProfileID)
-);
+) ENGINE=InnoDB;
 INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 2, 20);
 
 CREATE TABLE Results (
@@ -23,11 +23,19 @@ CREATE TABLE Results (
     GameType VARCHAR(20) NOT NULL,
     GameDifficulty INT NOT NULL,
     GameLength INT NOT NULL,
-    ProfileID INT NOT NULL REFERENCES Settings(ProfileID)
-);
+    ProfileID INT NOT NULL,
+    PRIMARY KEY(ResultID),
+    CONSTRAINT FOREIGN KEY(ProfileID)
+        REFERENCES Settings(ProfileID)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
 
 CREATE TABLE CurrentProfile (
     CurrentProfileID INT UNIQUE NOT NULL AUTO_INCREMENT,
-    ProfileID INT UNIQUE NOT NULL REFERENCES Settings(ProfileID)
-);
+    ProfileID INT UNIQUE,
+    PRIMARY KEY(CurrentProfileID),
+    CONSTRAINT FOREIGN KEY(ProfileID)
+        REFERENCES Settings(ProfileID)
+        ON DELETE SET NULL
+) ENGINE=InnoDB;
 INSERT INTO CurrentProfile VALUES(NULL, 1);

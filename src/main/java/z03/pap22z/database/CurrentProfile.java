@@ -23,7 +23,7 @@ public class CurrentProfile implements Serializable {
     @Column(name = "CurrentProfileID", unique = true, nullable = false)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "ProfileID", referencedColumnName = "ProfileID")
     private ProfileSettings profile;
 }
