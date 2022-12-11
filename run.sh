@@ -1,6 +1,7 @@
 #!/bin/bash
 # Run the installed AimTrainer program.
 
+cd $(dirname "$0")
 source Scripts/mysql_variables.sh
 $mysqld --defaults-file="$HOME/pap22Z_z03_mysql/mysql_config.cnf" &> /dev/null &
 sleep 2
