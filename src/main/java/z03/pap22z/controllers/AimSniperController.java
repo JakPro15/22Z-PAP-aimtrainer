@@ -67,6 +67,9 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     private SimpleDoubleProperty play_height = new SimpleDoubleProperty();
     private SimpleDoubleProperty circle_radius = new SimpleDoubleProperty();
 
+    /**
+     * Initializes all needed properties and starts the game.
+     */
     public void initialize() {
         this.random = new Random();
 
@@ -93,6 +96,10 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
         playGame();
     }
 
+    /**
+     * Main game method. Launches all events in correct order: countdown, game
+     * itself, game over screen.
+     */
     public void playGame() {
         circle.setVisible(false);
         messageLabel.setText(String.format("%d", delay_time));
@@ -139,6 +146,10 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
         }
     }
 
+    /**
+     * Teleports the circle object to random coordinates within the playfield
+     * object.
+     */
     public void teleportCircle() {
         double new_x = generateCircleCoord(this.play_width.getValue());
         double new_y = generateCircleCoord(this.play_height.getValue());
@@ -147,16 +158,25 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
         circle.setCenterY(new_y);
     }
 
+    /**
+     * Generates a random valid circle center coordinate given span - length of
+     * a single dimension of a field. This method accounts for the radius of
+     * the circle to make sure the circle doesn't clip the edges of the field.
+     * 
+     * @return double
+     */
     public double generateCircleCoord(double span) {
         double radius = circle_radius.getValue();
         double allowed_span = span - 2 * radius;
         return random.nextDouble() * allowed_span + radius;
     }
 
-    public void initializeCircle() {
-        teleportCircle();
-    }
-
+    /**
+     * Returns the circle radius length calculated based on current game
+     * difficulty setting (the harder the game, the smaller the radius).
+     * 
+     * @return double
+     */
     public double calculateCircleRadius() {
         int game_diff = Settings.getGameDifficulty();
         double new_radius = DEFAULT_RADIUS - (game_diff - 2) * 2.5;
@@ -204,6 +224,12 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
         }
     }
 
+    /**
+     * Returns true if the click occured within the circle.
+     * 
+     * @param event
+     * @return boolean
+     */
     private boolean isInCircle(MouseEvent event) {
         double pos_x = event.getX();
         double pos_y = event.getY();
@@ -213,6 +239,15 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
         return center_distance <= this.circle.getRadius();
     }
 
+    /**
+     * Returns the distance between point (x1, y1) and (x2, y2).
+     * 
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @return double
+     */
     private double calculateDistance(double x1, double y1, double x2, double y2) {
         double delta_x = x2 - x1;
         double delta_y = y2 - y1;
