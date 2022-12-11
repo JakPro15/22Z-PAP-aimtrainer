@@ -84,3 +84,29 @@
     -fx-padding: 2;
     -fx-background-color: -fx-color-outline;
 }
+
+.slider .thumb {
+    -fx-background-color:
+        -fx-color-outline,
+        radial-gradient(center 50% 50%, radius 50%, -fx-color-background, derive(-fx-color-background, 15%));
+    -fx-background-insets: -3, 0;
+    -fx-background-radius: 12;
+}
+
+.slider .thumb:hover {
+    -fx-background-color:
+        -fx-color-outline,
+        radial-gradient(center 50% 50%, radius 50%, -fx-color-background, derive(-fx-color-background, -15%));
+    -fx-background-insets: -2, 1;
+    -fx-background-radius: 12;
+}
+
+/* 
+.slider .track {
+    -fx-background-color:
+        derive(-fx-color-outline, -50%),
+        -fx-color-outline;
+    -fx-background-insets: 0 0 -1 0, 1;
+    -fx-background-radius: 3, 2;
+    -fx-padding: 3;
+} */

@@ -38,13 +38,14 @@ public class GameMenuController extends z03.pap22z.controllers.SceneController {
     @FXML
     protected void handleHint(ActionEvent event) {
         if (event.getSource() == hint_1) {
-            text_hint.setText("How to play game number 1");
+            text_hint.setText(
+                    "AimSniper: hit the target as many times as you can while it teleports on every successful click you make!");
         }
         if (event.getSource() == hint_2) {
-            text_hint.setText("How to play game number 2. I specially put here longer text to see what happens.");
+            text_hint.setText("KeyboardWarrior: to be implemented!");
         }
         if (event.getSource() == hint_3) {
-            text_hint.setText("How to play game number 3. I like studying IT :) ");
+            text_hint.setText("Third game: to be implemented!");
         }
         text_hint.setVisible(true);
     }
