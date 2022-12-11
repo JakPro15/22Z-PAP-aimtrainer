@@ -33,12 +33,12 @@ then
         exit 1
     fi
     echo "Setting up MySQL"
-    $mysqld --initialize-insecure --datadir="$HOME/pap22Z_z03_mysql/mysql/data"
     # prepare MySQL configuration file
     cp Others/mysql_config.cnf "$HOME/pap22Z_z03_mysql"
     sed -i "s#HOME#$HOME#" "$HOME/pap22Z_z03_mysql/mysql_config.cnf"
     sed -i "s#USER#$USER#" "$HOME/pap22Z_z03_mysql/mysql_config.cnf"
 fi
+$mysqld --initialize-insecure --datadir="$HOME/pap22Z_z03_mysql/mysql/data"
 # launch MySQL
 $mysqld --defaults-file="$HOME/pap22Z_z03_mysql/mysql_config.cnf" &
 sleep 2

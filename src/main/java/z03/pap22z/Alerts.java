@@ -5,6 +5,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 
 public class Alerts extends Alert {
+    /**
+     * Creates a JavaFX alert with style loaded from style.css.
+     * @param alertType the alert type
+     * @param contentText the content text
+     * @param buttons the button types
+     */
     private Alerts(AlertType alertType, String contentText, ButtonType... buttons) {
         super(alertType, contentText, buttons);
         DialogPane dialogPane = this.getDialogPane();

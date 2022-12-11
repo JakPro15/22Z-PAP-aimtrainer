@@ -25,7 +25,7 @@ trudności.
 
 ### Instalacja i uruchomienie
 * Należy zainstalować Javę w wersji co najmniej 17, np. komendą `sudo apt-get install openjdk-17-jre`
-* Należy zainstalować pakiet libncurses5 potrzebny do MySQLa, np. komendą `sudo apt-get install libncurses5`
+oraz OpenJFX, np. komendą `sudo apt-get install openjfx`
 * Należy pobrać MySQL ze strony https://dev.mysql.com/downloads/mysql/ (wariant Linux Generic).  
   Otrzymane archiwum należy zapisać w katalogu ~/pap22Z_z03_mysql pod nazwą mysql.tar.xz  
     Bezpośredni link do pobrania:  
@@ -36,8 +36,10 @@ trudności.
 `mkdir ~/pap22Z_z03_mysql && wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.31-linux-glibc2.12-i686.tar.xz -O ~/pap22Z_z03_mysql/mysql.tar.xz`  
         wersja 64-bitowa:  
 `mkdir ~/pap22Z_z03_mysql && wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.31-linux-glibc2.12-x86_64.tar.xz -O ~/pap22Z_z03_mysql/mysql.tar.xz`  
-* Należy uruchomić skrypt instalacyjny `./install_and_run.sh`
-* Następne uruchomienia aplikacji należy wykonywać przez skrypt `./run.sh`
+* Należy uruchomić skrypt instalacyjny `pap22Z_z03/install_and_run.sh`. Jeżeli wyświetlony zostanie napis "Error
+while loading shared libraries", należy brakujące biblioteki doinstalować i uruchomić skrypt ponownie. Potrzebna
+może się okazać instalacja pakietów libnuma1, libtinfo5, libaio1 lub innych.
+* Następne uruchomienia aplikacji należy wykonywać przez skrypt `pap22Z_z03/run.sh`
 
 ### Deinstalacja
 * W celu usunięcia programu z komputera należy usunąć katalog ~/pap22Z_z03_mysql oraz sklonowane repozytorium.
