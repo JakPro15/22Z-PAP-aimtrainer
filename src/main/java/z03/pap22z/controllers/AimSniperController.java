@@ -22,8 +22,7 @@ import z03.pap22z.Settings;
 import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedResults;
 
-// TODO: make the game calculate points differently depending on circle radius
-// TODO: add docs on AimSniperController non-fxml methods
+
 public class AimSniperController extends z03.pap22z.controllers.SceneController {
     private final int delay_time = 3;
     private final int DEFAULT_RADIUS = 15;
@@ -162,7 +161,6 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
      * Generates a random valid circle center coordinate given span - length of
      * a single dimension of a field. This method accounts for the radius of
      * the circle to make sure the circle doesn't clip the edges of the field.
-     * 
      * @return double
      */
     public double generateCircleCoord(double span) {
@@ -174,8 +172,7 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     /**
      * Returns the circle radius length calculated based on current game
      * difficulty setting (the harder the game, the smaller the radius).
-     * 
-     * @return double
+     * @return the calculated radius
      */
     public double calculateCircleRadius() {
         int game_diff = Settings.getGameDifficulty();
@@ -225,10 +222,8 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     }
 
     /**
-     * Returns true if the click occured within the circle.
-     * 
-     * @param event
-     * @return boolean
+     * @param event mouse click event
+     * @return whether the click occured within the circle
      */
     private boolean isInCircle(MouseEvent event) {
         double pos_x = event.getX();
@@ -240,13 +235,12 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     }
 
     /**
-     * Returns the distance between point (x1, y1) and (x2, y2).
-     * 
+     * Calculates distance between two points.
      * @param x1
      * @param y1
      * @param x2
      * @param y2
-     * @return double
+     * @return the distance between points (x1, y1) and (x2, y2)
      */
     private double calculateDistance(double x1, double y1, double x2, double y2) {
         double delta_x = x2 - x1;
