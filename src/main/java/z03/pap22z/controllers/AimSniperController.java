@@ -105,7 +105,6 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
                 public void run() {
 
                     is_game_on = false;
-                    System.out.println(time_left);
                     Platform.runLater(() -> messageLabel.setText(String.format("%d", time_left + 1)));
                     time_left -= 1;
                     if (time_left < 0) {
@@ -197,15 +196,11 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     protected void handlePlayfieldClick(MouseEvent event) {
         if (this.is_game_on) {
             if (isInCircle(event)) {
-                System.out.println("Hit.");
                 teleportCircle();
                 this.logic.registerTargetHit();
             } else {
-                System.out.println("Miss.");
                 this.logic.registerTargetMiss();
             }
-        } else {
-            System.out.println("Game not on.");
         }
     }
 
@@ -215,7 +210,6 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
         double circle_x = this.circle.getCenterX();
         double circle_y = this.circle.getCenterY();
         double center_distance = calculateDistance(pos_x, pos_y, circle_x, circle_y);
-        System.out.println(center_distance);
         return center_distance <= this.circle.getRadius();
     }
 

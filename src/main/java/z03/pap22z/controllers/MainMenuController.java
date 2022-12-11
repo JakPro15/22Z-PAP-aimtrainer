@@ -14,7 +14,6 @@ public class MainMenuController extends z03.pap22z.controllers.SceneController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Start button pressed.");
     }
 
     @FXML
@@ -24,7 +23,6 @@ public class MainMenuController extends z03.pap22z.controllers.SceneController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Settings button pressed.");
     }
 
     @FXML
@@ -34,12 +32,10 @@ public class MainMenuController extends z03.pap22z.controllers.SceneController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Scoreboard button pressed.");
     }
 
     @FXML
     protected void handleExitButtonPress(ActionEvent event) {
-        System.out.println("Exit button pressed.");
         Platform.exit();
     }
 }

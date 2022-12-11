@@ -25,7 +25,7 @@ public class SavedSettings {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in readAllSettings: " + ex.getMessage());
+            System.err.println("Exception in readAllSettings: " + ex.getMessage());
         }
         finally {
             manager.close();
@@ -49,7 +49,7 @@ public class SavedSettings {
                     manager.remove(profile);
                 }
                 else {
-                    System.out.println("Failed to find a profile to delete.");
+                    System.err.println("Failed to find a profile to delete.");
                 }
             }
             for(ProfileSettings profile: profiles) {
@@ -67,7 +67,7 @@ public class SavedSettings {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in updateAllSettings: " + ex.getMessage());
+            System.err.println("Exception in updateAllSettings: " + ex.getMessage());
         }
         finally {
             manager.close();
@@ -97,7 +97,7 @@ public class SavedSettings {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in readCurrentProfile: " + ex.getMessage());
+            System.err.println("Exception in readCurrentProfile: " + ex.getMessage());
         }
         finally {
             manager.close();
@@ -136,7 +136,7 @@ public class SavedSettings {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in writeCurrentProfile: " + ex.getMessage());
+            System.err.println("Exception in writeCurrentProfile: " + ex.getMessage());
         }
         finally {
             manager.close();

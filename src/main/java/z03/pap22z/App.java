@@ -8,17 +8,15 @@ import javafx.stage.Stage;
 import z03.pap22z.database.Database;
 
 public class App extends Application {
-    public static Stage primaryStage;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-        App.primaryStage = primaryStage;
         try {
             Database.connect();
         } catch (Exception e) {
-            System.out.println("Failed to connect to the MySQL database.");
-            System.out.println("Will use default profile settings.");
-            e.printStackTrace();
+            System.err.println("Failed to connect to the MySQL database.");
+            System.err.println("Exception: " + e.getMessage());
+            System.err.println("Will use default profile settings.");
+            System.err.println("Saving results will not work.");
         }
 
         try {
@@ -31,7 +29,8 @@ public class App extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Exception in App start method: " + e.getMessage());
+            System.err.println("Shutting down");
             Database.closeConnection();
             System.exit(0);
         }

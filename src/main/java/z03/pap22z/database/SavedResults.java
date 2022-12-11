@@ -39,7 +39,7 @@ public class SavedResults {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in writeResult: " + ex.getMessage());
+            System.err.println("Exception in writeResult: " + ex.getMessage());
         }
         finally {
             manager.close();
@@ -65,7 +65,7 @@ public class SavedResults {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in readAllSettings: " + ex.getMessage());
+            System.err.println("Exception in readAllSettings: " + ex.getMessage());
         }
         finally {
             manager.close();
@@ -92,7 +92,7 @@ public class SavedResults {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in readCurrentProfileResults: " + ex.getMessage());
+            System.err.println("Exception in readCurrentProfileResults: " + ex.getMessage());
         }
         finally {
             manager.close();
@@ -132,7 +132,7 @@ public class SavedResults {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("Exception in deleteResult: " + ex.getMessage());
+            System.err.println("Exception in deleteResult: " + ex.getMessage());
         }
         finally {
             manager.close();
