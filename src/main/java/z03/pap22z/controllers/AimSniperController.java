@@ -3,10 +3,9 @@ package z03.pap22z.controllers;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import javafx.application.Platform;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import z03.pap22z.AimSniperLogic;
 import z03.pap22z.Settings;
 import z03.pap22z.database.Database;
@@ -28,8 +28,6 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     private final int DEFAULT_RADIUS = 15;
 
     private AimSniperLogic logic = new AimSniperLogic();
-
-    private Timer timer = new Timer();
 
     private int timeLeft = Settings.getGameLength();
 
@@ -102,47 +100,37 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     public void playGame() {
         circle.setVisible(false);
         messageLabel.setText(String.format("%d", delay_time));
-        synchronized (this.timer) {
-            // ready period before a game
-            this.timer.scheduleAtFixedRate(new TimerTask() {
-                int time_left = delay_time;
 
-                @Override
-                public void run() {
-
-                    is_game_on = false;
-                    Platform.runLater(() -> messageLabel.setText(String.format("%d", time_left + 1)));
-                    time_left -= 1;
-                    if (time_left < 0) {
-                        Platform.runLater(() -> messageLabel.setText(""));
-                        circle.setVisible(true);
-                        this.cancel();
+        // ready period before a game
+        Timeline countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
+            int time_left = Integer.parseInt(messageLabel.getText()) - 1;
+            if (time_left > 0) {
+                messageLabel.setText(String.format("%d", time_left));
+            }
+            else {
+                messageLabel.setText("");
+                circle.setVisible(true);
+                is_game_on = true;
+                gameEndTime = LocalDateTime.now().plusSeconds(timeLeft);
+                timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
+                Timeline gameTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event2 -> {
+                    timeLeft -= 1;
+                    if (timeLeft > 0) {
+                    timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                     }
-
-                }
-            }, 0, 1000);
-
-            this.timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            is_game_on = true;
-                            timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                            timeLeft -= 1;
-                            if (timeLeft == -1) {
-                                circle.setVisible(false);
-                                messageLabel.setText("GAME OVER");
-                                timer.cancel();
-                                is_game_on = false;
-                                gameEndTime = LocalDateTime.now();
-                            }
-                        }
-                    });
-                }
-            }, delay_time * 1000, 1000);
-        }
+                    else {
+                        timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
+                        is_game_on = false;
+                        circle.setVisible(false);
+                        messageLabel.setText("GAME OVER");
+                    }
+                }));
+                gameTimeline.setCycleCount(timeLeft);
+                gameTimeline.play();
+            }
+        }));
+        countdownTimeline.setCycleCount(delay_time);
+        countdownTimeline.play();
     }
 
     /**
@@ -202,7 +190,6 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     @FXML
     protected void handleExit(ActionEvent event) {
         try {
-            timer.cancel();
             switchToGameMenu(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
