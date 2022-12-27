@@ -13,6 +13,7 @@ public class GameLogic {
     protected SimpleIntegerProperty totalClicks = new SimpleIntegerProperty();
     protected SimpleIntegerProperty clicksOnTarget = new SimpleIntegerProperty();
     protected SimpleIntegerProperty currentCombo = new SimpleIntegerProperty();
+    protected Boolean isGameOn;
 
     public GameLogic() {
         this.pointsProperty.setValue(0);
@@ -24,6 +25,7 @@ public class GameLogic {
             double hits = this.clicksOnTarget.getValue();
             return hits == 0 ? 0d : ((double) this.clicksOnTarget.get() / this.totalClicks.get() * 100);
         }, this.clicksOnTarget, this.totalClicks));
+        this.isGameOn = false;
     }
 
     /**
@@ -61,6 +63,15 @@ public class GameLogic {
     }
 
     /**
+     * Return current game state (whether or not it is on)
+     * @return current game state
+     * 
+     */
+    public Boolean getIsGameOn() {
+        return this.isGameOn;
+    }
+
+    /**
      * Returns the IntegerProperty of current score to be used in updating labels
      * @return IntegerProperty of the number of points gained throughout the game
      */
@@ -75,5 +86,12 @@ public class GameLogic {
      */
     public DoubleProperty accuracyProperty() {
         return this.accuracyProperty;
+    }
+
+    /**
+     * Changes the value of isGameOn variable to the opposite of what it was before.
+     */
+    public void switchGameState() {
+        this.isGameOn = !this.isGameOn;
     }
 }

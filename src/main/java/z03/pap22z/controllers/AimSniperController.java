@@ -33,11 +33,9 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
     private Random random;
 
-    private Boolean is_game_on = false;
-
     private LocalDateTime gameEndTime;
 
-    private boolean is_score_saved = false;
+    private boolean isScoreSaved = false;
 
     @FXML
     private AnchorPane playfield;
@@ -58,11 +56,11 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
     private Label messageLabel;
 
     @FXML
-    private Button save_button;
+    private Button saveButton;
 
-    private SimpleDoubleProperty play_width = new SimpleDoubleProperty();
-    private SimpleDoubleProperty play_height = new SimpleDoubleProperty();
-    private SimpleDoubleProperty circle_radius = new SimpleDoubleProperty();
+    private SimpleDoubleProperty playWidth = new SimpleDoubleProperty();
+    private SimpleDoubleProperty playHeight = new SimpleDoubleProperty();
+    private SimpleDoubleProperty circleRadius = new SimpleDoubleProperty();
 
     /**
      * Initializes all needed properties and starts the game.
@@ -72,9 +70,9 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
         circle.setRadius(this.calculateCircleRadius());
 
-        circle_radius.bind(this.circle.radiusProperty());
-        play_width.bind(this.playfield.widthProperty());
-        play_height.bind(this.playfield.heightProperty());
+        circleRadius.bind(this.circle.radiusProperty());
+        playWidth.bind(this.playfield.widthProperty());
+        playHeight.bind(this.playfield.heightProperty());
 
         this.logic.pointsProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -103,14 +101,14 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
         // ready period before a game
         Timeline countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
-            int time_left = Integer.parseInt(messageLabel.getText()) - 1;
-            if (time_left > 0) {
-                messageLabel.setText(String.format("%d", time_left));
+            int countdownTime = Integer.parseInt(messageLabel.getText()) - 1;
+            if (countdownTime > 0) {
+                messageLabel.setText(String.format("%d", countdownTime));
             }
             else {
                 messageLabel.setText("");
                 circle.setVisible(true);
-                is_game_on = true;
+                logic.switchGameState();
                 gameEndTime = LocalDateTime.now().plusSeconds(timeLeft);
                 timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                 Timeline gameTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event2 -> {
@@ -120,7 +118,7 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
                     }
                     else {
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                        is_game_on = false;
+                        logic.switchGameState();
                         circle.setVisible(false);
                         messageLabel.setText("GAME OVER");
                     }
@@ -138,11 +136,11 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
      * object.
      */
     public void teleportCircle() {
-        double new_x = generateCircleCoord(this.play_width.getValue());
-        double new_y = generateCircleCoord(this.play_height.getValue());
+        double newX = generateCircleCoord(this.playWidth.getValue());
+        double newY = generateCircleCoord(this.playHeight.getValue());
 
-        circle.setCenterX(new_x);
-        circle.setCenterY(new_y);
+        circle.setCenterX(newX);
+        circle.setCenterY(newY);
     }
 
     /**
@@ -152,9 +150,9 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
      * @return double
      */
     public double generateCircleCoord(double span) {
-        double radius = circle_radius.getValue();
-        double allowed_span = span - 2 * radius;
-        return random.nextDouble() * allowed_span + radius;
+        double radius = circleRadius.getValue();
+        double allowedSpan = span - 2 * radius;
+        return random.nextDouble() * allowedSpan + radius;
     }
 
     /**
@@ -163,18 +161,18 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
      * @return the calculated radius
      */
     public double calculateCircleRadius() {
-        int game_diff = Settings.getGameDifficulty();
-        double new_radius = DEFAULT_RADIUS - (game_diff - 2) * 2.5;
-        return new_radius;
+        int gameDiff = Settings.getGameDifficulty();
+        double newRadius = DEFAULT_RADIUS - (gameDiff - 2) * 2.5;
+        return newRadius;
     }
 
     @FXML
     void handleSave(ActionEvent event) {
-        if (!is_game_on && gameEndTime != null && !is_score_saved && Database.isConnected()) {
+        if (!logic.getIsGameOn() && gameEndTime != null && !isScoreSaved && Database.isConnected()) {
             SavedResults.writeResult(
                     logic.getPoints(), logic.getAccuracy(), gameEndTime, "AimSniper");
-            save_button.setText("Score saved.");
-            is_score_saved = true;
+            saveButton.setText("Score saved.");
+            isScoreSaved = true;
         }
     }
 
@@ -198,7 +196,7 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
     @FXML
     protected void handlePlayfieldClick(MouseEvent event) {
-        if (this.is_game_on) {
+        if (logic.getIsGameOn()) {
             if (isInCircle(event)) {
                 teleportCircle();
                 this.logic.registerTargetHit();
@@ -213,12 +211,12 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
      * @return whether the click occured within the circle
      */
     private boolean isInCircle(MouseEvent event) {
-        double pos_x = event.getX();
-        double pos_y = event.getY();
-        double circle_x = this.circle.getCenterX();
-        double circle_y = this.circle.getCenterY();
-        double center_distance = calculateDistance(pos_x, pos_y, circle_x, circle_y);
-        return center_distance <= this.circle.getRadius();
+        double posX = event.getX();
+        double posY = event.getY();
+        double circleX = this.circle.getCenterX();
+        double circleY = this.circle.getCenterY();
+        double centerDistance = calculateDistance(posX, posY, circleX, circleY);
+        return centerDistance <= this.circle.getRadius();
     }
 
     /**
@@ -230,10 +228,10 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
      * @return the distance between points (x1, y1) and (x2, y2)
      */
     private double calculateDistance(double x1, double y1, double x2, double y2) {
-        double delta_x = x2 - x1;
-        double delta_y = y2 - y1;
+        double deltaX = x2 - x1;
+        double deltaY = y2 - y1;
 
-        return Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
     }
 

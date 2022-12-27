@@ -21,6 +21,21 @@ public class GameLogicTest extends TestCase {
         assertTrue(logic.getPoints() == 0);
 
         assertTrue(logic.getAccuracy() == 0);
+
+        assertFalse(logic.getIsGameOn());
+    }
+
+    @Test
+    public void testChangeState() {
+        GameLogic logic = new GameLogic();
+
+        logic.switchGameState();
+
+        assertTrue(logic.getIsGameOn());
+
+        logic.switchGameState();
+
+        assertFalse(logic.getIsGameOn());
     }
 
     @Test
