@@ -77,6 +77,7 @@ public class Settings {
             throw new RuntimeException("Tried to add an existing profile.");
         }
         ProfileSettings profile = new ProfileSettings();
+        profile.setId(-1);
         profile.setName(newProfileName);
         profile.setMusicVolume(getMusicVolume());
         profile.setSfxVolume(getSfxVolume());
@@ -107,7 +108,10 @@ public class Settings {
             currentProfile = profiles.get(0);
             update();
         }
-        deletedProfileIds.add(profile.getId());
+        if (profile.getId() != -1) {
+            System.out.println(profile.getId());
+            deletedProfileIds.add(profile.getId());
+        }
     }
 
     /**
