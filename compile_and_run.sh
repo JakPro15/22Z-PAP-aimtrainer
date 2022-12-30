@@ -30,3 +30,4 @@ mv AimTrainer-1.0.0.jar AimTrainer.jar
 
 java --module-path Others/openjfx/lib --add-modules=javafx.controls,javafx.fxml --add-opens java.base/java.lang=ALL-UNNAMED -cp AimTrainer.jar z03.pap22z.App
 $mysqladmin --host=localhost --socket="$HOME/pap22Z_z03_mysql/mysqld.sock" -u root shutdown
+rm *.log
