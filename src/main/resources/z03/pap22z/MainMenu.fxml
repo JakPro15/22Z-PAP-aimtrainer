@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -23,7 +22,6 @@
         <Button fx:id="scoreboardButton" onAction="#handleScoreboardButtonPress" prefHeight="40.0" prefWidth="200.0" text="Scoreboard" textAlignment="CENTER" GridPane.rowIndex="3" />
         <Button fx:id="settingsButton" onAction="#handleSettingsButtonPress" prefHeight="40.0" prefWidth="200.0" text="Settings" textAlignment="CENTER" GridPane.rowIndex="4" />
         <Button fx:id="exitButton" onAction="#handleExitButtonPress" prefHeight="40.0" prefWidth="200.0" text="Exit" textAlignment="CENTER" GridPane.rowIndex="5" />
-        <MediaView fx:id="mediaView" fitHeight="40.0" fitWidth="200.0" GridPane.rowIndex="1" />
     </children>
     <columnConstraints>
         <ColumnConstraints />
