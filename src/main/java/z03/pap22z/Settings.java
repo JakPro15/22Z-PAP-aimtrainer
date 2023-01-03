@@ -109,7 +109,6 @@ public class Settings {
             update();
         }
         if (profile.getId() != -1) {
-            System.out.println(profile.getId());
             deletedProfileIds.add(profile.getId());
         }
     }
