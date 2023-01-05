@@ -58,4 +58,13 @@ public class GameMenuController extends z03.pap22z.controllers.SceneController {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    protected void switchToKeyboardWarrior(ActionEvent event) {
+        try {
+            switchToScene(event, "KeyboardWarrior");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
