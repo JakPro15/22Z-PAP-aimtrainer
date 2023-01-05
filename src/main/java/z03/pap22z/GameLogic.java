@@ -91,7 +91,7 @@ public class GameLogic {
     /**
      * Changes the value of isGameOn variable to the opposite of what it was before.
      */
-    public void switchGameState() {
+    public void toggleGameState() {
         this.isGameOn = !this.isGameOn;
     }
 }

@@ -31,7 +31,7 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
 
     private int timeLeft = Settings.getGameLength();
 
-    private Random random;
+    private Random random = new Random();
 
     private LocalDateTime gameEndTime;
 
@@ -66,8 +66,6 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
      * Initializes all needed properties and starts the game.
      */
     public void initialize() {
-        this.random = new Random();
-
         circle.setRadius(this.calculateCircleRadius());
 
         circleRadius.bind(this.circle.radiusProperty());
@@ -108,7 +106,7 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
             else {
                 messageLabel.setText("");
                 circle.setVisible(true);
-                logic.switchGameState();
+                logic.toggleGameState();
                 gameEndTime = LocalDateTime.now().plusSeconds(timeLeft);
                 timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                 Timeline gameTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event2 -> {
@@ -118,7 +116,7 @@ public class AimSniperController extends z03.pap22z.controllers.SceneController 
                     }
                     else {
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                        logic.switchGameState();
+                        logic.toggleGameState();
                         circle.setVisible(false);
                         messageLabel.setText("GAME OVER");
                     }
