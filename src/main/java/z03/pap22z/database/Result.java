@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
@@ -22,6 +23,7 @@ import lombok.Data;
 public class Result implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     @Column(name = "ResultID", unique = true, nullable = false)
     private int id;
 
