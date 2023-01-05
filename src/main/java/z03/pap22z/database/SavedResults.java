@@ -11,7 +11,7 @@ import z03.pap22z.Settings;
 
 public class SavedResults {
     /**
-     * Registers a result of the game in the database.
+     * Registers a result of a game in the database.
      * @param score score achieved in the game
      * @param accuracy accuracy achieved in the game
      */
@@ -112,40 +112,41 @@ public class SavedResults {
         return results;
     }
 
-    /**
-     * Deletes a result from the database.
-     * @param result the result to be deleted
-     */
-    public static void deleteResult(Result result) {
-        EntityManager manager = Database.ENTITY_MANAGER_FACTORY.createEntityManager();
-        EntityTransaction transaction = null;
-        try {
-            transaction = manager.getTransaction();
-            transaction.begin();
-            Result persistentResult = manager.find(Result.class, result.getId());
-            if(persistentResult != null) {
-                manager.remove(persistentResult);
-            }
-            transaction.commit();
-        }
-        catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            System.err.println("Exception in deleteResult: " + ex.getMessage());
-        }
-        finally {
-            manager.close();
-        }
-    }
+    // TODO: don't leave this in official code
+    // /**
+    //  * Deletes a result from the database.
+    //  * @param result the result to be deleted
+    //  */
+    // public static void deleteResult(Result result) {
+    //     EntityManager manager = Database.ENTITY_MANAGER_FACTORY.createEntityManager();
+    //     EntityTransaction transaction = null;
+    //     try {
+    //         transaction = manager.getTransaction();
+    //         transaction.begin();
+    //         Result persistentResult = manager.find(Result.class, result.getId());
+    //         if(persistentResult != null) {
+    //             manager.remove(persistentResult);
+    //         }
+    //         transaction.commit();
+    //     }
+    //     catch (Exception ex) {
+    //         if (transaction != null) {
+    //             transaction.rollback();
+    //         }
+    //         System.err.println("Exception in deleteResult: " + ex.getMessage());
+    //     }
+    //     finally {
+    //         manager.close();
+    //     }
+    // }
 
-    /**
-     * Deletes the given results from the database.
-     * @param results list of the results to be deleted
-     */
-    public static void deleteResults(List<Result> results) {
-        for(Result result: results) {
-            deleteResult(result);
-        }
-    }
+    // /**
+    //  * Deletes the given results from the database.
+    //  * @param results list of the results to be deleted
+    //  */
+    // public static void deleteResults(List<Result> results) {
+    //     for(Result result: results) {
+    //         deleteResult(result);
+    //     }
+    // }
 }

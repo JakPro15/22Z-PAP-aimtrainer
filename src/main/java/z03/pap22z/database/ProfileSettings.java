@@ -23,6 +23,7 @@ import lombok.EqualsAndHashCode;
 public class ProfileSettings implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     @Column(name = "ProfileID", unique = true, nullable = false)
     private int id;
 

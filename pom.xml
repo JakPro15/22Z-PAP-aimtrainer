@@ -138,9 +138,6 @@
                         <manifest>
                             <mainClass>z03.pap22z.App</mainClass>
                         </manifest>
-                        <manifestEntries>
-                            <Automatic-Module-Name>hibernate.jpa</Automatic-Module-Name>
-                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
