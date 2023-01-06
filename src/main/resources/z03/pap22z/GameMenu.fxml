@@ -55,7 +55,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleToBeImplemented" prefHeight="250.0" prefWidth="200.0" text="Keyboard Warrior" textAlignment="CENTER">
+                        <Button fx:id="keyboardWarriorButton" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" mnemonicParsing="false" onAction="#switchToKeyboardWarrior" prefHeight="250.0" prefWidth="200.0" text="Keyboard Warrior" textAlignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="170.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

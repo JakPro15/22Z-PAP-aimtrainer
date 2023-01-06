@@ -29,11 +29,11 @@ public class GameLogicTest extends TestCase {
     public void testChangeState() {
         GameLogic logic = new GameLogic();
 
-        logic.switchGameState();
+        logic.toggleGameState();
 
         assertTrue(logic.getIsGameOn());
 
-        logic.switchGameState();
+        logic.toggleGameState();
 
         assertFalse(logic.getIsGameOn());
     }

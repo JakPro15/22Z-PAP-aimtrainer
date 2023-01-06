@@ -1,6 +1,5 @@
 package z03.pap22z;
 
-public class AimSniperLogic extends GameLogic
-{
+public class AimSniperLogic extends GameLogic {
 
 }
