@@ -35,7 +35,7 @@ import z03.pap22z.database.SavedResults;
 public class KeyboardWarriorController extends z03.pap22z.controllers.SceneController {
     private final int delay_time = 3;
 
-    private final int squareSize = 160;
+    private final int squareSize = 80;
 
     private KeyboardWarriorLogic logic = new KeyboardWarriorLogic();
 
@@ -107,6 +107,8 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.SceneContr
             }
 
         });
+
+        this.finishLine.widthProperty().bind(playfield.widthProperty());
 
         playGame();
     }
