@@ -48,6 +48,7 @@ public class GameLogic {
 
     /**
      * Returns the current ratio of targets hit to all targets
+     * 
      * @return ratio of number of targets hit to total number off all targets
      */
     public double getAccuracy() {
@@ -56,6 +57,7 @@ public class GameLogic {
 
     /**
      * Returns current score
+     * 
      * @return number of points gained throughout the game
      */
     public int getPoints() {
@@ -64,6 +66,7 @@ public class GameLogic {
 
     /**
      * Return current game state (whether or not it is on)
+     * 
      * @return current game state
      * 
      */
@@ -73,6 +76,7 @@ public class GameLogic {
 
     /**
      * Returns the IntegerProperty of current score to be used in updating labels
+     * 
      * @return IntegerProperty of the number of points gained throughout the game
      */
     public IntegerProperty pointsProperty() {
@@ -81,6 +85,7 @@ public class GameLogic {
 
     /**
      * Returns the DoubleProperty of the current ratio of targets hit to all targets
+     * 
      * @return DoubleProperty of the ratio of number of targets hit to total number
      *         off all targets
      */

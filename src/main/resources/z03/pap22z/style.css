@@ -72,7 +72,11 @@
 }
 
 .circle {
-    -fx-fill: -fx-color-outline;
+    -fx-fill: radial-gradient(center 50% 50%,
+            radius 50%,
+            derive(-fx-color-outline, +50%),
+            -fx-color-outline,
+            derive(-fx-color-outline, -50%));
     -fx-stroke: black;
 }
 

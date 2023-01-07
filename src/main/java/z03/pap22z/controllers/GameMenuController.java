@@ -67,4 +67,13 @@ public class GameMenuController extends z03.pap22z.controllers.SceneController {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    protected void switchToSharpshooter(ActionEvent event) {
+        try {
+            switchToScene(event, "Sharpshooter");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
