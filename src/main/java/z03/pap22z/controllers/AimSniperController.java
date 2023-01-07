@@ -17,7 +17,7 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
     private Label timeLeftValueLabel;
 
     static {
-        AimSniperController.GAME_NAME = "AimTrainer";
+        AimSniperController.GAME_NAME = "AimSniper";
         AimSniperController.NORMAL_RADIUS = 15;
         AimSniperController.RADIUS_OFFSET = 2.5;
     }

@@ -1,55 +1,17 @@
 package z03.pap22z.controllers;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Random;
-
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-import z03.pap22z.GameLogic;
 import z03.pap22z.Settings;
-import z03.pap22z.database.Database;
-import z03.pap22z.database.SavedResults;
 
-public abstract class BaseAimGameController extends z03.pap22z.controllers.SceneController {
-    protected final int DELAY_TIME = 3;
-    protected static float NORMAL_RADIUS;
-    protected static float RADIUS_OFFSET;
-    protected static String GAME_NAME;
-
-    protected GameLogic logic;
-
-    protected static Random random = new Random();
-
-    protected LocalDateTime gameEndTime;
-
-    protected boolean isScoreSaved = false;
-
-    @FXML
-    protected AnchorPane playfield;
+public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseGameController {
+    protected static double NORMAL_RADIUS;
+    protected static double RADIUS_OFFSET;
 
     @FXML
     protected Circle circle;
-
-    @FXML
-    protected Label scoreValueLabel;
-
-    @FXML
-    protected Label accuracyValueLabel;
-
-    @FXML
-    protected Label messageLabel;
-
-    @FXML
-    protected Button saveButton;
 
     protected SimpleDoubleProperty playWidth = new SimpleDoubleProperty();
     protected SimpleDoubleProperty playHeight = new SimpleDoubleProperty();
@@ -65,28 +27,8 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.Scene
         playWidth.bind(this.playfield.widthProperty());
         playHeight.bind(this.playfield.heightProperty());
 
-        this.logic.pointsProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                scoreValueLabel.textProperty().setValue(String.format("%d", logic.getPoints()));
-            }
-        });
-        this.logic.accuracyProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                accuracyValueLabel.textProperty().setValue(String.format("%.2f%%", logic.getAccuracy()));
-            }
-
-        });
-
-        playGame();
+        super.initialize();
     }
-
-    /**
-     * Main game method. Launches all events in correct order: countdown, game
-     * itself, game over screen.
-     */
-    abstract public void playGame();
 
     /**
      * Teleports the circle object to random coordinates within the playfield
@@ -123,34 +65,6 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.Scene
         int gameDiff = Settings.getGameDifficulty();
         double newRadius = NORMAL_RADIUS - (gameDiff - 2) * RADIUS_OFFSET;
         return newRadius;
-    }
-
-    @FXML
-    void handleSave(ActionEvent event) {
-        if (!logic.getIsGameOn() && gameEndTime != null && !isScoreSaved && Database.isConnected()) {
-            SavedResults.writeResult(
-                    logic.getPoints(), logic.getAccuracy(), gameEndTime, GAME_NAME);
-            saveButton.setText("Score saved.");
-            isScoreSaved = true;
-        }
-    }
-
-    @FXML
-    void handleNewGame(ActionEvent event) {
-        try {
-            switchToScene(event, GAME_NAME);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
-    protected void handleExit(ActionEvent event) {
-        try {
-            switchToGameMenu(event);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
