@@ -1,6 +1,7 @@
 package z03.pap22z.controllers;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,6 +12,12 @@ import javafx.util.Duration;
 import z03.pap22z.SharpshooterLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
+    static {
+        SharpshooterController.GAME_NAME = "Sharpshooter";
+        SharpshooterController.NORMAL_RADIUS = 24;
+        SharpshooterController.RADIUS_OFFSET = 8;
+    }
+
     private int attemptsLeft = 5;
 
     @FXML
@@ -18,11 +25,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
 
     private Timeline attemptTimeline;
 
-    static {
-        SharpshooterController.GAME_NAME = "Sharpshooter";
-        SharpshooterController.NORMAL_RADIUS = 24;
-        SharpshooterController.RADIUS_OFFSET = 8;
-    }
+    private LocalDateTime start;
 
     @Override
     public void initialize() {
@@ -49,6 +52,20 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         countdownTimeline.play();
     }
 
+    @Override
+    @FXML
+    protected void handlePlayfieldClick(MouseEvent event) {
+        if (logic.getIsGameOn()) {
+            if (isInCircle(event)) {
+                this.attemptTimeline.stop();
+                finishAttempt();
+                this.logic.registerTargetHit();
+            } else {
+                this.logic.registerTargetMiss();
+            }
+        }
+    }
+
     private void playTimeline() {
         attemptsLeftLabel.setText(Integer.toString(attemptsLeft));
         double waitDuration = 2.0 + random.nextDouble() * 8.0;
@@ -58,6 +75,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
                             System.out.println("1st frame ended");
                             teleportCircle();
                             circle.setVisible(true);
+                            start = LocalDateTime.now();
                             logic.toggleGameState();
                         }),
                 new KeyFrame(Duration.seconds(3 + waitDuration), event2 -> {
@@ -80,17 +98,10 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         }
     }
 
-    @Override
-    @FXML
-    protected void handlePlayfieldClick(MouseEvent event) {
-        if (logic.getIsGameOn()) {
-            if (isInCircle(event)) {
-                this.attemptTimeline.stop();
-                finishAttempt();
-                this.logic.registerTargetHit();
-            } else {
-                this.logic.registerTargetMiss();
-            }
-        }
+    private double calculatePoints(MouseEvent event) {
+        double distanceRatio = Math.pow(
+                1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue(), 2);
+        double timeRatio = 273.0 / ChronoUnit.MILLIS.between(start, LocalDateTime.now());
+        return 200 * distanceRatio * timeRatio;
     }
 }

@@ -21,8 +21,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import z03.pap22z.KeyboardWarriorLogic;
 import z03.pap22z.Settings;
+import z03.pap22z.logics.KeyboardWarriorLogic;
 
 public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameController {
     private final int squareSize = 80;

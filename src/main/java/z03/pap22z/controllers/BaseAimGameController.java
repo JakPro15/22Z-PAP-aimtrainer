@@ -81,14 +81,22 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
 
     /**
      * @param event mouse click event
-     * @return whether the click occured within the circle
+     * @return the distance of a click from the center of the circle.
      */
-    protected boolean isInCircle(MouseEvent event) {
+    protected double clickToCenterDistance(MouseEvent event) {
         double posX = event.getX();
         double posY = event.getY();
         double circleX = this.circle.getCenterX();
         double circleY = this.circle.getCenterY();
-        double centerDistance = calculateDistance(posX, posY, circleX, circleY);
+        return calculateDistance(posX, posY, circleX, circleY);
+    }
+
+    /**
+     * @param event mouse click event
+     * @return whether the click occured within the circle.
+     */
+    protected boolean isInCircle(MouseEvent event) {
+        double centerDistance = clickToCenterDistance(event);
         return centerDistance <= this.circle.getRadius();
     }
 

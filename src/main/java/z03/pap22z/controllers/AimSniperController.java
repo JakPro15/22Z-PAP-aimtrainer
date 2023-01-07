@@ -7,8 +7,8 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
-import z03.pap22z.AimSniperLogic;
 import z03.pap22z.Settings;
+import z03.pap22z.logics.AimSniperLogic;
 
 public class AimSniperController extends z03.pap22z.controllers.BaseAimGameController {
     private int timeLeft = Settings.getGameLength();
