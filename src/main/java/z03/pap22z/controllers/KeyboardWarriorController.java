@@ -141,6 +141,9 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                                                 if (readySquares.contains(stack)) {
                                                     rectangle.setFill(Color.web("#ff2600"));
                                                     readySquares.remove(stack);
+                                                    if(this.logic.getIsGameOn()) {
+                                                        this.logic.registerTargetMiss();
+                                                    }
                                                 }
                                             }
                                         }));
