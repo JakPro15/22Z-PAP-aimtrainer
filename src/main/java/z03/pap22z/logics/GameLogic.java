@@ -1,4 +1,4 @@
-package z03.pap22z;
+package z03.pap22z.logics;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -12,7 +12,6 @@ public class GameLogic {
     protected SimpleDoubleProperty accuracyProperty = new SimpleDoubleProperty();
     protected SimpleIntegerProperty totalClicks = new SimpleIntegerProperty();
     protected SimpleIntegerProperty clicksOnTarget = new SimpleIntegerProperty();
-    protected SimpleIntegerProperty currentCombo = new SimpleIntegerProperty();
     protected Boolean isGameOn;
 
     public GameLogic() {
@@ -20,7 +19,6 @@ public class GameLogic {
         this.accuracyProperty.setValue(0);
         this.totalClicks.setValue(0);
         this.clicksOnTarget.setValue(0);
-        this.currentCombo.setValue(0);
         this.accuracyProperty.bind(Bindings.createDoubleBinding(() -> {
             double hits = this.clicksOnTarget.getValue();
             return hits == 0 ? 0d : ((double) this.clicksOnTarget.get() / this.totalClicks.get() * 100);
@@ -34,8 +32,10 @@ public class GameLogic {
     public void registerTargetHit() {
         this.totalClicks.set(this.totalClicks.get() + 1);
         this.clicksOnTarget.set(this.clicksOnTarget.get() + 1);
-        this.pointsProperty.set(this.pointsProperty.get() + 10 * (currentCombo.get() + 1));
-        this.currentCombo.set(this.currentCombo.get() + 1);
+    }
+
+    public void addPoints(int points) {
+        this.pointsProperty.set(this.pointsProperty.get() + points);
     }
 
     /**
@@ -43,7 +43,6 @@ public class GameLogic {
      */
     public void registerTargetMiss() {
         this.totalClicks.set(this.totalClicks.get() + 1);
-        this.currentCombo.set(0);
     }
 
     /**

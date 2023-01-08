@@ -3,11 +3,12 @@ package z03.pap22z;
 import org.junit.Test;
 
 import junit.framework.TestCase;
+import z03.pap22z.logics.ComboGameLogic;
 
-public class GameLogicTest extends TestCase {
+public class ComboGameLogicTest extends TestCase {
     @Test
     public void testConstructor() {
-        GameLogic logic = new GameLogic();
+        ComboGameLogic logic = new ComboGameLogic();
 
         assertTrue(logic.pointsProperty().getValue().equals(0));
 
@@ -16,7 +17,7 @@ public class GameLogicTest extends TestCase {
 
     @Test
     public void testGetters() {
-        GameLogic logic = new GameLogic();
+        ComboGameLogic logic = new ComboGameLogic();
 
         assertTrue(logic.getPoints() == 0);
 
@@ -27,7 +28,7 @@ public class GameLogicTest extends TestCase {
 
     @Test
     public void testChangeState() {
-        GameLogic logic = new GameLogic();
+        ComboGameLogic logic = new ComboGameLogic();
 
         logic.toggleGameState();
 
@@ -40,7 +41,7 @@ public class GameLogicTest extends TestCase {
 
     @Test
     public void testRegisterHit() {
-        GameLogic logic = new GameLogic();
+        ComboGameLogic logic = new ComboGameLogic();
 
         logic.registerTargetHit();
 
@@ -57,7 +58,7 @@ public class GameLogicTest extends TestCase {
 
     @Test
     public void testRegisterMiss() {
-        GameLogic logic = new GameLogic();
+        ComboGameLogic logic = new ComboGameLogic();
 
         logic.registerTargetMiss();
 
@@ -68,7 +69,7 @@ public class GameLogicTest extends TestCase {
 
     @Test
     public void testRegistersMixed() {
-        GameLogic logic = new GameLogic();
+        ComboGameLogic logic = new ComboGameLogic();
 
         logic.registerTargetHit();
         logic.registerTargetMiss();

@@ -22,7 +22,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import z03.pap22z.Settings;
-import z03.pap22z.logics.KeyboardWarriorLogic;
+import z03.pap22z.logics.ComboGameLogic;
 
 public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameController {
     private final int squareSize = 80;
@@ -68,7 +68,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
     public void initialize() {
 
         this.finishLine.widthProperty().bind(playfield.widthProperty());
-        this.logic = new KeyboardWarriorLogic();
+        this.logic = new ComboGameLogic();
 
         super.initialize();
     }
@@ -141,7 +141,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                                                 if (readySquares.contains(stack)) {
                                                     rectangle.setFill(Color.web("#ff2600"));
                                                     readySquares.remove(stack);
-                                                    if(this.logic.getIsGameOn()) {
+                                                    if (this.logic.getIsGameOn()) {
                                                         this.logic.registerTargetMiss();
                                                     }
                                                 }

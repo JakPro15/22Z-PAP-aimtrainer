@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
-import z03.pap22z.SharpshooterLogic;
+import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
     static {
@@ -29,7 +29,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
 
     @Override
     public void initialize() {
-        this.logic = new SharpshooterLogic();
+        this.logic = new GameLogic();
         super.initialize();
     }
 
@@ -57,12 +57,13 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
     protected void handlePlayfieldClick(MouseEvent event) {
         if (logic.getIsGameOn()) {
             if (isInCircle(event)) {
-                this.attemptTimeline.stop();
-                finishAttempt();
+                this.logic.addPoints(calculatePoints(event));
                 this.logic.registerTargetHit();
             } else {
                 this.logic.registerTargetMiss();
             }
+            this.attemptTimeline.stop();
+            finishAttempt();
         }
     }
 
@@ -98,10 +99,10 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         }
     }
 
-    private double calculatePoints(MouseEvent event) {
+    private int calculatePoints(MouseEvent event) {
         double distanceRatio = Math.pow(
                 1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue(), 2);
-        double timeRatio = 273.0 / ChronoUnit.MILLIS.between(start, LocalDateTime.now());
-        return 200 * distanceRatio * timeRatio;
+        double timeRatio = 500.0 / ChronoUnit.MILLIS.between(start, LocalDateTime.now());
+        return (int) (500 * distanceRatio * timeRatio);
     }
 }

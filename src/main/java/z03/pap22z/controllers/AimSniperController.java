@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 import z03.pap22z.Settings;
-import z03.pap22z.logics.AimSniperLogic;
+import z03.pap22z.logics.ComboGameLogic;
 
 public class AimSniperController extends z03.pap22z.controllers.BaseAimGameController {
     private int timeLeft = Settings.getGameLength();
@@ -24,7 +24,7 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
 
     @Override
     public void initialize() {
-        this.logic = new AimSniperLogic();
+        this.logic = new ComboGameLogic();
         super.initialize();
     }
 

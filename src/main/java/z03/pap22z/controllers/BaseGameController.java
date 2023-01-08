@@ -11,9 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import z03.pap22z.GameLogic;
 import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedResults;
+import z03.pap22z.logics.GameLogic;
 
 public abstract class BaseGameController extends z03.pap22z.controllers.SceneController {
     protected static final int DELAY_TIME = 3;
