@@ -15,6 +15,8 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
 
     @FXML
     private Label timeLeftValueLabel;
+    private Timeline gameTimeline;
+    private Timeline countdownTimeline;
 
     @Override
     protected void initializeStatics() {
@@ -35,7 +37,7 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
         messageLabel.setText(String.format("%d", DELAY_TIME));
 
         // ready period before a game
-        Timeline countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
+        countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
             int countdownTime = Integer.parseInt(messageLabel.getText()) - 1;
             if (countdownTime > 0) {
                 messageLabel.setText(String.format("%d", countdownTime));
@@ -45,7 +47,7 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
                 logic.toggleGameState();
                 gameEndTime = LocalDateTime.now().plusSeconds(timeLeft);
                 timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                Timeline gameTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event2 -> {
+                gameTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event2 -> {
                     timeLeft -= 1;
                     if (timeLeft > 0) {
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
@@ -62,6 +64,11 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
         }));
         countdownTimeline.setCycleCount(DELAY_TIME);
         countdownTimeline.play();
+    }
+
+    protected void terminateTimelines() {
+        terminateTimeline(gameTimeline);
+        terminateTimeline(countdownTimeline);
     }
 
 }

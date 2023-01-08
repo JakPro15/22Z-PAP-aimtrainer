@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +12,7 @@ import javafx.util.Duration;
 import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
+
     @Override
     protected void initializeStatics() {
         SharpshooterController.GAME_NAME = "Sharpshooter";
@@ -71,7 +71,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
 
     private void playTimeline() {
         attemptsLeftLabel.setText(Integer.toString(attemptsLeft));
-        double waitDuration = 2.0 + random.nextDouble() * 8.0;
+        double waitDuration = 2.0 + random.nextDouble() * 6.0;
         attemptTimeline = new Timeline(
                 new KeyFrame(
                         Duration.seconds(waitDuration), event2 -> {
@@ -106,22 +106,9 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         return (int) (500 * distanceRatio * timeRatio);
     }
 
-    private void terminateTimelines() {
-        if (this.attemptTimeline != null) {
-            this.attemptTimeline.stop();
-        }
-        countdownTimeline.stop();
-    }
-
     @Override
-    protected void handleNewGame(ActionEvent event) {
-        terminateTimelines();
-        super.handleNewGame(event);
-    }
-
-    @Override
-    protected void handleExit(ActionEvent event) {
-        terminateTimelines();
-        super.handleExit(event);
+    protected void terminateTimelines() {
+        terminateTimeline(attemptTimeline);
+        terminateTimeline(countdownTimeline);
     }
 }

@@ -8,7 +8,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -35,31 +34,16 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
 
     private ArrayList<StackPane> readySquares = new ArrayList<>();
 
+    private Timeline countdownTimeline;
+    private Timeline gameTimeline;
+    private Timeline rectangleTimeline;
+    private Timeline movementTimeline;
+
     @FXML
     private Rectangle finishLine;
 
-    // ?
-    @FXML
-    private Label timeLeftTextLabel;
-
-    // ?
-    @FXML
-    private Button exitButton;
-
     @FXML
     private Label timeLeftValueLabel;
-
-    // ?
-    @FXML
-    private Label accuracyTextLabel;
-
-    // ?
-    @FXML
-    private Label scoreTextLabel;
-
-    // ?
-    @FXML
-    private Button newGameButton;
 
     @Override
     protected void initializeStatics() {
@@ -80,7 +64,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
         messageLabel.setText(String.format("%d", DELAY_TIME));
 
         // ready period before a game
-        Timeline countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
+        countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
             int countdownTime = Integer.parseInt(messageLabel.getText()) - 1;
             if (countdownTime > 0) {
                 messageLabel.setText(String.format("%d", countdownTime));
@@ -90,7 +74,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                 logic.toggleGameState();
                 gameEndTime = LocalDateTime.now().plusSeconds(timeLeft);
                 timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                Timeline gameTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event2 -> {
+                gameTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event2 -> {
                     timeLeft -= 1;
                     if (timeLeft > 0) {
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
@@ -106,7 +90,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                 gameTimeline.setCycleCount(timeLeft);
                 gameTimeline.play();
 
-                Timeline rectangleTimeline = new Timeline(
+                rectangleTimeline = new Timeline(
                         new KeyFrame(Duration.millis(spawnDelay * (squareSize + 10)), event2 -> {
                             if (timeLeft > 0) {
                                 Rectangle rectangle = new Rectangle(squareSize, squareSize, Color.web("#ff2600"));
@@ -121,7 +105,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                                 playfield.getChildren().add(stack);
 
                                 // make the rectangle move down a pixel every 6 milliseconds
-                                Timeline movementTimeline = new Timeline(
+                                movementTimeline = new Timeline(
                                         new KeyFrame(Duration.millis(spawnDelay), event3 -> {
                                             stack.setLayoutY(stack.getLayoutY() + 1);
                                             if (stack.getLayoutY() + squareSize == finishLine.getLayoutY()) {
@@ -189,5 +173,13 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                 playfield.getChildren().removeAll(squaresToDiscard);
             }
         }
+    }
+
+    @Override
+    protected void terminateTimelines() {
+        terminateTimeline(movementTimeline);
+        terminateTimeline(rectangleTimeline);
+        terminateTimeline(gameTimeline);
+        terminateTimeline(countdownTimeline);
     }
 }

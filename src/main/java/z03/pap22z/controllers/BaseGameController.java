@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Random;
 
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -99,8 +100,17 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
         }
     }
 
+    protected abstract void terminateTimelines();
+
+    protected static void terminateTimeline(Timeline timeline) {
+        if (timeline != null) {
+            timeline.stop();
+        }
+    }
+
     @FXML
     protected void handleNewGame(ActionEvent event) {
+        terminateTimelines();
         try {
             switchToScene(event, GAME_NAME);
         } catch (IOException e) {
@@ -110,6 +120,7 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
 
     @FXML
     protected void handleExit(ActionEvent event) {
+        terminateTimelines();
         try {
             switchToGameMenu(event);
         } catch (IOException e) {
