@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
+import z03.pap22z.MusicManager;
 import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
@@ -41,11 +42,14 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         messageLabel.setText(String.format("%d", DELAY_TIME));
 
         // ready period before a game
+        MusicManager.stopMenuTheme();
+        MusicManager.playCountdownSound();
         countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
             int countdownTime = Integer.parseInt(messageLabel.getText()) - 1;
             if (countdownTime > 0) {
                 messageLabel.setText(String.format("%d", countdownTime));
             } else {
+                MusicManager.playThirdGameTheme();
                 messageLabel.setText("");
                 playTimeline();
             }
@@ -93,6 +97,8 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         if (attemptsLeft > 0) {
             playTimeline();
         } else {
+            MusicManager.stopAnyGameTheme();
+            MusicManager.playGameOverSound();
             attemptsLeftLabel.setText(Integer.toString(attemptsLeft));
             messageLabel.setText("GAME OVER");
             gameEndTime = LocalDateTime.now();

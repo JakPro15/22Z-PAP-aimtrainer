@@ -6,15 +6,23 @@ import javafx.util.Duration;
 
 public class MusicManager {
     private static MediaPlayer musicButton;
+    private static MediaPlayer musicCountdown;
     private static MediaPlayer musicHitMarker;
+    private static MediaPlayer musicGameOver;
     private static MediaPlayer musicMenuTheme;
     private static MediaPlayer musicFirstGameTheme;
+    private static MediaPlayer musicSecondGameTheme;
+    private static MediaPlayer musicThirdGameTheme;
 
     static {
         musicButton = MusicManager.createMediaPlayer("music/SimpleButton.mp3");
+        musicCountdown = MusicManager.createMediaPlayer("music/Countdown.mp3");
         musicHitMarker = MusicManager.createMediaPlayer("music/HitMarker.mp3");
+        musicGameOver = MusicManager.createMediaPlayer("music/GameOver.mp3");
         musicMenuTheme = MusicManager.createMediaPlayer("music/MenuTheme.mp3");
         musicFirstGameTheme = MusicManager.createMediaPlayer("music/FirstGameTheme.mp3");
+        musicSecondGameTheme = MusicManager.createMediaPlayer("music/SecondGameTheme.mp3");
+        musicThirdGameTheme = MusicManager.createMediaPlayer("music/ThirdGameTheme.mp3");
     }
 
     protected static MediaPlayer createMediaPlayer(String filename) {
@@ -25,8 +33,12 @@ public class MusicManager {
     }
 
     public static void setMusicVolume(float newVolume) {
+        musicCountdown.setVolume(newVolume / 100.0f);
+        musicGameOver.setVolume(newVolume / 100.0f);
         musicMenuTheme.setVolume(newVolume / 100.0f);
         musicFirstGameTheme.setVolume(newVolume / 100.0f);
+        musicSecondGameTheme.setVolume(newVolume / 100.0f);
+        musicThirdGameTheme.setVolume(newVolume / 100.0f);
     }
 
     public static void setSfxVolume(float newVolume) {
@@ -39,9 +51,19 @@ public class MusicManager {
         musicButton.play();
     }
 
+    public static void playCountdownSound() {
+        musicCountdown.seek(Duration.ZERO);
+        musicCountdown.play();
+    }
+
     public static void playHitMarkerSound() {
         musicHitMarker.seek(Duration.ZERO);
         musicHitMarker.play();
+    }
+
+    public static void playGameOverSound() {
+        musicGameOver.seek(Duration.ZERO);
+        musicGameOver.play();
     }
 
     public static void playMenuTheme() {
@@ -60,7 +82,21 @@ public class MusicManager {
         musicFirstGameTheme.play();
     }
 
-    public static void stopFirstGameTheme() {
+    public static void playSecondGameTheme() {
+        musicSecondGameTheme.seek(Duration.ZERO);
+        musicSecondGameTheme.setCycleCount(MediaPlayer.INDEFINITE);
+        musicSecondGameTheme.play();
+    }
+
+    public static void playThirdGameTheme() {
+        musicThirdGameTheme.seek(Duration.ZERO);
+        musicThirdGameTheme.setCycleCount(MediaPlayer.INDEFINITE);
+        musicThirdGameTheme.play();
+    }
+
+    public static void stopAnyGameTheme() {
         musicFirstGameTheme.stop();
+        musicSecondGameTheme.stop();
+        musicThirdGameTheme.stop();
     }
 }

@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
+import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
 import z03.pap22z.logics.ComboGameLogic;
 
@@ -37,11 +38,14 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
         messageLabel.setText(String.format("%d", DELAY_TIME));
 
         // ready period before a game
+        MusicManager.stopMenuTheme();
+        MusicManager.playCountdownSound();
         countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
             int countdownTime = Integer.parseInt(messageLabel.getText()) - 1;
             if (countdownTime > 0) {
                 messageLabel.setText(String.format("%d", countdownTime));
             } else {
+                MusicManager.playFirstGameTheme();
                 messageLabel.setText("");
                 circle.setVisible(true);
                 logic.toggleGameState();
@@ -52,6 +56,7 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
                     if (timeLeft > 0) {
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                     } else {
+                        MusicManager.stopAnyGameTheme();
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                         logic.toggleGameState();
                         circle.setVisible(false);

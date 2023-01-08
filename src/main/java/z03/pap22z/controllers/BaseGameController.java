@@ -124,6 +124,8 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
     protected void handleExit(ActionEvent event) {
         terminateTimelines();
         try {
+            MusicManager.stopAnyGameTheme();
+            MusicManager.playMenuTheme();
             switchToGameMenu(event);
         } catch (IOException e) {
             throw new RuntimeException(e);

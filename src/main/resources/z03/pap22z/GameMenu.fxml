@@ -108,10 +108,10 @@
                            prefWidth="200.0" text="Game 3"
                            textAlignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="131.0" fitWidth="176.0"
+                              <ImageView fitHeight="170.0" fitWidth="200.0"
                                  pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@pictures/game3Icon.png" />
+                                    <Image url="@pictures/sharpshooterIcon.png" />
                                  </image>
                               </ImageView>
                            </graphic>

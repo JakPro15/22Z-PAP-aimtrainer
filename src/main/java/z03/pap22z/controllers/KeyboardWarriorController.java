@@ -65,11 +65,14 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
         messageLabel.setText(String.format("%d", DELAY_TIME));
 
         // ready period before a game
+        MusicManager.stopMenuTheme();
+        MusicManager.playCountdownSound();
         countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
             int countdownTime = Integer.parseInt(messageLabel.getText()) - 1;
             if (countdownTime > 0) {
                 messageLabel.setText(String.format("%d", countdownTime));
             } else {
+                MusicManager.playSecondGameTheme();
                 messageLabel.setText("");
                 finishLine.setVisible(true);
                 logic.toggleGameState();
@@ -80,6 +83,8 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                     if (timeLeft > 0) {
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                     } else {
+                        MusicManager.stopAnyGameTheme();
+                        MusicManager.playGameOverSound();
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                         logic.toggleGameState();
                         // remove all rectangles from the playfield
