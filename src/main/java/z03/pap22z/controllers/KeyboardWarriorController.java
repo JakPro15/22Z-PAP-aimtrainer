@@ -61,16 +61,18 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
     @FXML
     private Button newGameButton;
 
-    static {
+    @Override
+    protected void initializeStatics() {
         KeyboardWarriorController.GAME_NAME = "KeyboardWarrior";
     }
 
-    public void initialize() {
+    @Override
+    public void initializeMainBlock() {
 
         this.finishLine.widthProperty().bind(playfield.widthProperty());
         this.logic = new ComboGameLogic();
 
-        super.initialize();
+        super.initializeMainBlock();
     }
 
     public void playGame() {

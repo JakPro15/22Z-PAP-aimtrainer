@@ -16,16 +16,17 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
     @FXML
     private Label timeLeftValueLabel;
 
-    static {
+    @Override
+    protected void initializeStatics() {
         AimSniperController.GAME_NAME = "AimSniper";
         AimSniperController.NORMAL_RADIUS = 15;
         AimSniperController.RADIUS_OFFSET = 2.5;
     }
 
     @Override
-    public void initialize() {
+    public void initializeMainBlock() {
         this.logic = new ComboGameLogic();
-        super.initialize();
+        super.initializeMainBlock();
     }
 
     @Override

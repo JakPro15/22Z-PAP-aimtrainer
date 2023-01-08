@@ -17,17 +17,15 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
     protected SimpleDoubleProperty playHeight = new SimpleDoubleProperty();
     protected SimpleDoubleProperty circleRadius = new SimpleDoubleProperty();
 
-    /**
-     * Initializes all needed properties and starts the game.
-     */
-    public void initialize() {
+    @Override
+    public void initializeMainBlock() {
         circle.setRadius(BaseAimGameController.calculateCircleRadius());
 
         circleRadius.bind(this.circle.radiusProperty());
         playWidth.bind(this.playfield.widthProperty());
         playHeight.bind(this.playfield.heightProperty());
 
-        super.initialize();
+        super.initializeMainBlock();
     }
 
     /**

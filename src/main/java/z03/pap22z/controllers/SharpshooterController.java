@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -12,7 +13,8 @@ import javafx.util.Duration;
 import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
-    static {
+    @Override
+    protected void initializeStatics() {
         SharpshooterController.GAME_NAME = "Sharpshooter";
         SharpshooterController.NORMAL_RADIUS = 24;
         SharpshooterController.RADIUS_OFFSET = 8;
@@ -23,14 +25,14 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
     @FXML
     private Label attemptsLeftLabel;
 
-    private Timeline attemptTimeline;
+    private Timeline attemptTimeline, countdownTimeline;
 
     private LocalDateTime start;
 
     @Override
-    public void initialize() {
+    public void initializeMainBlock() {
         this.logic = new GameLogic();
-        super.initialize();
+        super.initializeMainBlock();
     }
 
     @Override
@@ -39,7 +41,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         messageLabel.setText(String.format("%d", DELAY_TIME));
 
         // ready period before a game
-        Timeline countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
+        countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
             int countdownTime = Integer.parseInt(messageLabel.getText()) - 1;
             if (countdownTime > 0) {
                 messageLabel.setText(String.format("%d", countdownTime));
@@ -73,14 +75,12 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         attemptTimeline = new Timeline(
                 new KeyFrame(
                         Duration.seconds(waitDuration), event2 -> {
-                            System.out.println("1st frame ended");
                             teleportCircle();
                             circle.setVisible(true);
                             start = LocalDateTime.now();
                             logic.toggleGameState();
                         }),
                 new KeyFrame(Duration.seconds(3 + waitDuration), event2 -> {
-                    System.out.println("2nd frame ended");
                     finishAttempt();
                 }));
         attemptTimeline.play();
@@ -104,5 +104,24 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
                 1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue(), 2);
         double timeRatio = 500.0 / ChronoUnit.MILLIS.between(start, LocalDateTime.now());
         return (int) (500 * distanceRatio * timeRatio);
+    }
+
+    private void terminateTimelines() {
+        if (this.attemptTimeline != null) {
+            this.attemptTimeline.stop();
+        }
+        countdownTimeline.stop();
+    }
+
+    @Override
+    protected void handleNewGame(ActionEvent event) {
+        terminateTimelines();
+        super.handleNewGame(event);
+    }
+
+    @Override
+    protected void handleExit(ActionEvent event) {
+        terminateTimelines();
+        super.handleExit(event);
     }
 }

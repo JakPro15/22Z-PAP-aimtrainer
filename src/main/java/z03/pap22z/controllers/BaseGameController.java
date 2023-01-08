@@ -43,12 +43,15 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
     protected Label messageLabel;
 
     /**
-     * Initializes all needed properties and starts the game. The parent class
-     * initialize() method must be called at the end of the inherited classes'
-     * method because the super class calls playGame() at the end of it's
-     * routine.
+     * Initializes classes' static members. Should be used instead of the
+     * static block.
      */
-    public void initialize() {
+    protected abstract void initializeStatics();
+
+    /**
+     * Main initialization block.
+     */
+    protected void initializeMainBlock() {
 
         this.logic.pointsProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -63,6 +66,20 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
             }
 
         });
+    }
+
+    /**
+     * Initializes all needed properties and starts the game. The base
+     * initialize method calls three methods which are, in order:
+     * initializeStatics(), initializeMainBlock() and playGame(). Any changes
+     * to controller initialization should be done through the
+     * initializeStatics() and initializeMainBlock() methods to ensure correct
+     * order of initialization.
+     */
+    public void initialize() {
+
+        initializeStatics();
+        initializeMainBlock();
         playGame();
     }
 
