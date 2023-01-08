@@ -20,6 +20,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
 import z03.pap22z.logics.ComboGameLogic;
 
@@ -149,6 +150,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
     @FXML
     void handleKeyPressed(KeyEvent event) {
         if (logic.getIsGameOn()) {
+            MusicManager.playHitMarkerSound();
             String pressedLetter = event.getCode().getName();
             if (letters.contains(pressedLetter)) {
                 ArrayList<StackPane> squaresToDiscard = new ArrayList<>();

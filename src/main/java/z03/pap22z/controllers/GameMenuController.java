@@ -1,5 +1,7 @@
 package z03.pap22z.controllers;
 
+import z03.pap22z.MusicManager;
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -31,12 +33,14 @@ public class GameMenuController extends z03.pap22z.controllers.SceneController {
 
     @FXML
     protected void handleToBeImplemented(ActionEvent event) {
+        MusicManager.playButtonSound();
         text_hint.setText("Game to be implemented!");
         text_hint.setVisible(true);
     }
 
     @FXML
     protected void handleHint(ActionEvent event) {
+        MusicManager.playButtonSound();
         if (event.getSource() == hint_1) {
             text_hint.setText(
                     "AimSniper: hit the target as many times as you can while it teleports on every successful click you make!");

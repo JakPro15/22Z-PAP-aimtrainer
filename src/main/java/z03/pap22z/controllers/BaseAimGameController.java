@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
+import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
 
 public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseGameController {
@@ -44,7 +45,7 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
      * Generates a random valid circle center coordinate given span - length of
      * a single dimension of a field. This method accounts for the radius of
      * the circle to make sure the circle doesn't clip the edges of the field.
-     * 
+     *
      * @return double
      */
     protected double generateCircleCoord(double span) {
@@ -56,7 +57,7 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
     /**
      * Returns the circle radius length calculated based on current game
      * difficulty setting (the harder the game, the smaller the radius).
-     * 
+     *
      * @return the calculated radius
      */
     protected static double calculateCircleRadius() {
@@ -67,6 +68,7 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
 
     @FXML
     protected void handlePlayfieldClick(MouseEvent event) {
+        MusicManager.playHitMarkerSound();
         if (logic.getIsGameOn()) {
             if (isInCircle(event)) {
                 teleportCircle();
@@ -100,7 +102,7 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
 
     /**
      * Calculates distance between two points.
-     * 
+     *
      * @param x1
      * @param y1
      * @param x2

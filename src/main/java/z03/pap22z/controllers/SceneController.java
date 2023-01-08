@@ -1,5 +1,7 @@
 package z03.pap22z.controllers;
 
+import z03.pap22z.MusicManager;
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ public class SceneController {
         stage.setScene(oldScene == null
             ? new Scene(root, stage.getMinWidth(), stage.getMinHeight())
             : new Scene(root, oldScene.getWidth(), oldScene.getHeight()));
+        MusicManager.playButtonSound();
         stage.show();
     }
 

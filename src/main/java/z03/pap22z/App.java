@@ -27,6 +27,9 @@ public class App extends Application {
             Scene scene = new Scene(root, 800, 600);
             primaryStage.setTitle("AimTrainer");
             primaryStage.setScene(scene);
+            MusicManager.setMusicVolume((float) Settings.getMusicVolume());
+            MusicManager.setSfxVolume((float) Settings.getSfxVolume());
+            MusicManager.playMenuTheme();
             primaryStage.show();
         } catch (Exception e) {
             System.err.println("Exception in App start method: " + e.getMessage());

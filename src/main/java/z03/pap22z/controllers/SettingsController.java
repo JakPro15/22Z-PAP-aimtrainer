@@ -16,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import z03.pap22z.Alerts;
+import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
 
 public class SettingsController extends z03.pap22z.controllers.SceneController {
@@ -53,6 +54,7 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
                 musicVolumeValueLabel.textProperty()
                         .setValue(String.format("%d%%", (int) musicVolumeSlider.getValue()));
                 Settings.setMusicVolume((int) musicVolumeSlider.getValue());
+                MusicManager.setMusicVolume((float) musicVolumeSlider.getValue());
             }
         });
         sfxVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -60,6 +62,7 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
             public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
                 sfxVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int) sfxVolumeSlider.getValue()));
                 Settings.setSfxVolume((int) sfxVolumeSlider.getValue());
+                MusicManager.setSfxVolume((float) sfxVolumeSlider.getValue());
             }
         });
         gameDifficultySlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -84,6 +87,8 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
     @FXML
     protected void handleExit(ActionEvent event) {
         Settings.readFromDatabase();
+        MusicManager.setMusicVolume((float) Settings.getMusicVolume());
+        MusicManager.setSfxVolume((float) Settings.getSfxVolume());
         try {
             switchToMenu(event);
         } catch (IOException e) {
@@ -94,11 +99,13 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
     @FXML
     protected void handleSave(ActionEvent event) {
         Settings.writeToDatabase();
+        MusicManager.playButtonSound();
         showFeedback("Changes saved.");
     }
 
     @FXML
     protected void handleNewProfile(ActionEvent event) {
+        MusicManager.playButtonSound();
         String newProfile = NewProfileDialogController.getNewProfile(stage);
         if (newProfile != null) {
             if (newProfile.length() > 40) {
@@ -116,6 +123,7 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
 
     @FXML
     protected void handleDeleteProfile(ActionEvent event) {
+        MusicManager.playButtonSound();
         if (Settings.getProfileNames().size() == 1) {
             Alerts.warn("You cannot delete the only profile.");
         } else {

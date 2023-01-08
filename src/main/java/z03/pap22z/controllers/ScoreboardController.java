@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import z03.pap22z.MusicManager;
 import z03.pap22z.StringResult;
 import z03.pap22z.database.Database;
 import z03.pap22z.database.Result;
@@ -34,6 +35,7 @@ public class ScoreboardController extends z03.pap22z.controllers.SceneController
 
     @FXML
     protected void handleViewAllResults(ActionEvent event) {
+        MusicManager.playButtonSound();
         if(Database.isConnected()) {
             setResults(SavedResults.readAllResults());
         }
@@ -41,6 +43,7 @@ public class ScoreboardController extends z03.pap22z.controllers.SceneController
 
     @FXML
     protected void handleViewYourResults(ActionEvent event) {
+        MusicManager.playButtonSound();
         if(Database.isConnected()) {
             setResults(SavedResults.readCurrentProfileResults());
         }
