@@ -57,6 +57,7 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                     } else {
                         MusicManager.stopAnyGameTheme();
+                        MusicManager.playGameOverSound();
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                         logic.toggleGameState();
                         circle.setVisible(false);

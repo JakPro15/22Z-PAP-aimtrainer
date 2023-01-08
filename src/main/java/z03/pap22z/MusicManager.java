@@ -33,9 +33,9 @@ public class MusicManager {
     }
 
     public static void setMusicVolume(float newVolume) {
-        musicCountdown.setVolume(newVolume / 100.0f);
-        musicGameOver.setVolume(newVolume / 100.0f);
-        musicMenuTheme.setVolume(newVolume / 100.0f);
+        musicCountdown.setVolume(newVolume / 300.0f);
+        musicGameOver.setVolume(newVolume / 25.0f);
+        musicMenuTheme.setVolume(newVolume / 300.0f);
         musicFirstGameTheme.setVolume(newVolume / 100.0f);
         musicSecondGameTheme.setVolume(newVolume / 100.0f);
         musicThirdGameTheme.setVolume(newVolume / 100.0f);
