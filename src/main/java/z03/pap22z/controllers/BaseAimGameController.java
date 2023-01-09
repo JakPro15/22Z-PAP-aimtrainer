@@ -68,8 +68,8 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
 
     @FXML
     protected void handlePlayfieldClick(MouseEvent event) {
-        MusicManager.playHitMarkerSound();
         if (logic.getIsGameOn()) {
+            MusicManager.playHitMarkerSound();
             if (isInCircle(event)) {
                 teleportCircle();
                 this.logic.registerTargetHit();

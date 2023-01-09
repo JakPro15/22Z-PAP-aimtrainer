@@ -5,19 +5,18 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class MusicManager {
-    private static MediaPlayer musicButton;
     private static MediaPlayer musicCountdown;
-    private static MediaPlayer musicHitMarker;
     private static MediaPlayer musicGameOver;
     private static MediaPlayer musicMenuTheme;
     private static MediaPlayer musicFirstGameTheme;
     private static MediaPlayer musicSecondGameTheme;
     private static MediaPlayer musicThirdGameTheme;
+    private static float buttonVolume;
+    private static float hitmarkerVolume;
+    private static float revolverVolume;
 
     static {
-        musicButton = MusicManager.createMediaPlayer("music/SimpleButton.mp3");
         musicCountdown = MusicManager.createMediaPlayer("music/Countdown.mp3");
-        musicHitMarker = MusicManager.createMediaPlayer("music/HitMarker.mp3");
         musicGameOver = MusicManager.createMediaPlayer("music/GameOver.mp3");
         musicMenuTheme = MusicManager.createMediaPlayer("music/MenuTheme.mp3");
         musicFirstGameTheme = MusicManager.createMediaPlayer("music/FirstGameTheme.mp3");
@@ -42,34 +41,53 @@ public class MusicManager {
     }
 
     public static void setSfxVolume(float newVolume) {
-        musicButton.setVolume(newVolume / 100.0f);
-        musicHitMarker.setVolume(newVolume / 100.0f);
+        buttonVolume = newVolume / 100.0f;
+        hitmarkerVolume = newVolume / 100.0f;
+        revolverVolume = newVolume / 200.0f;
+    }
+
+    private static void playSound(MediaPlayer player, boolean indefinite) {
+        player.seek(Duration.ZERO);
+        if (indefinite) {
+            player.setCycleCount(MediaPlayer.INDEFINITE);
+        }
+        player.play();
+    }
+
+    private static Runnable getMusicThread(String fileName, float volume, boolean indefinite) {
+        return () -> {
+            MediaPlayer player = MusicManager.createMediaPlayer(fileName);
+            player.seek(Duration.ZERO);
+            player.setVolume(volume);
+            if (indefinite) {
+                player.setCycleCount(MediaPlayer.INDEFINITE);
+            }
+            player.play();
+        };
+    }
+
+    private static void playSFX(String fileName, float volume) {
+        getMusicThread(fileName, volume, false).run();
     }
 
     public static void playButtonSound() {
-        musicButton.seek(Duration.ZERO);
-        musicButton.play();
+        playSFX("music/SimpleButton.mp3", buttonVolume);
     }
 
     public static void playCountdownSound() {
-        musicCountdown.seek(Duration.ZERO);
-        musicCountdown.play();
+        playSound(musicCountdown, false);
     }
 
     public static void playHitMarkerSound() {
-        musicHitMarker.seek(Duration.ZERO);
-        musicHitMarker.play();
+        playSFX("music/HitMarker.mp3", hitmarkerVolume);
     }
 
     public static void playGameOverSound() {
-        musicGameOver.seek(Duration.ZERO);
-        musicGameOver.play();
+        playSound(musicGameOver, false);
     }
 
     public static void playMenuTheme() {
-        musicMenuTheme.seek(Duration.ZERO);
-        musicMenuTheme.setCycleCount(MediaPlayer.INDEFINITE);
-        musicMenuTheme.play();
+        playSound(musicMenuTheme, true);
     }
 
     public static void stopMenuTheme() {
@@ -77,21 +95,19 @@ public class MusicManager {
     }
 
     public static void playFirstGameTheme() {
-        musicFirstGameTheme.seek(Duration.ZERO);
-        musicFirstGameTheme.setCycleCount(MediaPlayer.INDEFINITE);
-        musicFirstGameTheme.play();
+        playSound(musicFirstGameTheme, true);
     }
 
     public static void playSecondGameTheme() {
-        musicSecondGameTheme.seek(Duration.ZERO);
-        musicSecondGameTheme.setCycleCount(MediaPlayer.INDEFINITE);
-        musicSecondGameTheme.play();
+        playSound(musicSecondGameTheme, true);
     }
 
     public static void playThirdGameTheme() {
-        musicThirdGameTheme.seek(Duration.ZERO);
-        musicThirdGameTheme.setCycleCount(MediaPlayer.INDEFINITE);
-        musicThirdGameTheme.play();
+        playSound(musicThirdGameTheme, true);
+    }
+
+    public static void playRevolverShot() {
+        playSFX("music/RevolverShot.wav", revolverVolume);
     }
 
     public static void stopAnyGameTheme() {
