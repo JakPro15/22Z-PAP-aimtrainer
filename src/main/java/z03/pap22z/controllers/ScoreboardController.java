@@ -50,6 +50,16 @@ public class ScoreboardController extends z03.pap22z.controllers.SceneController
     }
 
     @FXML
+    protected void handleSeeStatistics(ActionEvent event) {
+        MusicManager.playButtonSound();
+        try {
+            switchToScene(event, "Statistics");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
     protected void handleExit(ActionEvent event) {
         try {
             switchToMenu(event);

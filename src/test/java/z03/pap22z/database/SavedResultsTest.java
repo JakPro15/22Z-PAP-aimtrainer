@@ -31,7 +31,8 @@ public class SavedResultsTest extends TestCase {
     @Test
     public void testWriteResult() {
         LocalDateTime now = LocalDateTime.now();
-        SavedResults.writeResult(500, 0.5, now, "AimSniper");
+        StatResult statResult = SavedResults.writeStatResult(500, 0.5, "AimSniper");
+        SavedResults.writeResult(statResult, now);
         // round now to full seconds
         if(now.getNano() >= 500_000_000) {
             now = now.plusSeconds(1);
@@ -58,14 +59,17 @@ public class SavedResultsTest extends TestCase {
         time1 = time1.withNano(0);
         LocalDateTime time2 = time1.plusSeconds(1);
         LocalDateTime time3 = time1.plusMinutes(1);
-        SavedResults.writeResult(500, 0.5, time1, "AimSniper");
+        StatResult statResult = SavedResults.writeStatResult(500, 0.5, "AimSniper");
+        SavedResults.writeResult(statResult, time1);
         Settings.addNewProfile("new");
         Settings.addNewProfile("hehe xd");
         Settings.writeToDatabase();
         Settings.setCurrentProfile("new");
-        SavedResults.writeResult(1500, 0.3, time2, "KeyboardWarrior");
+        statResult = SavedResults.writeStatResult(1500, 0.3, "KeyboardWarrior");
+        SavedResults.writeResult(statResult, time2);
         Settings.setCurrentProfile("hehe xd");
-        SavedResults.writeResult(1000, 0.6, time3, "SpeedTyper");
+        statResult = SavedResults.writeStatResult(1000, 0.6, "SpeedTyper");
+        SavedResults.writeResult(statResult, time3);
 
         List<Result> results = SavedResults.readAllResults();
         assertEquals(results.size(), 3);
@@ -102,12 +106,15 @@ public class SavedResultsTest extends TestCase {
         time1 = time1.withNano(0);
         LocalDateTime time2 = time1.plusSeconds(1);
         LocalDateTime time3 = time1.plusMinutes(1);
-        SavedResults.writeResult(500, 0.5, time1, "AimSniper");
+        StatResult statResult = SavedResults.writeStatResult(500, 0.5, "AimSniper");
+        SavedResults.writeResult(statResult, time1);
         Settings.addNewProfile("new");
         Settings.writeToDatabase();
         Settings.setCurrentProfile("new");
-        SavedResults.writeResult(1500, 0.3, time2, "KeyboardWarrior");
-        SavedResults.writeResult(1000, 0.6, time3, "SpeedTyper");
+        statResult = SavedResults.writeStatResult(1500, 0.3, "KeyboardWarrior");
+        SavedResults.writeResult(statResult, time2);
+        statResult = SavedResults.writeStatResult(1000, 0.6, "SpeedTyper");
+        SavedResults.writeResult(statResult, time3);
 
         Settings.setCurrentProfile("default");
         List<Result> results = SavedResults.readCurrentProfileResults();
@@ -149,14 +156,17 @@ public class SavedResultsTest extends TestCase {
         time1 = time1.withNano(0);
         LocalDateTime time2 = time1.plusSeconds(1);
         LocalDateTime time3 = time1.plusMinutes(1);
-        SavedResults.writeResult(500, 0.5, time1, "AimSniper");
+        StatResult statResult = SavedResults.writeStatResult(500, 0.5, "AimSniper");
+        SavedResults.writeResult(statResult, time1);
         Settings.addNewProfile("new");
         Settings.addNewProfile("hehe xd");
         Settings.writeToDatabase();
         Settings.setCurrentProfile("new");
-        SavedResults.writeResult(1500, 0.3, time2, "KeyboardWarrior");
+        statResult = SavedResults.writeStatResult(1500, 0.3, "KeyboardWarrior");
+        SavedResults.writeResult(statResult, time2);
         Settings.setCurrentProfile("hehe xd");
-        SavedResults.writeResult(1000, 0.6, time3, "SpeedTyper");
+        statResult = SavedResults.writeStatResult(1000, 0.6, "SpeedTyper");
+        SavedResults.writeResult(statResult, time3);
         Settings.deleteProfile("new");
         Settings.writeToDatabase();
 

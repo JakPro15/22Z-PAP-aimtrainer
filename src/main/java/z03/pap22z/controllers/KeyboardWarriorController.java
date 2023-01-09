@@ -20,6 +20,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
+import z03.pap22z.database.Database;
+import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.ComboGameLogic;
 
 public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameController {
@@ -63,6 +65,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
     public void playGame() {
         finishLine.setVisible(false);
         messageLabel.setText(String.format("%d", DELAY_TIME));
+        unsavedResult = null;
 
         // ready period before a game
         MusicManager.stopMenuTheme();
@@ -91,6 +94,11 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                         playfield.getChildren().removeIf(node -> node instanceof StackPane);
                         finishLine.setVisible(false);
                         messageLabel.setText("GAME OVER");
+                        if(Database.isConnected()) {
+                            unsavedResult = SavedResults.writeStatResult(
+                                logic.getPoints(), logic.getAccuracy(), GAME_NAME
+                            );
+                        }
                     }
                 }));
                 gameTimeline.setCycleCount(timeLeft);

@@ -7,11 +7,20 @@ import org.junit.Test;
 import junit.framework.TestCase;
 import z03.pap22z.database.ProfileSettings;
 import z03.pap22z.database.Result;
+import z03.pap22z.database.StatResult;
 
 public class StringResultTest extends TestCase {
+    /**
+     * Get a dummy result.
+     *
+     * @param profileName name of the profile to have this result assigned
+     * @param time time to write to the result
+     * @return the created result
+     */
     private Result getResult(String profileName, LocalDateTime time) {
         Result result = new Result();
         result.setId(12);
+        result.setStatResult(new StatResult());
 
         ProfileSettings profile = new ProfileSettings();
         profile.setName(profileName);

@@ -11,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
+import z03.pap22z.database.Database;
+import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
@@ -41,6 +43,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
     public void playGame() {
         circle.setVisible(false);
         messageLabel.setText(String.format("%d", DELAY_TIME));
+        unsavedResult = null;
 
         // ready period before a game
         MusicManager.stopMenuTheme();
@@ -79,16 +82,16 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         attemptsLeftLabel.setText(Integer.toString(attemptsLeft));
         double waitDuration = 2.0 + random.nextDouble() * 6.0;
         attemptTimeline = new Timeline(
-                new KeyFrame(
-                        Duration.seconds(waitDuration), event2 -> {
-                            teleportCircle();
-                            circle.setVisible(true);
-                            start = LocalDateTime.now();
-                            logic.toggleGameState();
-                        }),
-                new KeyFrame(Duration.seconds(DELAY_TIME + waitDuration), event2 -> {
-                    finishAttempt();
-                }));
+            new KeyFrame(
+                Duration.seconds(waitDuration), event2 -> {
+                    teleportCircle();
+                    circle.setVisible(true);
+                    start = LocalDateTime.now();
+                    logic.toggleGameState();
+                }),
+            new KeyFrame(Duration.seconds(DELAY_TIME + waitDuration), event2 -> {
+                finishAttempt();
+            }));
         attemptTimeline.play();
     }
 
@@ -103,6 +106,11 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
             MusicManager.playGameOverSound();
             attemptsLeftLabel.setText(Integer.toString(attemptsLeft));
             messageLabel.setText("GAME OVER");
+            if(Database.isConnected()) {
+                unsavedResult = SavedResults.writeStatResult(
+                    logic.getPoints(), logic.getAccuracy(), GAME_NAME
+                );
+            }
             gameEndTime = LocalDateTime.now();
         }
     }
