@@ -16,7 +16,7 @@ public class Statistics {
     private String gameType;
 
     @Column(name = "AverageScore", nullable = false)
-    private int averageScore;
+    private double averageScore;
 
     @Column(name = "AverageAccuracy", nullable = false)
     private double averageAccuracy;

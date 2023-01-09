@@ -48,7 +48,7 @@ public class StatisticsController extends z03.pap22z.controllers.SceneController
         Map<String, Statistics> stats = SavedStatistics.readAllStatistics();
         Statistics stat = stats.get("AimSniper");
         if(stat != null) {
-            avgScoreAimSniperLabel.setText(String.format("%sAverage score: %d", INDENT, stat.getAverageScore()));
+            avgScoreAimSniperLabel.setText(String.format("%sAverage score: %f", INDENT, stat.getAverageScore()));
             avgAccuracyAimSniperLabel.setText(String.format("%sAverage accuracy: %f", INDENT, stat.getAverageAccuracy()));
             numberOfGamesAimSniperLabel.setText(String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames()));
         }
@@ -59,7 +59,7 @@ public class StatisticsController extends z03.pap22z.controllers.SceneController
         }
         stat = stats.get("KeyboardWarrior");
         if(stat != null) {
-            avgScoreKeyboardWarriorLabel.setText(String.format("%sAverage score: %d", INDENT, stat.getAverageScore()));
+            avgScoreKeyboardWarriorLabel.setText(String.format("%sAverage score: %f", INDENT, stat.getAverageScore()));
             avgAccuracyKeyboardWarriorLabel.setText(String.format("%sAverage accuracy: %f", INDENT, stat.getAverageAccuracy()));
             numberOfGamesKeyboardWarriorLabel.setText(String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames()));
         }
@@ -70,7 +70,7 @@ public class StatisticsController extends z03.pap22z.controllers.SceneController
         }
         stat = stats.get("Sharpshooter");
         if(stat != null) {
-            avgScoreSharpshooterLabel.setText(String.format("%sAverage score: %d", INDENT, stat.getAverageScore()));
+            avgScoreSharpshooterLabel.setText(String.format("%sAverage score: %f", INDENT, stat.getAverageScore()));
             avgAccuracySharpshooterLabel.setText(String.format("%sAverage accuracy: %f", INDENT, stat.getAverageAccuracy()));
             numberOfGamesSharpshooterLabel.setText(String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames()));
         }
