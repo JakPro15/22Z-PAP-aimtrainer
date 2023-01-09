@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -27,17 +28,8 @@ public class Result implements Serializable {
     @Column(name = "ResultID", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "Score", nullable = false)
-    private int score;
-
-    @Column(name = "Accuracy", nullable = false)
-    private double accuracy;
-
     @Column(name = "GameTime", nullable = false)
     private LocalDateTime gameTime;
-
-    @Column(name = "GameType", nullable = false)
-    private String gameType;
 
     @Column(name = "GameDifficulty", nullable = false)
     private int gameDifficulty;
@@ -48,4 +40,32 @@ public class Result implements Serializable {
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(name = "ProfileID", referencedColumnName = "ProfileID")
     private ProfileSettings profile;
+
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "StatResultID", referencedColumnName = "StatResultID")
+    private StatResult statResult;
+
+    public int getScore() {
+        return getStatResult().getScore();
+    }
+
+    public void setScore(int score) {
+        getStatResult().setScore(score);
+    }
+
+    public double getAccuracy() {
+        return getStatResult().getAccuracy();
+    }
+
+    public void setAccuracy(double accuracy) {
+        getStatResult().setAccuracy(accuracy);
+    }
+
+    public String getGameType() {
+        return getStatResult().getGameType();
+    }
+
+    public void setGameType(String gameType) {
+        getStatResult().setGameType(gameType);
+    }
 }

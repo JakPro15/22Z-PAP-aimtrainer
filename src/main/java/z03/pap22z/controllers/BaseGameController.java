@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import z03.pap22z.MusicManager;
 import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedResults;
+import z03.pap22z.database.StatResult;
 import z03.pap22z.logics.GameLogic;
 
 public abstract class BaseGameController extends z03.pap22z.controllers.SceneController {
@@ -25,7 +26,7 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
 
     protected LocalDateTime gameEndTime;
 
-    protected boolean isScoreSaved = false;
+    protected StatResult unsavedResult = null;
 
     protected static Random random = new Random();
 
@@ -94,11 +95,10 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
     @FXML
     protected void handleSave(ActionEvent event) {
         MusicManager.playButtonSound();
-        if (!logic.getIsGameOn() && gameEndTime != null && !isScoreSaved && Database.isConnected()) {
-            SavedResults.writeResult(
-                    logic.getPoints(), logic.getAccuracy(), gameEndTime, GAME_NAME);
+        if (unsavedResult != null && Database.isConnected()) {
+            SavedResults.writeResult(unsavedResult, gameEndTime);
             saveButton.setText("Score saved.");
-            isScoreSaved = true;
+            unsavedResult = null;
         }
     }
 

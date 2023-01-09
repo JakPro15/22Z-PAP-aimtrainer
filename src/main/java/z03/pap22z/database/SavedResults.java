@@ -11,11 +11,44 @@ import z03.pap22z.Settings;
 
 public class SavedResults {
     /**
-     * Registers a result of a game in the database.
+     * Writes a statistical result and returns the StatResult written.
      * @param score score achieved in the game
      * @param accuracy accuracy achieved in the game
+     * @param gameType type of the game
+     * @return stat result created
      */
-    public static void writeResult(int score, double accuracy, LocalDateTime gameTime, String gameType) {
+    public static StatResult writeStatResult(int score, double accuracy, String gameType) {
+        EntityManager manager = Database.ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
+            StatResult result = new StatResult();
+            result.setScore(score);
+            result.setAccuracy(accuracy);
+            result.setGameType(gameType);
+            manager.persist(result);
+            transaction.commit();
+            return result;
+        }
+        catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            System.err.println("Exception in writeStatResult: " + ex.getMessage());
+            return null;
+        }
+        finally {
+            manager.close();
+        }
+    }
+
+    /**
+     * Registers a result of a game in the database.
+     * @param statResult previously written StatResult
+     * @param gameTime time of the game
+     */
+    public static void writeResult(StatResult statResult, LocalDateTime gameTime) {
         EntityManager manager = Database.ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
         try {
@@ -26,10 +59,8 @@ public class SavedResults {
                 ProfileSettings.class, Settings.getCurrentProfile().getId()
             );
             result.setProfile(currentProfile);
-            result.setScore(score);
-            result.setAccuracy(accuracy);
             result.setGameTime(gameTime);
-            result.setGameType(gameType);
+            result.setStatResult(statResult);
             result.setGameDifficulty(Settings.getGameDifficulty());
             result.setGameLength(Settings.getGameLength());
             manager.persist(result);
@@ -57,7 +88,8 @@ public class SavedResults {
             transaction = manager.getTransaction();
             transaction.begin();
             results = manager.createQuery(
-                "SELECT r FROM Result r ORDER BY Score DESC", Result.class
+                "SELECT r FROM Result r INNER JOIN r.statResult ORDER BY Score DESC",
+                Result.class
             ).getResultList();
             transaction.commit();
         }

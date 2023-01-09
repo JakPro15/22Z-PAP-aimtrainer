@@ -32,7 +32,7 @@ public class App extends Application {
             MusicManager.playMenuTheme();
             primaryStage.show();
         } catch (Exception e) {
-            System.err.println("Exception in App start method: " + e.getMessage());
+            System.err.println("Exception in App.start method: " + e.getMessage());
             System.err.println("Shutting down");
             Database.closeConnection();
             System.exit(0);

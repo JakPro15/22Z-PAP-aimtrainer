@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
+import z03.pap22z.database.Database;
+import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.ComboGameLogic;
 
 public class AimSniperController extends z03.pap22z.controllers.BaseAimGameController {
@@ -36,6 +38,7 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
     public void playGame() {
         circle.setVisible(false);
         messageLabel.setText(String.format("%d", DELAY_TIME));
+        unsavedResult = null;
 
         // ready period before a game
         MusicManager.stopMenuTheme();
@@ -62,6 +65,11 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
                         logic.toggleGameState();
                         circle.setVisible(false);
                         messageLabel.setText("GAME OVER");
+                        if(Database.isConnected()) {
+                            unsavedResult = SavedResults.writeStatResult(
+                                logic.getPoints(), logic.getAccuracy(), GAME_NAME
+                            );
+                        }
                     }
                 }));
                 gameTimeline.setCycleCount(timeLeft);
