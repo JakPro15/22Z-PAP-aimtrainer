@@ -5,6 +5,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import z03.pap22z.Settings;
 
 public class GameLogic {
 
@@ -55,12 +56,12 @@ public class GameLogic {
     }
 
     /**
-     * Returns current score
+     * Returns current score modified by difficulty set in settings
      * 
      * @return number of points gained throughout the game
      */
     public int getPoints() {
-        return this.pointsProperty.getValue();
+        return (int) ((this.pointsProperty.getValue()) * (1 + (double) (Settings.getGameDifficulty() - 2) / 10));
     }
 
     /**

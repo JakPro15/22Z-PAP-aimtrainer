@@ -57,7 +57,41 @@ public class ComboGameLogicTest extends TestCase {
     }
 
     @Test
+    public void testRegisterHitChangedDifficulty() {
+        Settings.setGameDifficulty(4);
+
+        ComboGameLogic logic = new ComboGameLogic();
+
+        logic.registerTargetHit();
+
+        assertTrue(logic.getPoints() == 12);
+
+        assertTrue(logic.getAccuracy() == 100);
+
+        logic.registerTargetHit();
+
+        assertTrue(logic.getPoints() == 36);
+
+        assertTrue(logic.getAccuracy() == 100);
+
+        Settings.setGameDifficulty(2);
+    }
+
+    @Test
     public void testRegisterMiss() {
+        ComboGameLogic logic = new ComboGameLogic();
+
+        logic.registerTargetMiss();
+
+        assertTrue(logic.getPoints() == 0);
+
+        assertTrue(logic.getAccuracy() == 0);
+    }
+
+    @Test
+    public void testRegisterMissChangedDifficulty() {
+        Settings.setGameDifficulty(4);
+
         ComboGameLogic logic = new ComboGameLogic();
 
         logic.registerTargetMiss();
@@ -91,5 +125,35 @@ public class ComboGameLogicTest extends TestCase {
 
         assertTrue(logic.getPoints() == 40);
         assertEquals(logic.getAccuracy(), (double) 300 / (double) 5, 1e-4);
+    }
+
+    @Test
+    public void testRegistersMixedChangedDifficulty() {
+        Settings.setGameDifficulty(4);
+
+        ComboGameLogic logic = new ComboGameLogic();
+
+        logic.registerTargetHit();
+        logic.registerTargetMiss();
+
+        assertTrue(logic.getPoints() == 12);
+        assertTrue(logic.getAccuracy() == 50);
+
+        logic.registerTargetHit();
+
+        assertTrue(logic.getPoints() == 24);
+        assertEquals(logic.getAccuracy(), (double) 200 / (double) 3, 1e-4);
+
+        logic.registerTargetHit();
+
+        assertTrue(logic.getPoints() == 48);
+        assertEquals(logic.getAccuracy(), (double) 300 / (double) 4, 1e-4);
+
+        logic.registerTargetMiss();
+
+        assertTrue(logic.getPoints() == 48);
+        assertEquals(logic.getAccuracy(), (double) 300 / (double) 5, 1e-4);
+
+        Settings.setGameDifficulty(2);
     }
 }
