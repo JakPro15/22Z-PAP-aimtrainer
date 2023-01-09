@@ -20,7 +20,7 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
 
     @Override
     public void initializeMainBlock() {
-        circle.setRadius(BaseAimGameController.calculateCircleRadius());
+        circle.setRadius(calculateCircleRadius());
 
         circleRadius.bind(this.circle.radiusProperty());
         playWidth.bind(this.playfield.widthProperty());

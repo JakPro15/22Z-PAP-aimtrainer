@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import z03.pap22z.MusicManager;
+import z03.pap22z.Settings;
 import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
@@ -17,11 +18,11 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
     @Override
     protected void initializeStatics() {
         SharpshooterController.GAME_NAME = "Sharpshooter";
-        SharpshooterController.NORMAL_RADIUS = 24;
-        SharpshooterController.RADIUS_OFFSET = 8;
+        SharpshooterController.NORMAL_RADIUS = 20;
+        SharpshooterController.RADIUS_OFFSET = 5;
     }
 
-    private int attemptsLeft = 5;
+    private int attemptsLeft = Settings.getGameLength();
 
     @FXML
     private Label attemptsLeftLabel;
@@ -84,7 +85,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
                             start = LocalDateTime.now();
                             logic.toggleGameState();
                         }),
-                new KeyFrame(Duration.seconds(3 + waitDuration), event2 -> {
+                new KeyFrame(Duration.seconds(DELAY_TIME + waitDuration), event2 -> {
                     finishAttempt();
                 }));
         attemptTimeline.play();
