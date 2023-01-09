@@ -262,3 +262,7 @@
     -fx-scale-x: .99;
     -fx-scale-y: .95;
 }
+
+.table-view>.placeholder>.label {
+    -fx-text-fill: white;
+}
