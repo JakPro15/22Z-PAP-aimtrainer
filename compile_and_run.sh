@@ -27,6 +27,7 @@ $mysql --host=localhost \
        -u pap22Z_z03 -ppap.2022.PAP \
        < Scripts/setup_database.sql
 
+mvn clean
 mvn package
 rm dependency-reduced-pom.xml
 mv target/AimTrainer-1.0.0.jar .

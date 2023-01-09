@@ -27,11 +27,11 @@ import z03.pap22z.logics.ComboGameLogic;
 public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameController {
     private static PseudoClass ON_TARGET = PseudoClass.getPseudoClass("onTarget");
 
-    private final int squareSize = 80;
+    private int squareSize = (int) (80 * (1 - 0.1 * (Settings.getGameDifficulty() - 2)));
 
     private int timeLeft = Settings.getGameLength();
 
-    private int spawnDelay = 6;
+    private int spawnDelay = 6 - Settings.getGameDifficulty() + 2;
 
     private ArrayList<String> letters = new ArrayList<>(Arrays.asList("A", "S", "K", "L"));
 
@@ -119,7 +119,6 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                                         10 + random.nextInt((int) playfield.getWidth() - squareSize - 20));
                                 playfield.getChildren().add(stack);
 
-                                // make the rectangle move down a pixel every 6 milliseconds
                                 movementTimeline = new Timeline(
                                         new KeyFrame(Duration.millis(spawnDelay), event3 -> {
                                             stack.setLayoutY(stack.getLayoutY() + 1);
