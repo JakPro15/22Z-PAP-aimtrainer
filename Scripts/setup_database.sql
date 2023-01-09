@@ -63,6 +63,7 @@ CREATE VIEW ResultsStatistics
 AS
 SELECT GameType,
        AVG(Score) AS AverageScore,
-       AVG(Accuracy) AS AverageAccuracy
+       AVG(Accuracy) AS AverageAccuracy,
+       COUNT(*) AS NumberOfGames
 FROM StatResults
 GROUP BY GameType;
