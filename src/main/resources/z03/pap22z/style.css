@@ -22,6 +22,7 @@
     -fx-border-insets: -2px;
 }
 
+.button:pressed,
 .button:hover {
     -fx-scale-x: .95;
     -fx-scale-y: .95;
@@ -100,11 +101,10 @@
     -fx-background-radius: 12;
 }
 
+.slider .thumb:pressed,
 .slider .thumb:hover {
-    -fx-background-color:
-        -fx-color-outline,
-        radial-gradient(center 50% 50%, radius 50%, -fx-color-background, derive(-fx-color-background, -15%));
-    -fx-background-insets: -2, 1;
+    -fx-scale-x: .9;
+    -fx-scale-y: .9;
     -fx-background-radius: 12;
 }
 
@@ -194,6 +194,15 @@
         -fx-color-outline,
         radial-gradient(center 50% 50%, radius 50%, -fx-color-background, derive(-fx-color-background, 15%));
     -fx-background-insets: 0, 2;
+}
+
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb:pressed,
+.table-view .virtual-flow .scroll-bar:horizontal .thumb:pressed,
+.table-view .virtual-flow .scroll-bar:vertical .thumb:hover,
+.table-view .virtual-flow .scroll-bar:horizontal .thumb:hover {
+    -fx-scale-x: .99;
+    -fx-scale-y: .95;
 }
 
 /* 
