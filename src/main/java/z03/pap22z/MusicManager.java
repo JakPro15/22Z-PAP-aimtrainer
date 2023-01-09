@@ -5,26 +5,23 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class MusicManager {
-    private static MediaPlayer musicButton;
     private static MediaPlayer musicCountdown;
-    private static MediaPlayer musicHitMarker;
     private static MediaPlayer musicGameOver;
     private static MediaPlayer musicMenuTheme;
     private static MediaPlayer musicFirstGameTheme;
     private static MediaPlayer musicSecondGameTheme;
     private static MediaPlayer musicThirdGameTheme;
-    private static MediaPlayer musicRevolverShot;
+    private static float buttonVolume;
+    private static float hitmarkerVolume;
+    private static float revolverVolume;
 
     static {
-        musicButton = MusicManager.createMediaPlayer("music/SimpleButton.mp3");
         musicCountdown = MusicManager.createMediaPlayer("music/Countdown.mp3");
-        musicHitMarker = MusicManager.createMediaPlayer("music/HitMarker.mp3");
         musicGameOver = MusicManager.createMediaPlayer("music/GameOver.mp3");
         musicMenuTheme = MusicManager.createMediaPlayer("music/MenuTheme.mp3");
         musicFirstGameTheme = MusicManager.createMediaPlayer("music/FirstGameTheme.mp3");
         musicSecondGameTheme = MusicManager.createMediaPlayer("music/SecondGameTheme.mp3");
         musicThirdGameTheme = MusicManager.createMediaPlayer("music/ThirdGameTheme.mp3");
-        musicRevolverShot = MusicManager.createMediaPlayer("music/RevolverShot.wav");
     }
 
     protected static MediaPlayer createMediaPlayer(String filename) {
@@ -44,9 +41,9 @@ public class MusicManager {
     }
 
     public static void setSfxVolume(float newVolume) {
-        musicButton.setVolume(newVolume / 100.0f);
-        musicHitMarker.setVolume(newVolume / 100.0f);
-        musicRevolverShot.setVolume(newVolume / 200.0f);
+        buttonVolume = newVolume / 100.0f;
+        hitmarkerVolume = newVolume / 100.0f;
+        revolverVolume = newVolume / 200.0f;
     }
 
     private static void playSound(MediaPlayer player, boolean indefinite) {
@@ -57,8 +54,24 @@ public class MusicManager {
         player.play();
     }
 
+    private static Runnable getMusicThread(String fileName, float volume, boolean indefinite) {
+        return () -> {
+            MediaPlayer player = MusicManager.createMediaPlayer(fileName);
+            player.seek(Duration.ZERO);
+            player.setVolume(volume);
+            if (indefinite) {
+                player.setCycleCount(MediaPlayer.INDEFINITE);
+            }
+            player.play();
+        };
+    }
+
+    private static void playSFX(String fileName, float volume) {
+        getMusicThread(fileName, volume, false).run();
+    }
+
     public static void playButtonSound() {
-        playSound(musicButton, false);
+        playSFX("music/SimpleButton.mp3", buttonVolume);
     }
 
     public static void playCountdownSound() {
@@ -66,7 +79,7 @@ public class MusicManager {
     }
 
     public static void playHitMarkerSound() {
-        playSound(musicHitMarker, false);
+        playSFX("music/HitMarker.mp3", hitmarkerVolume);
     }
 
     public static void playGameOverSound() {
@@ -94,7 +107,7 @@ public class MusicManager {
     }
 
     public static void playRevolverShot() {
-        playSound(musicRevolverShot, false);
+        playSFX("music/RevolverShot.wav", revolverVolume);
     }
 
     public static void stopAnyGameTheme() {
