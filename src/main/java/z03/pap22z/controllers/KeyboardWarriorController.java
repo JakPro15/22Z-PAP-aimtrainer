@@ -6,15 +6,13 @@ import java.util.Arrays;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -25,6 +23,8 @@ import z03.pap22z.Settings;
 import z03.pap22z.logics.ComboGameLogic;
 
 public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameController {
+    private static PseudoClass ON_TARGET = PseudoClass.getPseudoClass("onTarget");
+
     private final int squareSize = 80;
 
     private int timeLeft = Settings.getGameLength();
@@ -100,6 +100,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                         new KeyFrame(Duration.millis(spawnDelay * (squareSize + 10)), event2 -> {
                             if (timeLeft > 0) {
                                 Rectangle rectangle = new Rectangle(squareSize, squareSize, Color.web("#ff2600"));
+                                rectangle.getStyleClass().add("rectangle");
                                 StackPane stack = new StackPane();
                                 stack.getChildren().add(rectangle);
                                 Text text = new Text(letters.get(random.nextInt(letters.size())).toUpperCase());
@@ -115,23 +116,13 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                                         new KeyFrame(Duration.millis(spawnDelay), event3 -> {
                                             stack.setLayoutY(stack.getLayoutY() + 1);
                                             if (stack.getLayoutY() + squareSize == finishLine.getLayoutY()) {
-                                                RadialGradient gradient = new RadialGradient(
-                                                        0, // focusAngle
-                                                        0, // focusDistance
-                                                        0.5, // centerX
-                                                        0.5, // centerY
-                                                        0.5, // radius
-                                                        true, // proportional
-                                                        CycleMethod.NO_CYCLE,
-                                                        new Stop(0, Color.WHITE),
-                                                        new Stop(1, Color.web("#ff2600")));
-                                                rectangle.setFill(gradient);
+                                                rectangle.pseudoClassStateChanged(ON_TARGET, true);
                                                 readySquares.add(stack);
                                             }
                                             if (stack.getLayoutY() == finishLine.getLayoutY()
                                                     + finishLine.getHeight()) {
                                                 if (readySquares.contains(stack)) {
-                                                    rectangle.setFill(Color.web("#ff2600"));
+                                                    rectangle.pseudoClassStateChanged(ON_TARGET, false);
                                                     readySquares.remove(stack);
                                                     if (this.logic.getIsGameOn()) {
                                                         this.logic.registerTargetMiss();

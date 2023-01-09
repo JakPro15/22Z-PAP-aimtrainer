@@ -125,6 +125,28 @@
     -fx-stroke: black;
 }
 
+.rectangle {
+    -fx-fill: radial-gradient(center 50% 50%,
+            radius 71%,
+            derive(-fx-color-outline, +50%),
+            -fx-color-outline,
+            derive(-fx-color-outline, -50%));
+    -fx-stroke: black;
+}
+
+.rectangle:onTarget {
+    -fx-fill: radial-gradient(center 50% 50%,
+            radius 71%,
+            white,
+            derive(-fx-color-outline, +25%),
+            derive(-fx-color-outline, -50%));
+}
+
+#finishLine {
+    -fx-fill: linear-gradient(derive(-fx-color-outline, -10%), derive(-fx-color-outline, -30%));
+
+}
+
 .table-column {
     -fx-alignment: CENTER;
 }
@@ -228,10 +250,8 @@
 .table-view .virtual-flow .scroll-bar:vertical .thumb,
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-radius: 6;
-    -fx-background-color:
-        -fx-color-outline,
-        radial-gradient(center 50% 50%, radius 50%, -fx-color-background, derive(-fx-color-background, 15%));
-    -fx-background-insets: 0, 2;
+    -fx-background-color: linear-gradient(derive(-fx-color-outline, -50%),
+            derive(-fx-color-outline, -10%));
 }
 
 
