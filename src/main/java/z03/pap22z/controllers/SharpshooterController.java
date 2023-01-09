@@ -62,6 +62,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
     @Override
     @FXML
     protected void handlePlayfieldClick(MouseEvent event) {
+        MusicManager.playRevolverShot();
         if (logic.getIsGameOn()) {
             if (isInCircle(event)) {
                 this.logic.addPoints(calculatePoints(event));

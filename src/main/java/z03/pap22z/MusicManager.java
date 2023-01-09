@@ -13,6 +13,7 @@ public class MusicManager {
     private static MediaPlayer musicFirstGameTheme;
     private static MediaPlayer musicSecondGameTheme;
     private static MediaPlayer musicThirdGameTheme;
+    private static MediaPlayer musicRevolverShot;
 
     static {
         musicButton = MusicManager.createMediaPlayer("music/SimpleButton.mp3");
@@ -23,6 +24,7 @@ public class MusicManager {
         musicFirstGameTheme = MusicManager.createMediaPlayer("music/FirstGameTheme.mp3");
         musicSecondGameTheme = MusicManager.createMediaPlayer("music/SecondGameTheme.mp3");
         musicThirdGameTheme = MusicManager.createMediaPlayer("music/ThirdGameTheme.mp3");
+        musicRevolverShot = MusicManager.createMediaPlayer("music/RevolverShot.wav");
     }
 
     protected static MediaPlayer createMediaPlayer(String filename) {
@@ -44,32 +46,35 @@ public class MusicManager {
     public static void setSfxVolume(float newVolume) {
         musicButton.setVolume(newVolume / 100.0f);
         musicHitMarker.setVolume(newVolume / 100.0f);
+        musicRevolverShot.setVolume(newVolume / 200.0f);
+    }
+
+    private static void playSound(MediaPlayer player, boolean indefinite) {
+        player.seek(Duration.ZERO);
+        if (indefinite) {
+            player.setCycleCount(MediaPlayer.INDEFINITE);
+        }
+        player.play();
     }
 
     public static void playButtonSound() {
-        musicButton.seek(Duration.ZERO);
-        musicButton.play();
+        playSound(musicButton, false);
     }
 
     public static void playCountdownSound() {
-        musicCountdown.seek(Duration.ZERO);
-        musicCountdown.play();
+        playSound(musicCountdown, false);
     }
 
     public static void playHitMarkerSound() {
-        musicHitMarker.seek(Duration.ZERO);
-        musicHitMarker.play();
+        playSound(musicHitMarker, false);
     }
 
     public static void playGameOverSound() {
-        musicGameOver.seek(Duration.ZERO);
-        musicGameOver.play();
+        playSound(musicGameOver, false);
     }
 
     public static void playMenuTheme() {
-        musicMenuTheme.seek(Duration.ZERO);
-        musicMenuTheme.setCycleCount(MediaPlayer.INDEFINITE);
-        musicMenuTheme.play();
+        playSound(musicMenuTheme, true);
     }
 
     public static void stopMenuTheme() {
@@ -77,21 +82,19 @@ public class MusicManager {
     }
 
     public static void playFirstGameTheme() {
-        musicFirstGameTheme.seek(Duration.ZERO);
-        musicFirstGameTheme.setCycleCount(MediaPlayer.INDEFINITE);
-        musicFirstGameTheme.play();
+        playSound(musicFirstGameTheme, true);
     }
 
     public static void playSecondGameTheme() {
-        musicSecondGameTheme.seek(Duration.ZERO);
-        musicSecondGameTheme.setCycleCount(MediaPlayer.INDEFINITE);
-        musicSecondGameTheme.play();
+        playSound(musicSecondGameTheme, true);
     }
 
     public static void playThirdGameTheme() {
-        musicThirdGameTheme.seek(Duration.ZERO);
-        musicThirdGameTheme.setCycleCount(MediaPlayer.INDEFINITE);
-        musicThirdGameTheme.play();
+        playSound(musicThirdGameTheme, true);
+    }
+
+    public static void playRevolverShot() {
+        playSound(musicRevolverShot, false);
     }
 
     public static void stopAnyGameTheme() {
