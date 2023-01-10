@@ -37,6 +37,10 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
     @FXML
     private Label gameLengthValueLabel;
     @FXML
+    private Slider sharpshooterLengthSlider;
+    @FXML
+    private Label sharpshooterLengthValueLabel;
+    @FXML
     private ComboBox<String> profileComboBox;
     @FXML
     private Label saveButtonLabel;
@@ -47,39 +51,31 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
      * Initialize the settings UI.
      */
     public void initialize() {
-        // Bind the slider labels to the sliders
-        musicVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                musicVolumeValueLabel.textProperty()
-                        .setValue(String.format("%d%%", (int) musicVolumeSlider.getValue()));
-                Settings.setMusicVolume((int) musicVolumeSlider.getValue());
-                MusicManager.setMusicVolume((float) musicVolumeSlider.getValue());
-            }
+        // Bind the slider labels and settings to the sliders
+        musicVolumeSlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            musicVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int) musicVolumeSlider.getValue()));
+            Settings.setMusicVolume((int) musicVolumeSlider.getValue());
+            MusicManager.setMusicVolume((float) musicVolumeSlider.getValue());
         });
-        sfxVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                sfxVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int) sfxVolumeSlider.getValue()));
-                Settings.setSfxVolume((int) sfxVolumeSlider.getValue());
-                MusicManager.setSfxVolume((float) sfxVolumeSlider.getValue());
-            }
+        sfxVolumeSlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            sfxVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int) sfxVolumeSlider.getValue()));
+            Settings.setSfxVolume((int) sfxVolumeSlider.getValue());
+            MusicManager.setSfxVolume((float) sfxVolumeSlider.getValue());
         });
-        gameDifficultySlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                int gameDifficulty = (int) round(gameDifficultySlider.getValue());
-                gameDifficultyValueLabel.textProperty().setValue(Settings.DIFFICULTIES[gameDifficulty]);
-                Settings.setGameDifficulty(gameDifficulty);
-            }
+        gameDifficultySlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            int gameDifficulty = (int) round(gameDifficultySlider.getValue());
+            gameDifficultyValueLabel.textProperty().setValue(Settings.DIFFICULTIES[gameDifficulty]);
+            Settings.setGameDifficulty(gameDifficulty);
         });
-        gameLengthSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                Integer gameLength = (int) round(gameLengthSlider.getValue());
-                gameLengthValueLabel.textProperty().setValue(String.format("%d seconds", gameLength));
-                Settings.setGameLength(gameLength);
-            }
+        gameLengthSlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            Integer gameLength = (int) round(gameLengthSlider.getValue());
+            gameLengthValueLabel.textProperty().setValue(String.format("%d seconds", gameLength));
+            Settings.setGameLength(gameLength);
+        });
+        sharpshooterLengthSlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            Integer sharpshooterLength = (int) round(sharpshooterLengthSlider.getValue());
+            sharpshooterLengthValueLabel.textProperty().setValue(String.format("%d attempts", sharpshooterLength));
+            Settings.setSharpshooterLength(sharpshooterLength);
         });
         profileListChanged();
     }
@@ -152,6 +148,7 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
         sfxVolumeSlider.setValue(Settings.getSfxVolume());
         gameDifficultySlider.setValue(Settings.getGameDifficulty());
         gameLengthSlider.setValue(Settings.getGameLength());
+        sharpshooterLengthSlider.setValue(Settings.getSharpshooterLength());
     }
 
     /**

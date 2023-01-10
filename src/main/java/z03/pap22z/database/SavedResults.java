@@ -62,7 +62,12 @@ public class SavedResults {
             result.setGameTime(gameTime);
             result.setStatResult(statResult);
             result.setGameDifficulty(Settings.getGameDifficulty());
-            result.setGameLength(Settings.getGameLength());
+            if(statResult.getGameType().equals("Sharpshooter")) {
+                result.setGameLength(Settings.getSharpshooterLength());
+            }
+            else {
+                result.setGameLength(Settings.getGameLength());
+            }
             manager.persist(result);
             transaction.commit();
         }

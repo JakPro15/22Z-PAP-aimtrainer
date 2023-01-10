@@ -9,7 +9,7 @@ import z03.pap22z.database.Result;
 public class StringResult {
     private int id;
     private String gameTime, user, gameType, difficulty, length, score, accuracy;
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     /**
      * Creates a StringResult containing all fields of the given result converted to strings.
@@ -22,7 +22,12 @@ public class StringResult {
         user = result.getProfile().getName();
         gameType = result.getGameType();
         difficulty = Settings.DIFFICULTIES[result.getGameDifficulty()];
-        length = String.format("%ds", result.getGameLength());
+        if(gameType.equals("Sharpshooter")) {
+            length = String.format("%d attempts", result.getGameLength());
+        }
+        else {
+            length = String.format("%d seconds", result.getGameLength());
+        }
         score = String.valueOf(result.getScore());
         accuracy = String.format("%.2f%%", result.getAccuracy());
     }

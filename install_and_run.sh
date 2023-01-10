@@ -46,5 +46,12 @@ sleep 2
 $mysql -u root < Scripts/setup_user.sql
 $mysql -u pap22Z_z03 -ppap.2022.PAP < Scripts/setup_database.sql
 
-java --module-path Others/openjfx/lib --add-modules=javafx.controls,javafx.fxml --add-opens java.base/java.lang=ALL-UNNAMED -cp AimTrainer.jar z03.pap22z.App
+java --module-path Others/openjfx/lib \
+     --add-modules=javafx.controls,javafx.fxml \
+     --add-opens java.base/java.lang=ALL-UNNAMED \
+     --add-exports=javafx.graphics/com.sun.glass.utils=ALL-UNNAMED \
+     --add-exports=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED \
+     --add-exports=javafx.base/com.sun.javafx=ALL-UNNAMED \
+     -cp AimTrainer.jar z03.pap22z.App
+
 $mysqladmin -u root shutdown

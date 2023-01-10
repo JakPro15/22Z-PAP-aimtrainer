@@ -42,6 +42,9 @@ public class ProfileSettings implements Serializable {
     @Column(name = "GameLength", nullable = false)
     private int gameLength;
 
+    @Column(name = "SharpshooterLength", nullable = false)
+    private int sharpshooterLength;
+
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "profile")
     private CurrentProfile user;
@@ -61,6 +64,7 @@ public class ProfileSettings implements Serializable {
         defaultProfile.setSfxVolume(50);
         defaultProfile.setGameDifficulty(2);
         defaultProfile.setGameLength(20);
+        defaultProfile.setSharpshooterLength(10);
         return defaultProfile;
     }
 
@@ -104,5 +108,6 @@ public class ProfileSettings implements Serializable {
         sfxVolume = other.getSfxVolume();
         gameDifficulty = other.getGameDifficulty();
         gameLength = other.getGameLength();
+        sharpshooterLength = other.getSharpshooterLength();
     }
 }

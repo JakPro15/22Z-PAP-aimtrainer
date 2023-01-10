@@ -15,9 +15,10 @@ CREATE TABLE Settings (
     SFXVolume INT NOT NULL,
     GameDifficulty INT NOT NULL,
     GameLength INT NOT NULL,
+    SharpshooterLength INT NOT NULL,
     PRIMARY KEY(ProfileID)
 ) ENGINE=InnoDB;
-INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 2, 20);
+INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 2, 20, 10);
 
 /* This table holds the statistical data of the results, for calculation
  * of averages. */
