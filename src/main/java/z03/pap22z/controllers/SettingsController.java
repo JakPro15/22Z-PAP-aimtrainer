@@ -7,14 +7,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
 import z03.pap22z.Alerts;
 import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
@@ -44,6 +44,22 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
     private ComboBox<String> profileComboBox;
     @FXML
     private Label saveButtonLabel;
+    @FXML
+    private Label key1Label;
+    @FXML
+    private Button key1Button;
+    @FXML
+    private Label key2Label;
+    @FXML
+    private Button key2Button;
+    @FXML
+    private Label key3Label;
+    @FXML
+    private Button key3Button;
+    @FXML
+    private Label key4Label;
+    @FXML
+    private Button key4Button;
 
     Timer timer = new Timer();
 
@@ -149,6 +165,10 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
         gameDifficultySlider.setValue(Settings.getGameDifficulty());
         gameLengthSlider.setValue(Settings.getGameLength());
         sharpshooterLengthSlider.setValue(Settings.getSharpshooterLength());
+        key1Label.setText(Settings.getKeys().get(0));
+        key2Label.setText(Settings.getKeys().get(1));
+        key3Label.setText(Settings.getKeys().get(2));
+        key4Label.setText(Settings.getKeys().get(3));
     }
 
     /**
@@ -178,5 +198,43 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
         profileComboBox.setItems(FXCollections.observableArrayList(Settings.getProfileNames()));
         profileComboBox.getSelectionModel().select(Settings.getCurrentProfileName());
         update();
+    }
+
+    private void handleKeyButtonPressed(int buttonNumber) {
+        KeyCode keyCode = Alerts.getNewKey(
+            String.format("Press a key to set as Key %d for KeyboardWarrior", buttonNumber)
+        );
+        if(keyCode != null) {
+            String key = keyCode.getName();
+            if(!Settings.getKeys().get(buttonNumber - 1).equals(key) &&
+               Settings.getKeys().contains(key))
+            {
+                Alerts.warn(String.format("Key %s is already used.", key));
+            }
+            else {
+                Settings.setKey(buttonNumber, key);
+                update();
+            }
+        }
+    }
+
+    @FXML
+    void handleKey1Button(ActionEvent event) {
+        handleKeyButtonPressed(1);
+    }
+
+    @FXML
+    void handleKey2Button(ActionEvent event) {
+        handleKeyButtonPressed(2);
+    }
+
+    @FXML
+    void handleKey3Button(ActionEvent event) {
+        handleKeyButtonPressed(3);
+    }
+
+    @FXML
+    void handleKey4Button(ActionEvent event) {
+        handleKeyButtonPressed(4);
     }
 }

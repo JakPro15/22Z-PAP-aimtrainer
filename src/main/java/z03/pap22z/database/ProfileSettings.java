@@ -45,6 +45,18 @@ public class ProfileSettings implements Serializable {
     @Column(name = "SharpshooterLength", nullable = false)
     private int sharpshooterLength;
 
+    @Column(name = "Key1", nullable = false)
+    private String key1;
+
+    @Column(name = "Key2", nullable = false)
+    private String key2;
+
+    @Column(name = "Key3", nullable = false)
+    private String key3;
+
+    @Column(name = "Key4", nullable = false)
+    private String key4;
+
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "profile")
     private CurrentProfile user;
@@ -65,6 +77,10 @@ public class ProfileSettings implements Serializable {
         defaultProfile.setGameDifficulty(2);
         defaultProfile.setGameLength(20);
         defaultProfile.setSharpshooterLength(10);
+        defaultProfile.setKey1("A");
+        defaultProfile.setKey2("S");
+        defaultProfile.setKey3("K");
+        defaultProfile.setKey4("L");
         return defaultProfile;
     }
 
@@ -109,5 +125,9 @@ public class ProfileSettings implements Serializable {
         gameDifficulty = other.getGameDifficulty();
         gameLength = other.getGameLength();
         sharpshooterLength = other.getSharpshooterLength();
+        key1 = other.getKey1();
+        key2 = other.getKey2();
+        key3 = other.getKey3();
+        key4 = other.getKey4();
     }
 }

@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS Results;
 DROP TABLE IF EXISTS StatResults;
 DROP TABLE IF EXISTS Settings;
 
-/* This table hold the data about profiles and the settings associated
+/* This table holds the data about profiles and the settings associated
  * with them. */
 CREATE TABLE Settings (
     ProfileID INT UNIQUE NOT NULL AUTO_INCREMENT,
@@ -13,11 +13,16 @@ CREATE TABLE Settings (
     SFXVolume INT NOT NULL,
     GameDifficulty INT NOT NULL,
     GameLength INT NOT NULL,
+    SharpshooterLength INT NOT NULL,
+    Key1 VARCHAR(1) NOT NULL,
+    Key2 VARCHAR(1) NOT NULL,
+    Key3 VARCHAR(1) NOT NULL,
+    Key4 VARCHAR(1) NOT NULL,
     PRIMARY KEY(ProfileID)
 ) ENGINE=InnoDB;
-INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 2, 20);
+INSERT INTO Settings VALUES(NULL, 'default', 50, 50, 2, 20, 10, 'A', 'S', 'K', 'L');
 
-/* This table hold the statistical data of the results, for calculation
+/* This table holds the statistical data of the results, for calculation
  * of averages. */
 CREATE TABLE StatResults (
     StatResultID INT UNIQUE NOT NULL AUTO_INCREMENT,

@@ -2,7 +2,7 @@ package z03.pap22z.controllers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -33,7 +33,9 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
 
     private int spawnDelay = 6;
 
-    private ArrayList<String> letters = new ArrayList<>(Arrays.asList("A", "S", "K", "L"));
+    private List<String> getLetters() {
+        return Settings.getKeys();
+    }
 
     private ArrayList<StackPane> readySquares = new ArrayList<>();
 
@@ -55,7 +57,6 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
 
     @Override
     public void initializeMainBlock() {
-
         this.finishLine.widthProperty().bind(playfield.widthProperty());
         this.logic = new ComboGameLogic();
 
@@ -111,7 +112,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                                 rectangle.getStyleClass().add("rectangle");
                                 StackPane stack = new StackPane();
                                 stack.getChildren().add(rectangle);
-                                Text text = new Text(letters.get(random.nextInt(letters.size())).toUpperCase());
+                                Text text = new Text(getLetters().get(random.nextInt(getLetters().size())).toUpperCase());
                                 text.setFont(Font.font("Arial", FontWeight.BOLD, squareSize / 2));
                                 stack.getChildren().add(text);
                                 stack.setLayoutY(-squareSize);
@@ -156,7 +157,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
         if (logic.getIsGameOn()) {
             MusicManager.playHitMarkerSound();
             String pressedLetter = event.getCode().getName();
-            if (letters.contains(pressedLetter)) {
+            if (getLetters().contains(pressedLetter)) {
                 ArrayList<StackPane> squaresToDiscard = new ArrayList<>();
                 boolean hitSomething = false;
                 for (StackPane square : readySquares) {

@@ -229,6 +229,42 @@ public class Settings {
     }
 
     /**
+     * @return a list of keys for KeyboardWarrior.
+     */
+    public static List<String> getKeys() {
+        List<String> keys = new ArrayList<String>();
+        keys.add(currentProfile.getKey1());
+        keys.add(currentProfile.getKey2());
+        keys.add(currentProfile.getKey3());
+        keys.add(currentProfile.getKey4());
+        return keys;
+    }
+
+    /**
+     * Sets the key given as keyNumber (1, 2, 3 or 4) to the given key.
+     * @param keyNumber number of the key to set
+     * @param value of the key to set
+     */
+    public static void setKey(int keyNumber, String key) {
+        switch(keyNumber) {
+            case 1:
+                currentProfile.setKey1(key);
+                break;
+            case 2:
+                currentProfile.setKey2(key);
+                break;
+            case 3:
+                currentProfile.setKey3(key);
+                break;
+            case 4:
+                currentProfile.setKey4(key);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid key number");
+        }
+    }
+
+    /**
      * Writes all changes to settings to the database (if connected).
      */
     public static void writeToDatabase() {
