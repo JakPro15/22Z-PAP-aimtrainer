@@ -1,16 +1,9 @@
 package z03.pap22z.controllers;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.css.PseudoClass;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -22,32 +15,8 @@ import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
 import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedResults;
-import z03.pap22z.logics.ComboGameLogic;
 
-public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameController {
-    private static PseudoClass ON_TARGET = PseudoClass.getPseudoClass("onTarget");
-
-    private int squareSize = (int) (80 * (1 - 0.1 * (Settings.getGameDifficulty() - 2)));
-
-    private int timeLeft = Settings.getGameLength();
-
-    private int spawnDelay = 6 - Settings.getGameDifficulty() + 2;
-
-    private ArrayList<String> letters = new ArrayList<>(Arrays.asList("A", "S", "K", "L"));
-
-    private ArrayList<StackPane> readySquares = new ArrayList<>();
-
-    private Timeline countdownTimeline;
-    private Timeline gameTimeline;
-    private Timeline rectangleTimeline;
-    private Timeline movementTimeline;
-
-    @FXML
-    private Rectangle finishLine;
-
-    @FXML
-    private Label timeLeftValueLabel;
-
+public class KeyboardWarriorController extends z03.pap22z.controllers.BaseSquareGameController {
     @Override
     protected void initializeStatics() {
         KeyboardWarriorController.GAME_NAME = "KeyboardWarrior";
@@ -56,8 +25,9 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
     @Override
     public void initializeMainBlock() {
 
-        this.finishLine.widthProperty().bind(playfield.widthProperty());
-        this.logic = new ComboGameLogic();
+        squareSize = (int) (80 * (1 - 0.1 * (Settings.getGameDifficulty() - 2)));
+        spawnDelay = 6 - Settings.getGameDifficulty() + 2;
+        timeLeft = Settings.getGameLength();
 
         super.initializeMainBlock();
     }
@@ -103,46 +73,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
                 }));
                 gameTimeline.setCycleCount(timeLeft);
                 gameTimeline.play();
-
-                rectangleTimeline = new Timeline(
-                        new KeyFrame(Duration.millis(spawnDelay * (squareSize + 10)), event2 -> {
-                            if (timeLeft > 0) {
-                                Rectangle rectangle = new Rectangle(squareSize, squareSize, Color.web("#ff2600"));
-                                rectangle.getStyleClass().add("rectangle");
-                                StackPane stack = new StackPane();
-                                stack.getChildren().add(rectangle);
-                                Text text = new Text(letters.get(random.nextInt(letters.size())).toUpperCase());
-                                text.setFont(Font.font("Arial", FontWeight.BOLD, squareSize / 2));
-                                stack.getChildren().add(text);
-                                stack.setLayoutY(-squareSize);
-                                stack.setLayoutX(
-                                        10 + random.nextInt((int) playfield.getWidth() - squareSize - 20));
-                                playfield.getChildren().add(stack);
-
-                                movementTimeline = new Timeline(
-                                        new KeyFrame(Duration.millis(spawnDelay), event3 -> {
-                                            stack.setLayoutY(stack.getLayoutY() + 1);
-                                            if (stack.getLayoutY() + squareSize == finishLine.getLayoutY()) {
-                                                rectangle.pseudoClassStateChanged(ON_TARGET, true);
-                                                readySquares.add(stack);
-                                            }
-                                            if (stack.getLayoutY() == finishLine.getLayoutY()
-                                                    + finishLine.getHeight()) {
-                                                if (readySquares.contains(stack)) {
-                                                    rectangle.pseudoClassStateChanged(ON_TARGET, false);
-                                                    readySquares.remove(stack);
-                                                    if (this.logic.getIsGameOn()) {
-                                                        this.logic.registerTargetMiss();
-                                                    }
-                                                }
-                                            }
-                                        }));
-                                movementTimeline.setCycleCount(Timeline.INDEFINITE);
-                                movementTimeline.play();
-                            }
-                        }));
-                rectangleTimeline.setCycleCount(1000 * timeLeft / (spawnDelay * (squareSize + 10)));
-                rectangleTimeline.play();
+                spawnSquares();
             }
 
         }));
@@ -150,41 +81,45 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseGameCo
         countdownTimeline.play();
     }
 
-    @FXML
-    void handleKeyPressed(KeyEvent event) {
-        if (logic.getIsGameOn()) {
-            MusicManager.playHitMarkerSound();
-            String pressedLetter = event.getCode().getName();
-            if (letters.contains(pressedLetter)) {
-                ArrayList<StackPane> squaresToDiscard = new ArrayList<>();
-                boolean hitSomething = false;
-                for (StackPane square : readySquares) {
-                    String squareText = "";
-                    for (Node child : square.getChildren()) {
-                        if (child instanceof Text) {
-                            squareText = ((Text) child).getText();
-                        }
-                    }
-                    if (squareText.equals(pressedLetter)) {
-                        this.logic.registerTargetHit();
-                        hitSomething = true;
-                        squaresToDiscard.add(square);
-                    }
-                }
-                if (!hitSomething) {
-                    this.logic.registerTargetMiss();
-                }
-                readySquares.removeAll(squaresToDiscard);
-                playfield.getChildren().removeAll(squaresToDiscard);
-            }
-        }
-    }
+    protected void spawnSquares() {
+        rectangleTimeline = new Timeline(
+            new KeyFrame(Duration.millis(spawnDelay * (squareSize + 10)), event2 -> {
+                if (timeLeft > 0) {
+                    Rectangle rectangle = new Rectangle(squareSize, squareSize, Color.web("#ff2600"));
+                    rectangle.getStyleClass().add("rectangle");
+                    StackPane stack = new StackPane();
+                    stack.getChildren().add(rectangle);
+                    Text text = new Text(letters.get(random.nextInt(letters.size())).toUpperCase());
+                    text.setFont(Font.font("Arial", FontWeight.BOLD, squareSize / 2));
+                    stack.getChildren().add(text);
+                    stack.setLayoutY(-squareSize);
+                    stack.setLayoutX(
+                            10 + random.nextInt((int) playfield.getWidth() - squareSize - 20));
+                    playfield.getChildren().add(stack);
 
-    @Override
-    protected void terminateTimelines() {
-        terminateTimeline(movementTimeline);
-        terminateTimeline(rectangleTimeline);
-        terminateTimeline(gameTimeline);
-        terminateTimeline(countdownTimeline);
+                    movementTimeline = new Timeline(
+                            new KeyFrame(Duration.millis(spawnDelay), event3 -> {
+                                stack.setLayoutY(stack.getLayoutY() + 1);
+                                if (stack.getLayoutY() + squareSize == finishLine.getLayoutY()) {
+                                    rectangle.pseudoClassStateChanged(ON_TARGET, true);
+                                    readySquares.add(stack);
+                                }
+                                if (stack.getLayoutY() == finishLine.getLayoutY()
+                                        + finishLine.getHeight()) {
+                                    if (readySquares.contains(stack)) {
+                                        rectangle.pseudoClassStateChanged(ON_TARGET, false);
+                                        readySquares.remove(stack);
+                                        if (this.logic.getIsGameOn()) {
+                                            this.logic.registerTargetMiss();
+                                        }
+                                    }
+                                }
+                            }));
+                    movementTimeline.setCycleCount(Timeline.INDEFINITE);
+                    movementTimeline.play();
+                }
+            }));
+        rectangleTimeline.setCycleCount(1000 * timeLeft / (spawnDelay * (squareSize + 10)));
+        rectangleTimeline.play();
     }
 }
