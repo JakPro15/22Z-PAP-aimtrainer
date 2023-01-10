@@ -125,7 +125,7 @@
     -fx-stroke: black;
 }
 
-.rectangle {
+.shape {
     -fx-fill: radial-gradient(center 50% 50%,
             radius 71%,
             derive(-fx-color-outline, +50%),
@@ -134,7 +134,7 @@
     -fx-stroke: black;
 }
 
-.rectangle:onTarget {
+.shape:onTarget {
     -fx-fill: radial-gradient(center 50% 50%,
             radius 71%,
             white,

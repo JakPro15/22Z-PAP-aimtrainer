@@ -102,8 +102,17 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
         }
     }
 
+    /**
+     * This method is responsible for stopping all the timelines used by the
+     * inheriting class in case the game is exited before they stop naturally
+     * using the terminateTimeline(Timeline timeline) method
+     */
     protected abstract void terminateTimelines();
 
+    /**
+     * This method stops the timeline given to it as a argument
+     * @param timeline
+     */
     protected static void terminateTimeline(Timeline timeline) {
         if (timeline != null) {
             timeline.stop();

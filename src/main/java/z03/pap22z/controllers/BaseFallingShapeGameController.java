@@ -21,20 +21,24 @@ import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.ComboGameLogic;
 
-public abstract class BaseSquareGameController extends z03.pap22z.controllers.BaseGameController{
+public abstract class BaseFallingShapeGameController extends z03.pap22z.controllers.BaseGameController{
     protected static PseudoClass ON_TARGET = PseudoClass.getPseudoClass("onTarget");
-    protected int squareSize;
     protected int spawnDelay;
     protected int timeLeft;
 
+    /**
+     * Returns a list of keys chosen by the user in Settings to be used in all
+     * falling-shape type games
+     * @return list of character representations of chosen keys
+     */
     protected List<String> getLetters() {
         return Settings.getKeys();
     }
 
-    protected ArrayList<StackPane> readySquares = new ArrayList<>();
+    protected ArrayList<StackPane> readyShapes = new ArrayList<>();
     protected Timeline countdownTimeline;
     protected Timeline gameTimeline;
-    protected Timeline rectangleTimeline;
+    protected Timeline shapeTimeline;
     protected Timeline movementTimeline;
 
     @FXML
@@ -51,6 +55,7 @@ public abstract class BaseSquareGameController extends z03.pap22z.controllers.Ba
         super.initializeMainBlock();
     }
 
+    @Override
     public void playGame() {
         finishLine.setVisible(false);
         messageLabel.setText(String.format("%d", DELAY_TIME));
@@ -79,7 +84,7 @@ public abstract class BaseSquareGameController extends z03.pap22z.controllers.Ba
                         MusicManager.playGameOverSound();
                         timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
                         logic.toggleGameState();
-                        // remove all rectangles from the playfield
+                        // remove all shapes from the playfield
                         playfield.getChildren().removeIf(node -> node instanceof StackPane);
                         finishLine.setVisible(false);
                         messageLabel.setText("GAME OVER");
@@ -92,7 +97,7 @@ public abstract class BaseSquareGameController extends z03.pap22z.controllers.Ba
                 }));
                 gameTimeline.setCycleCount(timeLeft);
                 gameTimeline.play();
-                spawnSquares();
+                spawnShapes();
             }
 
         }));
@@ -100,7 +105,15 @@ public abstract class BaseSquareGameController extends z03.pap22z.controllers.Ba
         countdownTimeline.play();
     }
 
-    protected abstract void spawnSquares();
+    /**
+     * This method is responsible for creating the two timelines
+     * in which subsequent shapes are created and moved respectively
+     * checking when they reach the finish line
+     * and adding them to and removing them from
+     * the list of valid shapes
+     * (valid means such that points will be awarded upon hitting the correct key) 
+     */
+    protected abstract void spawnShapes();
 
     @FXML
     void handleKeyPressed(KeyEvent event) {
@@ -108,26 +121,26 @@ public abstract class BaseSquareGameController extends z03.pap22z.controllers.Ba
             MusicManager.playHitMarkerSound();
             String pressedLetter = event.getCode().getName();
             if (getLetters().contains(pressedLetter)) {
-                ArrayList<StackPane> squaresToDiscard = new ArrayList<>();
+                ArrayList<StackPane> shapesToDiscard = new ArrayList<>();
                 boolean hitSomething = false;
-                for (StackPane square : readySquares) {
-                    String squareText = "";
-                    for (Node child : square.getChildren()) {
+                for (StackPane shape : readyShapes) {
+                    String shapeText = "";
+                    for (Node child : shape.getChildren()) {
                         if (child instanceof Text) {
-                            squareText = ((Text) child).getText();
+                            shapeText = ((Text) child).getText();
                         }
                     }
-                    if (squareText.equals(pressedLetter)) {
+                    if (shapeText.equals(pressedLetter)) {
                         this.logic.registerTargetHit();
                         hitSomething = true;
-                        squaresToDiscard.add(square);
+                        shapesToDiscard.add(shape);
                     }
                 }
                 if (!hitSomething) {
                     this.logic.registerTargetMiss();
                 }
-                readySquares.removeAll(squaresToDiscard);
-                playfield.getChildren().removeAll(squaresToDiscard);
+                readyShapes.removeAll(shapesToDiscard);
+                playfield.getChildren().removeAll(shapesToDiscard);
             }
         }
     }
@@ -135,7 +148,7 @@ public abstract class BaseSquareGameController extends z03.pap22z.controllers.Ba
     @Override
     protected void terminateTimelines() {
         terminateTimeline(movementTimeline);
-        terminateTimeline(rectangleTimeline);
+        terminateTimeline(shapeTimeline);
         terminateTimeline(gameTimeline);
         terminateTimeline(countdownTimeline);
     }
