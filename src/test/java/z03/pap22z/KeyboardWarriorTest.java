@@ -6,17 +6,17 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.testfx.api.FxToolkit;
-import org.testfx.framework.junit.ApplicationTest;
-
-import javafx.scene.input.MouseButton;
-import z03.pap22z.database.Database;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.testfx.api.FxToolkit;
+import org.testfx.framework.junit.ApplicationTest;
 
-public class AimSniperTest extends ApplicationTest {
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import z03.pap22z.database.Database;
+
+public class KeyboardWarriorTest extends ApplicationTest{
     @Before
     public void setup() throws Exception {
         FxToolkit.registerPrimaryStage();
@@ -31,12 +31,12 @@ public class AimSniperTest extends ApplicationTest {
     }
 
     @Test
-    public void testCircleClicking() {
+    public void testSquarePressing() {
         // settings are not modified
         // enter game selection menu
         clickOn("#startButton");
-        // enter AimSniper scene
-        clickOn("#aimSniperButton");
+        // enter KeyboardWarrior scene
+        clickOn("#keyboardWarriorButton");
         verifyThat("#messageLabel", hasText("3"));
         sleep(1, TimeUnit.SECONDS);
         verifyThat("#messageLabel", hasText("2"));
@@ -48,20 +48,22 @@ public class AimSniperTest extends ApplicationTest {
         verifyThat("#timeLeftValueLabel", hasText("19 seconds"));
         verifyThat("#scoreValueLabel", hasText("0"));
         verifyThat("#accuracyValueLabel", hasText("0.00%"));
-        // click on circle twice
-        clickOn("#circle");
+        // wait until square falls down
+        sleep(1800, TimeUnit.MILLISECONDS);
+        // press all options twice
+        press(KeyCode.A, KeyCode.S, KeyCode.K, KeyCode.L);
+        release(KeyCode.A, KeyCode.S, KeyCode.K, KeyCode.L);
         verifyThat("#scoreValueLabel", hasText("10"));
-        verifyThat("#accuracyValueLabel", hasText("100.00%"));
-        clickOn("#circle");
-        verifyThat("#scoreValueLabel", hasText("30"));
-        verifyThat("#accuracyValueLabel", hasText("100.00%"));
-        // now miss a click
-        moveTo("#circle");
-        moveBy(0, 16);
-        press(MouseButton.PRIMARY);
-        release(MouseButton.PRIMARY);
-        verifyThat("#scoreValueLabel", hasText("30"));
-        verifyThat("#accuracyValueLabel", hasText("66.67%"));
+        verifyThat("#accuracyValueLabel", hasText("25.00%"));
+        sleep(250, TimeUnit.MILLISECONDS);
+        press(KeyCode.A, KeyCode.S, KeyCode.K, KeyCode.L);
+        release(KeyCode.A, KeyCode.S, KeyCode.K, KeyCode.L);
+        verifyThat("#scoreValueLabel", hasText("20"));
+        verifyThat("#accuracyValueLabel", hasText("25.00%"));
+        // miss a square
+        sleep(1100, TimeUnit.MILLISECONDS);
+        verifyThat("#scoreValueLabel", hasText("20"));
+        verifyThat("#accuracyValueLabel", hasText("22.22%"));
     }
 
     @Test
@@ -76,8 +78,8 @@ public class AimSniperTest extends ApplicationTest {
         clickOn("#exitButton");
         // enter game selection menu
         clickOn("#startButton");
-        // enter AimSniper scene
-        clickOn("#aimSniperButton");
+        // enter KeyboardWarrior scene
+        clickOn("#keyboardWarriorButton");
         verifyThat("#messageLabel", hasText("3"));
         sleep(1, TimeUnit.SECONDS);
         verifyThat("#messageLabel", hasText("2"));
@@ -104,8 +106,8 @@ public class AimSniperTest extends ApplicationTest {
         clickOn("#exitButton");
         // enter game selection menu
         clickOn("#startButton");
-        // enter AimSniper scene
-        clickOn("#aimSniperButton");
+        // enter KeyboardWarrior scene
+        clickOn("#keyboardWarriorButton");
         verifyThat("#messageLabel", hasText("3"));
         sleep(1, TimeUnit.SECONDS);
         verifyThat("#messageLabel", hasText("2"));
@@ -117,10 +119,13 @@ public class AimSniperTest extends ApplicationTest {
         verifyThat("#timeLeftValueLabel", hasText("4 seconds"));
         verifyThat("#scoreValueLabel", hasText("0"));
         verifyThat("#accuracyValueLabel", hasText("0.00%"));
-        // click on circle once
-        clickOn("#circle");
+        // wait until square falls down
+        sleep(1800, TimeUnit.MILLISECONDS);
+        // press all options twice
+        press(KeyCode.A, KeyCode.S, KeyCode.K, KeyCode.L);
+        release(KeyCode.A, KeyCode.S, KeyCode.K, KeyCode.L);
         verifyThat("#scoreValueLabel", hasText("10"));
-        verifyThat("#accuracyValueLabel", hasText("100.00%"));
+        verifyThat("#accuracyValueLabel", hasText("25.00%"));
         // reset the game
         clickOn("#newGameButton");
         verifyThat("#messageLabel", hasText("3"));
