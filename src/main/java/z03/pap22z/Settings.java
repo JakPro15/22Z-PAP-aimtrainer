@@ -12,7 +12,7 @@ public class Settings {
     private static List<ProfileSettings> profiles;
     private static List<Integer> deletedProfileIds;
 
-    public static final String[] DIFFICULTIES = { "Very Easy", "Easy", "Normal", "Hard", "Very Hard" };
+    public static final String[] DIFFICULTIES = {"Very Easy", "Easy", "Normal", "Hard", "Very Hard"};
 
     static {
         initialize();
@@ -27,7 +27,8 @@ public class Settings {
         if (Database.isConnected()) {
             readFromDatabase();
             currentProfile = ProfileSettings.findProfileById(
-                    profiles, SavedSettings.readCurrentProfile());
+                profiles, SavedSettings.readCurrentProfile()
+            );
         }
         else {
             // can't read from database - create a default profile instead
@@ -83,6 +84,11 @@ public class Settings {
         profile.setSfxVolume(getSfxVolume());
         profile.setGameDifficulty(getGameDifficulty());
         profile.setGameLength(getGameLength());
+        profile.setSharpshooterLength(getSharpshooterLength());
+        profile.setKey1(getKeys().get(0));
+        profile.setKey2(getKeys().get(1));
+        profile.setKey3(getKeys().get(2));
+        profile.setKey4(getKeys().get(3));
         profiles.add(profile);
     }
 
@@ -119,7 +125,7 @@ public class Settings {
      */
     public static List<String> getProfileNames() {
         List<String> profileNames = new ArrayList<String>();
-        for (ProfileSettings profile : profiles) {
+        for (ProfileSettings profile: profiles) {
             profileNames.add(profile.getName());
         }
         return profileNames;
@@ -155,7 +161,7 @@ public class Settings {
 
     /**
      * Set sound effects volume for the current profile.
-     * @param newSfxVolume music volume to be set
+     * @param newSfxVolume sound effects volume to be set
      * @throws IllegalArgumentException when the given volume is out of range
      *                                  [0,100] (inclusive)
      */
@@ -168,17 +174,17 @@ public class Settings {
     }
 
     /**
-     * @return game speed multiplier for the current profile
+     * @return game difficulty for the current profile
      */
     public static Integer getGameDifficulty() {
         return currentProfile.getGameDifficulty();
     }
 
     /**
-     * Set game speed multiplier for the current profile.
-     * @param newGameDifficulty game speed multiplier to be set
-     * @throws IllegalArgumentException when the given number is not in
-     *                                  Settings.VALID_GAME_SPEEDS
+     * Set game difficulty for the current profile.
+     * @param newGameDifficulty difficulty to be set
+     * @throws IllegalArgumentException when the given number is out of range
+     *                                  [0,4] (inclusive).
      */
     public static void setGameDifficulty(Integer newGameDifficulty) {
         if (newGameDifficulty < 0 || newGameDifficulty > 4) {
@@ -195,7 +201,7 @@ public class Settings {
     }
 
     /**
-     * Set sound effects volume for the current profile.
+     * Set single game length for the current profile.
      * @param newGameLength single game length in seconds to be set
      * @throws IllegalArgumentException when the given game length is out of range
      *                                  [5,60] (inclusive)
@@ -205,6 +211,63 @@ public class Settings {
             throw new IllegalArgumentException("Single game length must be between 5 and 60 (inclusive)");
         }
         currentProfile.setGameLength(newGameLength);
+    }
+
+    /**
+     * @return single game length for the current profile in seconds
+     */
+    public static Integer getSharpshooterLength() {
+        return currentProfile.getSharpshooterLength();
+    }
+
+    /**
+     * Set sound effects volume for the current profile.
+     * @param newGameLength single game length in seconds to be set
+     * @throws IllegalArgumentException when the given sharpshooter length is out of range
+     *                                  [3,40] (inclusive)
+     */
+    public static void setSharpshooterLength(Integer newSharpshooterLength) {
+        if (newSharpshooterLength > 40 || newSharpshooterLength < 3) {
+            throw new IllegalArgumentException("Single game length must be between 3 and 40 (inclusive)");
+        }
+        currentProfile.setSharpshooterLength(newSharpshooterLength);
+    }
+
+    /**
+     * @return a list of keys for KeyboardWarrior.
+     */
+    public static List<String> getKeys() {
+        List<String> keys = new ArrayList<String>();
+        keys.add(currentProfile.getKey1());
+        keys.add(currentProfile.getKey2());
+        keys.add(currentProfile.getKey3());
+        keys.add(currentProfile.getKey4());
+        return keys;
+    }
+
+    /**
+     * Sets the key given as keyNumber (1, 2, 3 or 4) to the given key.
+     * @param keyNumber number of the key to set
+     * @param value of the key to set
+     * @throws IllegalArgumentException when key number is out of range
+     */
+    public static void setKey(int keyNumber, String key) {
+        switch(keyNumber) {
+            case 1:
+                currentProfile.setKey1(key);
+                break;
+            case 2:
+                currentProfile.setKey2(key);
+                break;
+            case 3:
+                currentProfile.setKey3(key);
+                break;
+            case 4:
+                currentProfile.setKey4(key);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid key number");
+        }
     }
 
     /**
@@ -228,7 +291,8 @@ public class Settings {
             profiles = SavedSettings.readAllSettings();
             deletedProfileIds = new ArrayList<Integer>();
             currentProfile = ProfileSettings.findProfileById(
-                    profiles, SavedSettings.readCurrentProfile());
+                profiles, SavedSettings.readCurrentProfile()
+            );
             update();
         }
     }

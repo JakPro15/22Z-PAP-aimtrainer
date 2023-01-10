@@ -2,7 +2,7 @@ package z03.pap22z.controllers;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,23 +16,22 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import z03.pap22z.MusicManager;
+import z03.pap22z.Settings;
 import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.ComboGameLogic;
 
 public abstract class BaseSquareGameController extends z03.pap22z.controllers.BaseGameController{
     protected static PseudoClass ON_TARGET = PseudoClass.getPseudoClass("onTarget");
-
     protected int squareSize;
-
     protected int spawnDelay;
-
     protected int timeLeft;
 
-    protected ArrayList<String> letters = new ArrayList<>(Arrays.asList("A", "S", "K", "L"));
-    
-    protected ArrayList<StackPane> readySquares = new ArrayList<>();
+    protected List<String> getLetters() {
+        return Settings.getKeys();
+    }
 
+    protected ArrayList<StackPane> readySquares = new ArrayList<>();
     protected Timeline countdownTimeline;
     protected Timeline gameTimeline;
     protected Timeline rectangleTimeline;
@@ -40,7 +39,6 @@ public abstract class BaseSquareGameController extends z03.pap22z.controllers.Ba
 
     @FXML
     protected Rectangle finishLine;
-
     @FXML
     protected Label timeLeftValueLabel;
 
@@ -109,7 +107,7 @@ public abstract class BaseSquareGameController extends z03.pap22z.controllers.Ba
         if (logic.getIsGameOn()) {
             MusicManager.playHitMarkerSound();
             String pressedLetter = event.getCode().getName();
-            if (letters.contains(pressedLetter)) {
+            if (getLetters().contains(pressedLetter)) {
                 ArrayList<StackPane> squaresToDiscard = new ArrayList<>();
                 boolean hitSomething = false;
                 for (StackPane square : readySquares) {

@@ -3,8 +3,11 @@ package z03.pap22z;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.input.KeyCode;
 
 public class Alerts extends Alert {
+    KeyCode lastKeyPressed = null;
+
     /**
      * Creates a JavaFX alert with style loaded from style.css.
      * @param alertType the alert type
@@ -37,5 +40,17 @@ public class Alerts extends Alert {
         Alerts alert = new Alerts(AlertType.CONFIRMATION, text, ButtonType.OK, ButtonType.CANCEL);
         alert.showAndWait();
         return alert.getResult() == ButtonType.OK;
+    }
+
+    public static KeyCode getNewKey(String text) {
+        Alerts alert = new Alerts(AlertType.CONFIRMATION, text, ButtonType.CANCEL);
+        alert.getDialogPane().getScene().setOnKeyPressed(e -> {
+            if(e.getCode().getName().length() == 1) {
+                alert.lastKeyPressed = e.getCode();
+                alert.close();
+            }
+        });
+        alert.showAndWait();
+        return alert.lastKeyPressed;
     }
 }

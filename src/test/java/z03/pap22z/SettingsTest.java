@@ -248,4 +248,108 @@ public class SettingsTest extends TestCase {
             Settings.setGameLength(200);
         });
     }
+
+    @Test
+    public void testSharpshooterLength() {
+        Settings.setSharpshooterLength(20);
+        assertEquals(Settings.getSharpshooterLength(), Integer.valueOf(20));
+        // New profiles with single Sharpshooter length 20
+        String newProfile1 = Settings.getProfileNames().toString();
+        Settings.addNewProfile(newProfile1);
+        String newProfile2 = Settings.getProfileNames().toString();
+        Settings.addNewProfile(newProfile2);
+
+        Settings.setCurrentProfile(newProfile1);
+        assertEquals(Settings.getSharpshooterLength(), Integer.valueOf(20));
+        Settings.setSharpshooterLength(3);
+        assertEquals(Settings.getSharpshooterLength(), Integer.valueOf(3));
+
+        Settings.setCurrentProfile(newProfile2);
+        assertEquals(Settings.getSharpshooterLength(), Integer.valueOf(20));
+        Settings.setSharpshooterLength(40);
+        assertEquals(Settings.getSharpshooterLength(), Integer.valueOf(40));
+
+        Settings.setCurrentProfile(newProfile1);
+        assertEquals(Settings.getSharpshooterLength(), Integer.valueOf(3));
+    }
+
+    @Test
+    public void testSharpshooterLengthIllegalValues() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Settings.setSharpshooterLength(-1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Settings.setSharpshooterLength(101);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Settings.setSharpshooterLength(200);
+        });
+    }
+
+    @Test
+    public void testKeys() {
+        Settings.setKey(1, "Q");
+        Settings.setKey(2, "W");
+        Settings.setKey(3, "E");
+        Settings.setKey(4, "R");
+        assertEquals(Settings.getKeys().size(), 4);
+        assertEquals(Settings.getKeys().get(0), "Q");
+        assertEquals(Settings.getKeys().get(1), "W");
+        assertEquals(Settings.getKeys().get(2), "E");
+        assertEquals(Settings.getKeys().get(3), "R");
+
+        // New profiles with keys Q W E R
+        String newProfile1 = Settings.getProfileNames().toString();
+        Settings.addNewProfile(newProfile1);
+        String newProfile2 = Settings.getProfileNames().toString();
+        Settings.addNewProfile(newProfile2);
+
+        Settings.setCurrentProfile(newProfile1);
+        assertEquals(Settings.getKeys().size(), 4);
+        assertEquals(Settings.getKeys().get(0), "Q");
+        assertEquals(Settings.getKeys().get(1), "W");
+        assertEquals(Settings.getKeys().get(2), "E");
+        assertEquals(Settings.getKeys().get(3), "R");
+        Settings.setKey(2, "5");
+        Settings.setKey(4, "Z");
+        assertEquals(Settings.getKeys().size(), 4);
+        assertEquals(Settings.getKeys().get(0), "Q");
+        assertEquals(Settings.getKeys().get(1), "5");
+        assertEquals(Settings.getKeys().get(2), "E");
+        assertEquals(Settings.getKeys().get(3), "Z");
+
+        Settings.setCurrentProfile(newProfile2);
+        assertEquals(Settings.getKeys().size(), 4);
+        assertEquals(Settings.getKeys().get(0), "Q");
+        assertEquals(Settings.getKeys().get(1), "W");
+        assertEquals(Settings.getKeys().get(2), "E");
+        assertEquals(Settings.getKeys().get(3), "R");
+        Settings.setKey(1, "L");
+        Settings.setKey(3, "X");
+        assertEquals(Settings.getKeys().size(), 4);
+        assertEquals(Settings.getKeys().get(0), "L");
+        assertEquals(Settings.getKeys().get(1), "W");
+        assertEquals(Settings.getKeys().get(2), "X");
+        assertEquals(Settings.getKeys().get(3), "R");
+
+        Settings.setCurrentProfile(newProfile1);
+        assertEquals(Settings.getKeys().size(), 4);
+        assertEquals(Settings.getKeys().get(0), "Q");
+        assertEquals(Settings.getKeys().get(1), "5");
+        assertEquals(Settings.getKeys().get(2), "E");
+        assertEquals(Settings.getKeys().get(3), "Z");
+    }
+
+    @Test
+    public void testKeysIllegalValues() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Settings.setKey(0, "A");
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Settings.setKey(5, "A");
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Settings.setKey(100, "A");
+        });
+    }
 }

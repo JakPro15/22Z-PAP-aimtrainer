@@ -19,7 +19,6 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseSquare
 
     @Override
     public void initializeMainBlock() {
-
         squareSize = (int) (80 * (1 - 0.1 * (Settings.getGameDifficulty() - 2)));
         spawnDelay = 6 - Settings.getGameDifficulty() + 2;
         timeLeft = Settings.getGameLength();
@@ -35,7 +34,7 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseSquare
                     rectangle.getStyleClass().add("rectangle");
                     StackPane stack = new StackPane();
                     stack.getChildren().add(rectangle);
-                    Text text = new Text(letters.get(random.nextInt(letters.size())).toUpperCase());
+                    Text text = new Text(getLetters().get(random.nextInt(getLetters().size())).toUpperCase());
                     text.setFont(Font.font("Arial", FontWeight.BOLD, squareSize / 2));
                     stack.getChildren().add(text);
                     stack.setLayoutY(-squareSize);

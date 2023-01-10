@@ -100,11 +100,15 @@ public class StringResultTest extends TestCase {
     public void testLength() {
         Result result = getResult(null, null);
         StringResult stringized = new StringResult(result);
-        assertEquals(stringized.getLength(), "15s");
+        assertEquals(stringized.getLength(), "15 seconds");
 
         result.setGameLength(40);
         stringized = new StringResult(result);
-        assertEquals(stringized.getLength(), "40s");
+        assertEquals(stringized.getLength(), "40 seconds");
+
+        result.setGameType("Sharpshooter");
+        stringized = new StringResult(result);
+        assertEquals(stringized.getLength(), "40 attempts");
     }
 
     @Test

@@ -24,7 +24,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         SharpshooterController.RADIUS_OFFSET = 5;
     }
 
-    private int attemptsLeft = Settings.getGameLength();
+    private int attemptsLeft = Settings.getSharpshooterLength();
 
     @FXML
     private Label attemptsLeftLabel;
@@ -117,7 +117,8 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
 
     private int calculatePoints(MouseEvent event) {
         double distanceRatio = Math.pow(
-                1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue(), 2);
+            1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue(), 2
+        );
         double timeRatio = 500.0 / ChronoUnit.MILLIS.between(start, LocalDateTime.now());
         return (int) (500 * distanceRatio * timeRatio);
     }

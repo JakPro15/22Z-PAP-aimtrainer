@@ -7,14 +7,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
 import z03.pap22z.Alerts;
 import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
@@ -37,9 +37,29 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
     @FXML
     private Label gameLengthValueLabel;
     @FXML
+    private Slider sharpshooterLengthSlider;
+    @FXML
+    private Label sharpshooterLengthValueLabel;
+    @FXML
     private ComboBox<String> profileComboBox;
     @FXML
     private Label saveButtonLabel;
+    @FXML
+    private Label key1Label;
+    @FXML
+    private Button key1Button;
+    @FXML
+    private Label key2Label;
+    @FXML
+    private Button key2Button;
+    @FXML
+    private Label key3Label;
+    @FXML
+    private Button key3Button;
+    @FXML
+    private Label key4Label;
+    @FXML
+    private Button key4Button;
 
     Timer timer = new Timer();
 
@@ -47,39 +67,31 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
      * Initialize the settings UI.
      */
     public void initialize() {
-        // Bind the slider labels to the sliders
-        musicVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                musicVolumeValueLabel.textProperty()
-                        .setValue(String.format("%d%%", (int) musicVolumeSlider.getValue()));
-                Settings.setMusicVolume((int) musicVolumeSlider.getValue());
-                MusicManager.setMusicVolume((float) musicVolumeSlider.getValue());
-            }
+        // Bind the slider labels and settings to the sliders
+        musicVolumeSlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            musicVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int) musicVolumeSlider.getValue()));
+            Settings.setMusicVolume((int) musicVolumeSlider.getValue());
+            MusicManager.setMusicVolume((float) musicVolumeSlider.getValue());
         });
-        sfxVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                sfxVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int) sfxVolumeSlider.getValue()));
-                Settings.setSfxVolume((int) sfxVolumeSlider.getValue());
-                MusicManager.setSfxVolume((float) sfxVolumeSlider.getValue());
-            }
+        sfxVolumeSlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            sfxVolumeValueLabel.textProperty().setValue(String.format("%d%%", (int) sfxVolumeSlider.getValue()));
+            Settings.setSfxVolume((int) sfxVolumeSlider.getValue());
+            MusicManager.setSfxVolume((float) sfxVolumeSlider.getValue());
         });
-        gameDifficultySlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                int gameDifficulty = (int) round(gameDifficultySlider.getValue());
-                gameDifficultyValueLabel.textProperty().setValue(Settings.DIFFICULTIES[gameDifficulty]);
-                Settings.setGameDifficulty(gameDifficulty);
-            }
+        gameDifficultySlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            int gameDifficulty = (int) round(gameDifficultySlider.getValue());
+            gameDifficultyValueLabel.textProperty().setValue(Settings.DIFFICULTIES[gameDifficulty]);
+            Settings.setGameDifficulty(gameDifficulty);
         });
-        gameLengthSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldValue, Number newValue) {
-                Integer gameLength = (int) round(gameLengthSlider.getValue());
-                gameLengthValueLabel.textProperty().setValue(String.format("%d seconds", gameLength));
-                Settings.setGameLength(gameLength);
-            }
+        gameLengthSlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            Integer gameLength = (int) round(gameLengthSlider.getValue());
+            gameLengthValueLabel.textProperty().setValue(String.format("%d seconds", gameLength));
+            Settings.setGameLength(gameLength);
+        });
+        sharpshooterLengthSlider.valueProperty().addListener((source, oldValue, newValue) -> {
+            Integer sharpshooterLength = (int) round(sharpshooterLengthSlider.getValue());
+            sharpshooterLengthValueLabel.textProperty().setValue(String.format("%d attempts", sharpshooterLength));
+            Settings.setSharpshooterLength(sharpshooterLength);
         });
         profileListChanged();
     }
@@ -152,6 +164,11 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
         sfxVolumeSlider.setValue(Settings.getSfxVolume());
         gameDifficultySlider.setValue(Settings.getGameDifficulty());
         gameLengthSlider.setValue(Settings.getGameLength());
+        sharpshooterLengthSlider.setValue(Settings.getSharpshooterLength());
+        key1Label.setText(Settings.getKeys().get(0));
+        key2Label.setText(Settings.getKeys().get(1));
+        key3Label.setText(Settings.getKeys().get(2));
+        key4Label.setText(Settings.getKeys().get(3));
     }
 
     /**
@@ -181,5 +198,43 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
         profileComboBox.setItems(FXCollections.observableArrayList(Settings.getProfileNames()));
         profileComboBox.getSelectionModel().select(Settings.getCurrentProfileName());
         update();
+    }
+
+    private void handleKeyButtonPressed(int buttonNumber) {
+        KeyCode keyCode = Alerts.getNewKey(
+            String.format("Press a key to set as Key %d for KeyboardWarrior", buttonNumber)
+        );
+        if(keyCode != null) {
+            String key = keyCode.getName();
+            if(!Settings.getKeys().get(buttonNumber - 1).equals(key) &&
+               Settings.getKeys().contains(key))
+            {
+                Alerts.warn(String.format("Key %s is already used.", key));
+            }
+            else {
+                Settings.setKey(buttonNumber, key);
+                update();
+            }
+        }
+    }
+
+    @FXML
+    void handleKey1Button(ActionEvent event) {
+        handleKeyButtonPressed(1);
+    }
+
+    @FXML
+    void handleKey2Button(ActionEvent event) {
+        handleKeyButtonPressed(2);
+    }
+
+    @FXML
+    void handleKey3Button(ActionEvent event) {
+        handleKeyButtonPressed(3);
+    }
+
+    @FXML
+    void handleKey4Button(ActionEvent event) {
+        handleKeyButtonPressed(4);
     }
 }

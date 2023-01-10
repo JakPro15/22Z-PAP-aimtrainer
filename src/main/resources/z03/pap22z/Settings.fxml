@@ -18,7 +18,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.controllers.SettingsController">
    <children>
-      <VBox alignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="100.0">
+      <VBox alignment="CENTER" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" textAlignment="CENTER" wrappingWidth="169.0">
                <font>
@@ -34,7 +34,7 @@
                   <Insets />
                </HBox.margin>
                <children>
-                  <Label fx:id="saveButtonLabel" alignment="CENTER" text="Changes saved." textAlignment="CENTER" visible="false" textFill="BLACK">
+                  <Label fx:id="saveButtonLabel" alignment="CENTER" text="Changes saved." textAlignment="CENTER" textFill="BLACK" visible="false">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -45,7 +45,7 @@
             <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExit" prefHeight="32.0" prefWidth="64.0" text="Exit" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
+      <HBox fillHeight="false" prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
          <children>
             <VBox alignment="CENTER_RIGHT" minWidth="150.0" prefHeight="200.0" prefWidth="200.0" spacing="20.0">
                <children>
@@ -64,7 +64,32 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Single Game Length">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Length">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sharpshooter Length">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="KeyboardWarrior Key 1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="KeyboardWarrior Key 2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="KeyboardWarrior Key 3">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="KeyboardWarrior Key 4">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -74,7 +99,7 @@
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="1000.0" spacing="20.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="1000.0" spacing="19.0">
                <children>
                   <HBox alignment="CENTER">
                      <children>
@@ -116,6 +141,60 @@
                         </Label>
                      </children>
                   </HBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="1000.0" spacing="12.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Slider fx:id="sharpshooterLengthSlider" blockIncrement="1.0" majorTickUnit="1.0" max="40.0" min="3.0" minorTickCount="0" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="sharpshooterLengthValueLabel" minWidth="100.0" text="3 attempts" textFill="BLACK">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label fx:id="key1Label" minWidth="16.0" prefHeight="29.0" prefWidth="70.0" text="A" textFill="BLACK">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="key1Button" mnemonicParsing="false" onAction="#handleKey1Button" prefHeight="25.0" prefWidth="160.0" text="Change" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label fx:id="key2Label" minWidth="16.0" prefHeight="29.0" prefWidth="70.0" text="S" textFill="BLACK">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="key2Button" mnemonicParsing="false" onAction="#handleKey2Button" prefHeight="25.0" prefWidth="160.0" text="Change" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label fx:id="key3Label" minWidth="16.0" prefHeight="39.0" prefWidth="70.0" text="K" textAlignment="CENTER" textFill="BLACK">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="key3Button" mnemonicParsing="false" onAction="#handleKey3Button" prefHeight="25.0" prefWidth="160.0" text="Change" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label fx:id="key4Label" minWidth="16.0" prefHeight="39.0" prefWidth="70.0" text="L" textAlignment="CENTER" textFill="BLACK">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="key4Button" mnemonicParsing="false" onAction="#handleKey4Button" prefHeight="25.0" prefWidth="160.0" text="Change" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>
