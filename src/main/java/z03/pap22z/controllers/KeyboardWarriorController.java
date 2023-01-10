@@ -1,7 +1,5 @@
 package z03.pap22z.controllers;
 
-import java.time.LocalDateTime;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.layout.StackPane;
@@ -11,10 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
-import z03.pap22z.database.Database;
-import z03.pap22z.database.SavedResults;
 
 public class KeyboardWarriorController extends z03.pap22z.controllers.BaseSquareGameController {
     @Override
@@ -30,55 +25,6 @@ public class KeyboardWarriorController extends z03.pap22z.controllers.BaseSquare
         timeLeft = Settings.getGameLength();
 
         super.initializeMainBlock();
-    }
-
-    public void playGame() {
-        finishLine.setVisible(false);
-        messageLabel.setText(String.format("%d", DELAY_TIME));
-        unsavedResult = null;
-
-        // ready period before a game
-        MusicManager.stopMenuTheme();
-        MusicManager.playCountdownSound();
-        countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
-            int countdownTime = Integer.parseInt(messageLabel.getText()) - 1;
-            if (countdownTime > 0) {
-                messageLabel.setText(String.format("%d", countdownTime));
-            } else {
-                MusicManager.playSecondGameTheme();
-                messageLabel.setText("");
-                finishLine.setVisible(true);
-                logic.toggleGameState();
-                gameEndTime = LocalDateTime.now().plusSeconds(timeLeft);
-                timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                gameTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event2 -> {
-                    timeLeft -= 1;
-                    if (timeLeft > 0) {
-                        timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                    } else {
-                        MusicManager.stopAnyGameTheme();
-                        MusicManager.playGameOverSound();
-                        timeLeftValueLabel.setText(String.format("%d seconds", timeLeft));
-                        logic.toggleGameState();
-                        // remove all rectangles from the playfield
-                        playfield.getChildren().removeIf(node -> node instanceof StackPane);
-                        finishLine.setVisible(false);
-                        messageLabel.setText("GAME OVER");
-                        if(Database.isConnected()) {
-                            unsavedResult = SavedResults.writeStatResult(
-                                logic.getPoints(), logic.getAccuracy(), GAME_NAME
-                            );
-                        }
-                    }
-                }));
-                gameTimeline.setCycleCount(timeLeft);
-                gameTimeline.play();
-                spawnSquares();
-            }
-
-        }));
-        countdownTimeline.setCycleCount(DELAY_TIME);
-        countdownTimeline.play();
     }
 
     protected void spawnSquares() {
