@@ -84,6 +84,11 @@ public class Settings {
         profile.setSfxVolume(getSfxVolume());
         profile.setGameDifficulty(getGameDifficulty());
         profile.setGameLength(getGameLength());
+        profile.setSharpshooterLength(getSharpshooterLength());
+        profile.setKey1(getKeys().get(0));
+        profile.setKey2(getKeys().get(1));
+        profile.setKey3(getKeys().get(2));
+        profile.setKey4(getKeys().get(3));
         profiles.add(profile);
     }
 
@@ -244,6 +249,7 @@ public class Settings {
      * Sets the key given as keyNumber (1, 2, 3 or 4) to the given key.
      * @param keyNumber number of the key to set
      * @param value of the key to set
+     * @throws IllegalArgumentException when key number is out of range
      */
     public static void setKey(int keyNumber, String key) {
         switch(keyNumber) {

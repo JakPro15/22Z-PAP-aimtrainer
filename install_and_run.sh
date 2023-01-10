@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install and set up MySQL databse and run the AimTrainer program.
+# Install and set up MySQL database and run the AimTrainer program.
 
 cd $(dirname "$0")
 
