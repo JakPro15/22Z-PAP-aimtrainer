@@ -1,7 +1,5 @@
 package z03.pap22z.controllers;
 
-import z03.pap22z.MusicManager;
-
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -11,10 +9,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import z03.pap22z.MusicManager;
 
 public class SceneController {
     protected Stage stage;
     protected final static String FXML_PATH = "/z03/pap22z/";
+
+    @FXML
+    protected void playButtonSound() {
+        MusicManager.playButtonSound();
+    }
 
     @FXML
     protected void switchToScene(ActionEvent event, String scene_name) throws IOException {
@@ -22,8 +26,8 @@ public class SceneController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene oldScene = stage.getScene();
         stage.setScene(oldScene == null
-            ? new Scene(root, stage.getMinWidth(), stage.getMinHeight())
-            : new Scene(root, oldScene.getWidth(), oldScene.getHeight()));
+                ? new Scene(root, stage.getMinWidth(), stage.getMinHeight())
+                : new Scene(root, oldScene.getWidth(), oldScene.getHeight()));
         MusicManager.playButtonSound();
         stage.show();
     }

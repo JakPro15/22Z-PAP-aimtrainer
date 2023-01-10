@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import z03.pap22z.MusicManager;
 
 public class NewProfileDialogController extends SceneController {
     Stage stage;
@@ -28,17 +29,20 @@ public class NewProfileDialogController extends SceneController {
 
     @FXML
     void handleOK(ActionEvent event) {
+        MusicManager.playButtonSound();
         stage.close();
     }
 
     @FXML
     void handleCancel(ActionEvent event) {
         textField.setText("");
+        MusicManager.playButtonSound();
         stage.close();
     }
 
     /**
      * Shows a dialog for the user to input the name of the profile to be created.
+     * 
      * @param parentStage stage that calls the dialog (for modality to work)
      * @return new profile name inputted by the user
      */

@@ -16,6 +16,7 @@ import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
+    private final double TARGET_TIME = 1.5;
 
     @Override
     protected void initializeStatics() {
@@ -65,8 +66,8 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
     @Override
     @FXML
     protected void handlePlayfieldClick(MouseEvent event) {
-        MusicManager.playRevolverShot();
         if (logic.getIsGameOn()) {
+            MusicManager.playRevolverShot();
             if (isInCircle(event)) {
                 this.logic.addPoints(calculatePoints(event));
                 this.logic.registerTargetHit();
@@ -82,16 +83,17 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         attemptsLeftLabel.setText(Integer.toString(attemptsLeft));
         double waitDuration = 2.0 + random.nextDouble() * 6.0;
         attemptTimeline = new Timeline(
-            new KeyFrame(
-                Duration.seconds(waitDuration), event2 -> {
-                    teleportCircle();
-                    circle.setVisible(true);
-                    start = LocalDateTime.now();
-                    logic.toggleGameState();
-                }),
-            new KeyFrame(Duration.seconds(DELAY_TIME + waitDuration), event2 -> {
-                finishAttempt();
-            }));
+                new KeyFrame(
+                        Duration.seconds(waitDuration), event2 -> {
+                            teleportCircle();
+                            circle.setVisible(true);
+                            start = LocalDateTime.now();
+                            logic.toggleGameState();
+                        }),
+                new KeyFrame(Duration.seconds(TARGET_TIME + waitDuration), event2 -> {
+                    this.logic.registerTargetMiss();
+                    finishAttempt();
+                }));
         attemptTimeline.play();
     }
 
@@ -106,10 +108,9 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
             MusicManager.playGameOverSound();
             attemptsLeftLabel.setText(Integer.toString(attemptsLeft));
             messageLabel.setText("GAME OVER");
-            if(Database.isConnected()) {
+            if (Database.isConnected()) {
                 unsavedResult = SavedResults.writeStatResult(
-                    logic.getPoints(), logic.getAccuracy(), GAME_NAME
-                );
+                        logic.getPoints(), logic.getAccuracy(), GAME_NAME);
             }
             gameEndTime = LocalDateTime.now();
         }
@@ -117,8 +118,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
 
     private int calculatePoints(MouseEvent event) {
         double distanceRatio = Math.pow(
-            1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue(), 2
-        );
+                1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue(), 2);
         double timeRatio = 500.0 / ChronoUnit.MILLIS.between(start, LocalDateTime.now());
         return (int) (500 * distanceRatio * timeRatio);
     }

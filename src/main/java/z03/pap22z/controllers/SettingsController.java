@@ -150,8 +150,11 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
 
     @FXML
     protected void profileSelected(ActionEvent event) {
+        System.out.println(event.getEventType().getName());
         if (profileComboBox.getValue() != null) {
+            System.out.println(profileComboBox.getValue());
             Settings.setCurrentProfile(profileComboBox.getValue());
+            MusicManager.playButtonSound();
             update();
         }
     }
@@ -173,6 +176,7 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
 
     /**
      * Shows the given string as a label to the left of the Save button.
+     * 
      * @param message string to be shown
      */
     private void showFeedback(String message) {
@@ -201,17 +205,15 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
     }
 
     private void handleKeyButtonPressed(int buttonNumber) {
+        MusicManager.playButtonSound();
         KeyCode keyCode = Alerts.getNewKey(
-            String.format("Press a key to set as Key %d for KeyboardWarrior", buttonNumber)
-        );
-        if(keyCode != null) {
+                String.format("Press a key to set as Key %d for KeyboardWarrior", buttonNumber));
+        if (keyCode != null) {
             String key = keyCode.getName();
-            if(!Settings.getKeys().get(buttonNumber - 1).equals(key) &&
-               Settings.getKeys().contains(key))
-            {
+            if (!Settings.getKeys().get(buttonNumber - 1).equals(key) &&
+                    Settings.getKeys().contains(key)) {
                 Alerts.warn(String.format("Key %s is already used.", key));
-            }
-            else {
+            } else {
                 Settings.setKey(buttonNumber, key);
                 update();
             }
