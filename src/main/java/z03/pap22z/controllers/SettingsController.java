@@ -150,9 +150,7 @@ public class SettingsController extends z03.pap22z.controllers.SceneController {
 
     @FXML
     protected void profileSelected(ActionEvent event) {
-        System.out.println(event.getEventType().getName());
         if (profileComboBox.getValue() != null) {
-            System.out.println(profileComboBox.getValue());
             Settings.setCurrentProfile(profileComboBox.getValue());
             MusicManager.playButtonSound();
             update();
