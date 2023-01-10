@@ -15,19 +15,19 @@
                 <Font name="Bauhaus 93" size="36.0" />
             </font>
         </Text>
-        <Button fx:id="startButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleStartButtonPress" prefHeight="40.0" prefWidth="200.0" text="Play" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="startButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="100.0" onAction="#handleStartButtonPress" prefHeight="40.0" prefWidth="200.0" text="Play" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <GridPane.margin>
             <Insets bottom="5.0" left="300.0" right="300.0" top="5.0" />
          </GridPane.margin></Button>
-        <Button fx:id="scoreboardButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleScoreboardButtonPress" prefHeight="40.0" prefWidth="200.0" text="Scoreboard" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="scoreboardButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="100.0" onAction="#handleScoreboardButtonPress" prefHeight="40.0" prefWidth="200.0" text="Scoreboard" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <GridPane.margin>
             <Insets bottom="5.0" left="300.0" right="300.0" top="5.0" />
          </GridPane.margin></Button>
-        <Button fx:id="settingsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleSettingsButtonPress" prefHeight="40.0" prefWidth="200.0" text="Settings" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="settingsButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="100.0" onAction="#handleSettingsButtonPress" prefHeight="40.0" prefWidth="200.0" text="Settings" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <GridPane.margin>
             <Insets bottom="5.0" left="300.0" right="300.0" top="5.0" />
          </GridPane.margin></Button>
-        <Button fx:id="exitButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleExitButtonPress" prefHeight="40.0" prefWidth="200.0" text="Exit" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="exitButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="100.0" onAction="#handleExitButtonPress" prefHeight="40.0" prefWidth="200.0" text="Exit" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <GridPane.margin>
             <Insets bottom="105.0" left="300.0" right="300.0" top="5.0" />
          </GridPane.margin></Button>

@@ -16,21 +16,16 @@
    <children>
       <VBox alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="657.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="521.0">
          <children>
-            <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="64.0" maxWidth="128.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#handleExit" text="Back" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+            <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="64.0" maxWidth="128.0" minHeight="32.0" minWidth="64.0" mnemonicParsing="false" onAction="#handleExit" text="Back" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="64.0" top="32.0" />
                </VBox.margin>
             </Button>
          </children>
       </VBox>
-      <TextArea fx:id="text_hint" editable="false" layoutX="250.0" layoutY="450.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="119.0" prefWidth="300.0" visible="false" wrapText="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-      </TextArea>
-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" spacing="60.0" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" spacing="60.0" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="175.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the game mode" VBox.vgrow="ALWAYS">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the game mode" textAlignment="CENTER" wrappingWidth="287.02734375" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="24.0" />
                </font>
@@ -78,7 +73,7 @@
                   </VBox>
                   <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="30.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToSharpshooter" text="Game 3" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                        <Button alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToSharpshooter" text="Sharpshooter" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                            <graphic>
                               <ImageView fitHeight="170.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -96,6 +91,17 @@
                   </VBox>
                </children>
             </HBox>
+            <TextArea fx:id="text_hint" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="70.0" visible="false" wrapText="true" VBox.vgrow="ALWAYS">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <VBox.margin>
+                  <Insets left="150.0" right="150.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
          </children>
       </VBox>
    </children>
