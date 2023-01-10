@@ -9,7 +9,7 @@ import z03.pap22z.database.Result;
 public class StringResult {
     private int id;
     private String gameTime, user, gameType, difficulty, length, score, accuracy;
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    public static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     /**
      * Creates a StringResult containing all fields of the given result converted to strings.
