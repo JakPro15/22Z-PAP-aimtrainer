@@ -86,6 +86,7 @@ public class ProfileSettings implements Serializable {
 
     /**
      * Finds a profile with the given name in the given list
+     *
      * @param profiles list of profiles to search
      * @param profileName name of the profile to find
      * @return the found profile; null if not found
@@ -101,6 +102,7 @@ public class ProfileSettings implements Serializable {
 
     /**
      * Finds a profile with the given id in the given list
+     *
      * @param profiles list of profiles to search
      * @param profileId id of the profile to find
      * @return the found profile; null if not found
@@ -116,6 +118,7 @@ public class ProfileSettings implements Serializable {
 
     /**
      * Sets all attributes except ID to other's attributes.
+     *
      * @param other profile to copy from
      */
     public void copyFromOther(ProfileSettings other) {

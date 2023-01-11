@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class SavedSettings {
     /**
      * Reads all profiles with their settings from the database.
+     *
      * @return list of the loaded profiles
      */
     public static List<ProfileSettings> readAllSettings() {
@@ -34,7 +35,8 @@ public class SavedSettings {
     }
 
     /**
-     * Replaces the database settings list with the given one.
+     * Updates the database profile settings list to the given one.
+     *
      * @param profiles list of profiles to be written to the database
      */
     public static void updateAllSettings(List<ProfileSettings> profiles, List<Integer> deletedIds) {
@@ -77,6 +79,7 @@ public class SavedSettings {
     /**
      * Returns the ID of the current profile.
      * Returns ID, so that no copies of profiles are kept.
+     *
      * @return ID of current profile, -1 if failed to read
      */
     public static int readCurrentProfile() {
@@ -107,6 +110,7 @@ public class SavedSettings {
 
     /**
      * Saves the choice of the current profile to the database.
+     *
      * @param profile profile to write as current
      */
     public static void writeCurrentProfile(ProfileSettings profile) {

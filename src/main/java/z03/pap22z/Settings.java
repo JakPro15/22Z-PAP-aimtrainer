@@ -53,7 +53,7 @@ public class Settings {
 
     /**
      * Switch profile to the one with the given name.
-     * 
+     *
      * @param profileName name of the profile to switch to
      * @throws IllegalArgumentException when the given profile does not exist
      */
@@ -68,7 +68,7 @@ public class Settings {
     /**
      * Create a new profile. The name must be different from all current profiles.
      * The new profile is a copy of the current profile.
-     * 
+     *
      * @param newProfileName name of the new profile
      * @throws RuntimeException when the given profile already exists
      */
@@ -93,10 +93,10 @@ public class Settings {
 
     /**
      * Delete the given profile. There must be another profile to switch to.
-     * 
+     *
      * @param profile name of the profile to be deleted
      * @throws IllegalArgumentException when the given profile does not exist
-     * @throws RuntimeException         when the given profile is the only one
+     * @throws RuntimeException when the given profile is the only one
      */
     public static void deleteProfile(String profileName) {
         ProfileSettings profile = ProfileSettings.findProfileByName(profiles, profileName);
@@ -120,7 +120,7 @@ public class Settings {
 
     /**
      * Get a copy of the list of names of all profiles.
-     * 
+     *
      * @return list of the profile names
      */
     public static List<String> getProfileNames() {
@@ -140,7 +140,7 @@ public class Settings {
 
     /**
      * Set music volume for the current profile.
-     * 
+     *
      * @param newMusicVolume music volume to be set
      * @throws IllegalArgumentException when the given volume is out of range
      *                                  [0,100] (inclusive)
@@ -161,7 +161,7 @@ public class Settings {
 
     /**
      * Set sound effects volume for the current profile.
-     * 
+     *
      * @param newSfxVolume sound effects volume to be set
      * @throws IllegalArgumentException when the given volume is out of range
      *                                  [0,100] (inclusive)
@@ -182,7 +182,7 @@ public class Settings {
 
     /**
      * Set game difficulty for the current profile.
-     * 
+     *
      * @param newGameDifficulty difficulty to be set
      * @throws IllegalArgumentException when the given number is out of range
      *                                  [0,4] (inclusive).
@@ -203,7 +203,7 @@ public class Settings {
 
     /**
      * Set single game length for the current profile.
-     * 
+     *
      * @param newGameLength single game length in seconds to be set
      * @throws IllegalArgumentException when the given game length is out of range
      *                                  [5,60] (inclusive)
@@ -224,11 +224,10 @@ public class Settings {
 
     /**
      * Set sound effects volume for the current profile.
-     * 
+     *
      * @param newGameLength single game length in seconds to be set
      * @throws IllegalArgumentException when the given sharpshooter length is out of
-     *                                  range
-     *                                  [3,40] (inclusive)
+     *                                  range [3,40] (inclusive)
      */
     public static void setSharpshooterLength(Integer newSharpshooterLength) {
         if (newSharpshooterLength > 40 || newSharpshooterLength < 3) {
@@ -251,9 +250,9 @@ public class Settings {
 
     /**
      * Sets the key given as keyNumber (1, 2, 3 or 4) to the given key.
-     * 
+     *
      * @param keyNumber number of the key to set
-     * @param value     of the key to set
+     * @param value of the key to set
      * @throws IllegalArgumentException when key number is out of range
      */
     public static void setKey(int keyNumber, String key) {

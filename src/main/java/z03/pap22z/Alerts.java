@@ -10,10 +10,10 @@ public class Alerts extends Alert {
 
     /**
      * Creates a JavaFX alert with style loaded from style.css.
-     * 
-     * @param alertType   the alert type
+     *
+     * @param alertType the alert type
      * @param contentText the content text
-     * @param buttons     the button types
+     * @param buttons the button types
      */
     private Alerts(AlertType alertType, String contentText, ButtonType... buttons) {
         super(alertType, contentText, buttons);
@@ -24,7 +24,7 @@ public class Alerts extends Alert {
 
     /**
      * Show a warning dialog.
-     * 
+     *
      * @param text text to be shown on the dialog.
      */
     public static void warn(String text) {
@@ -35,7 +35,7 @@ public class Alerts extends Alert {
 
     /**
      * Show a dialog asking the user to confirm.
-     * 
+     *
      * @param text text to be shown on the dialog.
      * @return the user's answer (OK - true, Cancel - false)
      */
@@ -49,6 +49,13 @@ public class Alerts extends Alert {
         return result;
     }
 
+    /**
+     * Show a dialog asking the user to select a new key for KeyboardWarrior.
+     * Only numbers and letters can be chosen.
+     *
+     * @param text text to show on the dialog
+     * @return chosen key (null if canceled)
+     */
     public static KeyCode getNewKey(String text) {
         Alerts alert = new Alerts(AlertType.CONFIRMATION, text, ButtonType.CANCEL);
         alert.getDialogPane().getScene().setOnKeyPressed(e -> {

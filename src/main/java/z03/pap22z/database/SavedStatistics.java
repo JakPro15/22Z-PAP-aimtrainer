@@ -12,7 +12,7 @@ public class SavedStatistics {
     /**
      * Returns the calculated statistics of results.
      *
-     * @return object mapping game type to its Statistics object
+     * @return object mapping game type strings to their Statistics objects
      */
     public static Map<String, Statistics> readAllStatistics() {
         List<Statistics> resultList = null;
