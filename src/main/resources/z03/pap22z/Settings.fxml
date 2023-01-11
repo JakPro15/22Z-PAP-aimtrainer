@@ -125,7 +125,9 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Slider fx:id="musicVolumeSlider" HBox.hgrow="ALWAYS" />
+                        <Slider fx:id="musicVolumeSlider"
+                           onMouseReleased="#playButtonSound"
+                           HBox.hgrow="ALWAYS" />
                         <Label fx:id="musicVolumeValueLabel" minWidth="100.0"
                            text="0%" textFill="BLACK">
                            <font>
@@ -136,7 +138,9 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Slider fx:id="sfxVolumeSlider" HBox.hgrow="ALWAYS" />
+                        <Slider fx:id="sfxVolumeSlider"
+                           onMouseReleased="#playButtonSound"
+                           HBox.hgrow="ALWAYS" />
                         <Label fx:id="sfxVolumeValueLabel" minWidth="100.0"
                            text="0%" textFill="BLACK">
                            <font>
@@ -148,6 +152,7 @@
                   <HBox alignment="CENTER">
                      <children>
                         <Slider fx:id="gameDifficultySlider"
+                           onMouseReleased="#playButtonSound"
                            blockIncrement="1.0" majorTickUnit="1.0" max="4.0"
                            min="0.0" minorTickCount="0" snapToTicks="true"
                            HBox.hgrow="ALWAYS" />
@@ -161,7 +166,9 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Slider fx:id="gameLengthSlider" blockIncrement="1.0"
+                        <Slider fx:id="gameLengthSlider"
+                           onMouseReleased="#playButtonSound"
+                           blockIncrement="1.0"
                            majorTickUnit="1.0" max="60.0" min="5.0"
                            minorTickCount="0" HBox.hgrow="ALWAYS" />
                         <Label fx:id="gameLengthValueLabel" minWidth="100.0"
@@ -178,6 +185,7 @@
                         <HBox alignment="CENTER">
                            <children>
                               <Slider fx:id="sharpshooterLengthSlider"
+                                 onMouseReleased="#playButtonSound"
                                  blockIncrement="1.0" majorTickUnit="1.0"
                                  max="40.0" min="3.0" minorTickCount="0"
                                  HBox.hgrow="ALWAYS" />
