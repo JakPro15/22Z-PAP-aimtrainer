@@ -80,6 +80,7 @@ public class AimSniperController extends z03.pap22z.controllers.BaseAimGameContr
         countdownTimeline.play();
     }
 
+    @Override
     protected void terminateTimelines() {
         terminateTimeline(gameTimeline);
         terminateTimeline(countdownTimeline);

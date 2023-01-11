@@ -19,33 +19,33 @@ public class GameMenuController extends z03.pap22z.controllers.BaseSceneControll
     }
 
     @FXML
-    private TextArea text_hint;
+    private TextArea hintText;
 
     @FXML
-    private Button hint_1;
+    private Button hint1;
 
     @FXML
-    private Button hint_2;
+    private Button hint2;
 
     @FXML
-    private Button hint_3;
+    private Button hint3;
 
     @FXML
     protected void handleHint(ActionEvent event) {
         MusicManager.playButtonSound();
-        if (event.getSource() == hint_1) {
-            text_hint.setText(
+        if (event.getSource() == hint1) {
+            hintText.setText(
                     "AimSniper: hit the target as many times as you can while it teleports on every successful click you make!");
         }
-        if (event.getSource() == hint_2) {
-            text_hint.setText(
+        if (event.getSource() == hint2) {
+            hintText.setText(
                     "KeyboardWarrior: press the buttons on the keyboard in the correct order as soon as they appear on the line!");
         }
-        if (event.getSource() == hint_3) {
-            text_hint.setText(
+        if (event.getSource() == hint3) {
+            hintText.setText(
                     "Sharpshooter: train your reflex by hitting the target as fast as you can, at a random moment and time. You only have 5 tries!");
         }
-        text_hint.setVisible(true);
+        hintText.setVisible(true);
     }
 
     @FXML

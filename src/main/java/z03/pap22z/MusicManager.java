@@ -15,6 +15,9 @@ public class MusicManager {
     private static float hitmarkerVolume;
     private static float revolverVolume;
 
+    /**
+     * Creates all players for each of the sounds used in the app
+     */
     static {
         musicCountdown = MusicManager.createMediaPlayer("music/Countdown.mp3");
         musicGameOver = MusicManager.createMediaPlayer("music/GameOver.mp3");
@@ -24,6 +27,11 @@ public class MusicManager {
         musicThirdGameTheme = MusicManager.createMediaPlayer("music/ThirdGameTheme.mp3");
     }
 
+    /**
+     * This function creates a player for a given sound file
+     * @param filename name of the sound file
+     * @return player which plays the given sound file
+     */
     protected static MediaPlayer createMediaPlayer(String filename) {
         String soundFile = MusicManager.class.getResource(filename).toExternalForm();
         Media media = new Media(soundFile);
@@ -31,6 +39,10 @@ public class MusicManager {
         return player;
     }
 
+    /**
+     * Sets volume of all players to the given value modified by constants
+     * @param newVolume
+     */
     public static void setMusicVolume(float newVolume) {
         musicCountdown.setVolume(newVolume / 300.0f);
         musicGameOver.setVolume(newVolume / 25.0f);
@@ -40,12 +52,21 @@ public class MusicManager {
         musicThirdGameTheme.setVolume(newVolume / 100.0f);
     }
 
+    /**
+     * Sets volume used in VFX sounds to the given value modified by constants
+     * @param newVolume
+     */
     public static void setSfxVolume(float newVolume) {
         buttonVolume = newVolume / 100.0f;
         hitmarkerVolume = newVolume / 100.0f;
         revolverVolume = newVolume / 200.0f;
     }
 
+    /**
+     * Plays the given sound from the beginning
+     * @param player player for the desired sound
+     * @param indefinite if set to true the sound will loop indefinitely
+     */
     private static void playSound(MediaPlayer player, boolean indefinite) {
         player.seek(Duration.ZERO);
         if (indefinite) {
@@ -54,6 +75,13 @@ public class MusicManager {
         player.play();
     }
 
+    /**
+     * Creates a thread that plays the given sound with the chosen volume
+     * @param fileName file from which the sound will be played
+     * @param volume
+     * @param indefinite if set to true the sound will loop indefinitely
+     * @return a thread playing the sound
+     */
     private static Runnable getMusicThread(String fileName, float volume, boolean indefinite) {
         return () -> {
             MediaPlayer player = MusicManager.createMediaPlayer(fileName);
@@ -66,6 +94,11 @@ public class MusicManager {
         };
     }
 
+    /**
+     * Plays the given sound with the chosen volume in a new thread, once
+     * @param fileName file from which the sound will be played
+     * @param volume
+     */
     private static void playSFX(String fileName, float volume) {
         getMusicThread(fileName, volume, false).run();
     }
@@ -114,6 +147,9 @@ public class MusicManager {
         musicCountdown.stop();
     }
 
+    /**
+     * Stops all the players for "themes" (longer sounds)
+     */
     public static void stopAnyGameTheme() {
         musicFirstGameTheme.stop();
         musicSecondGameTheme.stop();

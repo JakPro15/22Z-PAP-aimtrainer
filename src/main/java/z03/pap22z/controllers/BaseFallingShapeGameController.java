@@ -22,7 +22,9 @@ import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.ComboGameLogic;
 
 public abstract class BaseFallingShapeGameController extends z03.pap22z.controllers.BaseGameController{
+    // PseudoClass used to properly change look of the shapes in css
     protected static PseudoClass ON_TARGET = PseudoClass.getPseudoClass("onTarget");
+
     protected int spawnDelay;
     protected int timeLeft;
 
@@ -35,7 +37,9 @@ public abstract class BaseFallingShapeGameController extends z03.pap22z.controll
         return Settings.getKeys();
     }
 
+    // List of shapes which would award points upon hitting the correct key
     protected ArrayList<StackPane> readyShapes = new ArrayList<>();
+
     protected Timeline countdownTimeline;
     protected Timeline gameTimeline;
     protected Timeline shapeTimeline;
@@ -107,7 +111,7 @@ public abstract class BaseFallingShapeGameController extends z03.pap22z.controll
 
     /**
      * This method is responsible for creating the two timelines
-     * in which subsequent shapes are created and moved respectively
+     * in which subsequent shapes are created and moved respectively,
      * checking when they reach the finish line
      * and adding them to and removing them from
      * the list of valid shapes

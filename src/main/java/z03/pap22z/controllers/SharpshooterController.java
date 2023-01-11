@@ -16,6 +16,8 @@ import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
+    // Time (in seconds) the user has to click a circle
+    // before it disappears and counts a miss
     private final double TARGET_TIME = 1.5;
 
     @Override
@@ -30,9 +32,10 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
     @FXML
     private Label attemptsLeftLabel;
 
-    private Timeline attemptTimeline, countdownTimeline;
+    private Timeline attemptTimeline;
+    private Timeline countdownTimeline;
 
-    private LocalDateTime start;
+    private LocalDateTime startTime;
 
     @Override
     public void initializeMainBlock() {
@@ -79,24 +82,32 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         }
     }
 
+    /**
+     * Runs the timeline responsible for moving the target
+     * and waiting some time between subsequent appearances
+     */
     private void playTimeline() {
         attemptsLeftLabel.setText(Integer.toString(attemptsLeft));
         double waitDuration = 2.0 + random.nextDouble() * 6.0;
         attemptTimeline = new Timeline(
-                new KeyFrame(
-                        Duration.seconds(waitDuration), event2 -> {
-                            teleportCircle();
-                            circle.setVisible(true);
-                            start = LocalDateTime.now();
-                            logic.toggleGameState();
-                        }),
-                new KeyFrame(Duration.seconds(TARGET_TIME + waitDuration), event2 -> {
-                    this.logic.registerTargetMiss();
-                    finishAttempt();
-                }));
+            new KeyFrame(
+                    Duration.seconds(waitDuration), event2 -> {
+                        teleportCircle();
+                        circle.setVisible(true);
+                        startTime = LocalDateTime.now();
+                        logic.toggleGameState();
+                    }),
+            new KeyFrame(Duration.seconds(TARGET_TIME + waitDuration), event2 -> {
+                this.logic.registerTargetMiss();
+                finishAttempt();
+            }));
         attemptTimeline.play();
     }
 
+    /**
+     * This function is responsible for ending the game
+     * after all attempts have been used
+     */
     private void finishAttempt() {
         circle.setVisible(false);
         logic.toggleGameState();
@@ -116,9 +127,16 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
         }
     }
 
+    /**
+     * Calculates the number of points awarded upon clicking on the target
+     * based on distance from the center of the target
+     * and delay between the appearance of the circle and clicking on it
+     * @param event
+     * @return number of points awarded
+     */
     private int calculatePoints(MouseEvent event) {
         double distanceRatio = 1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue();
-        double timeRatio = 500.0 / ChronoUnit.MILLIS.between(start, LocalDateTime.now());
+        double timeRatio = 500.0 / ChronoUnit.MILLIS.between(startTime, LocalDateTime.now());
         return (int) (500 * distanceRatio * timeRatio);
     }
 

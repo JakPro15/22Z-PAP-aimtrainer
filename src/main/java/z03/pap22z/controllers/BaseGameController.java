@@ -20,6 +20,7 @@ import z03.pap22z.logics.GameLogic;
 
 public abstract class BaseGameController extends z03.pap22z.controllers.BaseSceneController {
     protected static final int DELAY_TIME = 3;
+
     protected static String GAME_NAME;
 
     protected GameLogic logic;

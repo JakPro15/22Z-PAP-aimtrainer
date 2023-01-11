@@ -202,10 +202,15 @@ public class SettingsController extends z03.pap22z.controllers.BaseSceneControll
         update();
     }
 
+    /**
+     * Handles the user trying to change one of the KeyboardWarriors keys.
+     * 
+     * @param buttonNumber number of the Key to change
+     */
     private void handleKeyButtonPressed(int buttonNumber) {
         MusicManager.playButtonSound();
         KeyCode keyCode = Alerts.getNewKey(
-                String.format("Press a key to set as Key %d for KeyboardWarrior", buttonNumber));
+                String.format("Press a letter or number to set as Key %d for KeyboardWarrior", buttonNumber));
         if (keyCode != null) {
             String key = keyCode.getName();
             if (!Settings.getKeys().get(buttonNumber - 1).equals(key) &&

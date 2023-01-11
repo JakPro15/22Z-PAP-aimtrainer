@@ -28,13 +28,13 @@ public class BaseSceneController {
      * Switches to a new scene. This method searches for a file in the
      * src/main/resources/z03/pap22z/ directory called {scene_name}.fxml.
      * 
-     * @param event      - event which triggered the switch
-     * @param scene_name - name of the new scene.
+     * @param event event which triggered the switch
+     * @param sceneName name of the new scene.
      * @throws IOException
      */
     @FXML
-    protected void switchToScene(ActionEvent event, String scene_name) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(FXML_PATH + scene_name + ".fxml"));
+    protected void switchToScene(ActionEvent event, String sceneName) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(FXML_PATH + sceneName + ".fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene oldScene = stage.getScene();
         stage.setScene(oldScene == null
