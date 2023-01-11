@@ -12,7 +12,7 @@ public class Settings {
     private static List<ProfileSettings> profiles;
     private static List<Integer> deletedProfileIds;
 
-    public static final String[] DIFFICULTIES = {"Very Easy", "Easy", "Normal", "Hard", "Very Hard"};
+    public static final String[] DIFFICULTIES = { "Very Easy", "Easy", "Normal", "Hard", "Very Hard" };
 
     static {
         initialize();
@@ -27,10 +27,8 @@ public class Settings {
         if (Database.isConnected()) {
             readFromDatabase();
             currentProfile = ProfileSettings.findProfileById(
-                profiles, SavedSettings.readCurrentProfile()
-            );
-        }
-        else {
+                    profiles, SavedSettings.readCurrentProfile());
+        } else {
             // can't read from database - create a default profile instead
             profiles = new ArrayList<ProfileSettings>();
             profiles.add(ProfileSettings.getDefaultProfile());
@@ -55,6 +53,7 @@ public class Settings {
 
     /**
      * Switch profile to the one with the given name.
+     * 
      * @param profileName name of the profile to switch to
      * @throws IllegalArgumentException when the given profile does not exist
      */
@@ -64,12 +63,12 @@ public class Settings {
             throw new IllegalArgumentException("Tried to set a nonexistent profile.");
         }
         currentProfile = profile;
-        update();
     }
 
     /**
      * Create a new profile. The name must be different from all current profiles.
      * The new profile is a copy of the current profile.
+     * 
      * @param newProfileName name of the new profile
      * @throws RuntimeException when the given profile already exists
      */
@@ -94,6 +93,7 @@ public class Settings {
 
     /**
      * Delete the given profile. There must be another profile to switch to.
+     * 
      * @param profile name of the profile to be deleted
      * @throws IllegalArgumentException when the given profile does not exist
      * @throws RuntimeException         when the given profile is the only one
@@ -112,7 +112,6 @@ public class Settings {
         if (currentProfile == profile) {
             // not using setCurrentProfile, no need to search the profile by name
             currentProfile = profiles.get(0);
-            update();
         }
         if (profile.getId() != -1) {
             deletedProfileIds.add(profile.getId());
@@ -121,11 +120,12 @@ public class Settings {
 
     /**
      * Get a copy of the list of names of all profiles.
+     * 
      * @return list of the profile names
      */
     public static List<String> getProfileNames() {
         List<String> profileNames = new ArrayList<String>();
-        for (ProfileSettings profile: profiles) {
+        for (ProfileSettings profile : profiles) {
             profileNames.add(profile.getName());
         }
         return profileNames;
@@ -140,6 +140,7 @@ public class Settings {
 
     /**
      * Set music volume for the current profile.
+     * 
      * @param newMusicVolume music volume to be set
      * @throws IllegalArgumentException when the given volume is out of range
      *                                  [0,100] (inclusive)
@@ -149,7 +150,6 @@ public class Settings {
             throw new IllegalArgumentException("Music volume must be between 0 and 100 (inclusive)");
         }
         currentProfile.setMusicVolume(newMusicVolume);
-        update();
     }
 
     /**
@@ -161,6 +161,7 @@ public class Settings {
 
     /**
      * Set sound effects volume for the current profile.
+     * 
      * @param newSfxVolume sound effects volume to be set
      * @throws IllegalArgumentException when the given volume is out of range
      *                                  [0,100] (inclusive)
@@ -170,7 +171,6 @@ public class Settings {
             throw new IllegalArgumentException("Sfx volume must be between 0 and 100 (inclusive)");
         }
         currentProfile.setSfxVolume(newSfxVolume);
-        update();
     }
 
     /**
@@ -182,6 +182,7 @@ public class Settings {
 
     /**
      * Set game difficulty for the current profile.
+     * 
      * @param newGameDifficulty difficulty to be set
      * @throws IllegalArgumentException when the given number is out of range
      *                                  [0,4] (inclusive).
@@ -202,6 +203,7 @@ public class Settings {
 
     /**
      * Set single game length for the current profile.
+     * 
      * @param newGameLength single game length in seconds to be set
      * @throws IllegalArgumentException when the given game length is out of range
      *                                  [5,60] (inclusive)
@@ -222,8 +224,10 @@ public class Settings {
 
     /**
      * Set sound effects volume for the current profile.
+     * 
      * @param newGameLength single game length in seconds to be set
-     * @throws IllegalArgumentException when the given sharpshooter length is out of range
+     * @throws IllegalArgumentException when the given sharpshooter length is out of
+     *                                  range
      *                                  [3,40] (inclusive)
      */
     public static void setSharpshooterLength(Integer newSharpshooterLength) {
@@ -247,12 +251,13 @@ public class Settings {
 
     /**
      * Sets the key given as keyNumber (1, 2, 3 or 4) to the given key.
+     * 
      * @param keyNumber number of the key to set
-     * @param value of the key to set
+     * @param value     of the key to set
      * @throws IllegalArgumentException when key number is out of range
      */
     public static void setKey(int keyNumber, String key) {
-        switch(keyNumber) {
+        switch (keyNumber) {
             case 1:
                 currentProfile.setKey1(key);
                 break;
@@ -291,9 +296,7 @@ public class Settings {
             profiles = SavedSettings.readAllSettings();
             deletedProfileIds = new ArrayList<Integer>();
             currentProfile = ProfileSettings.findProfileById(
-                profiles, SavedSettings.readCurrentProfile()
-            );
-            update();
+                    profiles, SavedSettings.readCurrentProfile());
         }
     }
 
@@ -304,12 +307,5 @@ public class Settings {
         if (Database.isConnected()) {
             SavedSettings.writeCurrentProfile(currentProfile);
         }
-    }
-
-    /**
-     * Updates global settings after something is changed.
-     */
-    private static void update() {
-        // music volume and sfx volume will be updated here
     }
 }
