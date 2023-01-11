@@ -19,7 +19,7 @@ import z03.pap22z.Alerts;
 import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
 
-public class SettingsController extends z03.pap22z.controllers.SceneController {
+public class SettingsController extends z03.pap22z.controllers.BaseSceneController {
     @FXML
     private Slider musicVolumeSlider;
     @FXML

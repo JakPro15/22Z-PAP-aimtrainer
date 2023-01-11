@@ -14,7 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import z03.pap22z.MusicManager;
 
-public class NewProfileDialogController extends SceneController {
+public class NewProfileDialogController extends BaseSceneController {
     Stage stage;
 
     @FXML

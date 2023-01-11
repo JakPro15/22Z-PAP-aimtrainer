@@ -18,7 +18,7 @@ import z03.pap22z.database.SavedResults;
 import z03.pap22z.database.StatResult;
 import z03.pap22z.logics.GameLogic;
 
-public abstract class BaseGameController extends z03.pap22z.controllers.SceneController {
+public abstract class BaseGameController extends z03.pap22z.controllers.BaseSceneController {
     protected static final int DELAY_TIME = 3;
     protected static String GAME_NAME;
 
@@ -30,6 +30,9 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
 
     protected static Random random = new Random();
 
+    /**
+     * Upper part of the window. This is where the game is happening.
+     */
     @FXML
     protected AnchorPane playfield;
 
@@ -42,6 +45,10 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
     @FXML
     protected Button saveButton;
 
+    /**
+     * Label used for displaying countdown digits as well as the "GAME OVER"
+     * message.
+     */
     @FXML
     protected Label messageLabel;
 
@@ -112,7 +119,7 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
     /**
      * This method stops the timeline given to it as a argument
      * 
-     * @param timeline
+     * @param timeline - timeline to be stopped.
      */
     protected static void terminateTimeline(Timeline timeline) {
         if (timeline != null) {

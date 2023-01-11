@@ -11,7 +11,7 @@ import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedStatistics;
 import z03.pap22z.database.Statistics;
 
-public class StatisticsController extends z03.pap22z.controllers.SceneController {
+public class StatisticsController extends z03.pap22z.controllers.BaseSceneController {
     public static final String INDENT = "    ";
     @FXML
     private Label avgScoreAimSniperLabel;
@@ -38,52 +38,40 @@ public class StatisticsController extends z03.pap22z.controllers.SceneController
     public void initialize() {
         Map<String, Statistics> stats = SavedStatistics.readAllStatistics();
         Statistics stat = stats.get("AimSniper");
-        if(stat != null) {
+        if (stat != null) {
             avgScoreAimSniperLabel.setText(
-                String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore())
-            );
+                    String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore()));
             avgAccuracyAimSniperLabel.setText(
-                String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy())
-            );
+                    String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy()));
             numberOfGamesAimSniperLabel.setText(
-                String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames())
-            );
-        }
-        else {
+                    String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames()));
+        } else {
             avgScoreAimSniperLabel.setText(String.format("%sAverage score:", INDENT));
             avgAccuracyAimSniperLabel.setText(String.format("%sAverage accuracy:", INDENT));
             numberOfGamesAimSniperLabel.setText(String.format("%sNumber of games: 0", INDENT));
         }
         stat = stats.get("KeyboardWarrior");
-        if(stat != null) {
+        if (stat != null) {
             avgScoreKeyboardWarriorLabel.setText(
-                String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore())
-            );
+                    String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore()));
             avgAccuracyKeyboardWarriorLabel.setText(
-                String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy())
-            );
+                    String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy()));
             numberOfGamesKeyboardWarriorLabel.setText(
-                String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames())
-            );
-        }
-        else {
+                    String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames()));
+        } else {
             avgScoreKeyboardWarriorLabel.setText(String.format("%sAverage score:", INDENT));
             avgAccuracyKeyboardWarriorLabel.setText(String.format("%sAverage accuracy:", INDENT));
             numberOfGamesKeyboardWarriorLabel.setText(String.format("%sNumber of games: 0", INDENT));
         }
         stat = stats.get("Sharpshooter");
-        if(stat != null) {
+        if (stat != null) {
             avgScoreSharpshooterLabel.setText(
-                String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore())
-            );
+                    String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore()));
             avgAccuracySharpshooterLabel.setText(
-                String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy())
-            );
+                    String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy()));
             numberOfGamesSharpshooterLabel.setText(
-                String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames())
-            );
-        }
-        else {
+                    String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames()));
+        } else {
             avgScoreSharpshooterLabel.setText(String.format("%sAverage score:", INDENT));
             avgAccuracySharpshooterLabel.setText(String.format("%sAverage accuracy:", INDENT));
             numberOfGamesSharpshooterLabel.setText(String.format("%sNumber of games: 0", INDENT));
@@ -93,7 +81,7 @@ public class StatisticsController extends z03.pap22z.controllers.SceneController
     @FXML
     protected void handleClearAllStatistics(ActionEvent event) {
         MusicManager.playButtonSound();
-        if(Database.isConnected()) {
+        if (Database.isConnected()) {
             SavedStatistics.clearAllStatisticsAndResults();
             // reinitialize
             initialize();

@@ -8,12 +8,17 @@ import z03.pap22z.MusicManager;
 import z03.pap22z.Settings;
 
 public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseGameController {
+    // Radius of the target when the difficulty is set to "normal".
     protected static double NORMAL_RADIUS;
+    // Offset value used when calculating target radius in other difficulties.
     protected static double RADIUS_OFFSET;
 
+    // Target circle object.
     @FXML
     protected Circle circle;
 
+    // These properties are used as a means of having constantly updated game
+    // dimensions.
     protected SimpleDoubleProperty playWidth = new SimpleDoubleProperty();
     protected SimpleDoubleProperty playHeight = new SimpleDoubleProperty();
     protected SimpleDoubleProperty circleRadius = new SimpleDoubleProperty();
@@ -46,7 +51,8 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
      * a single dimension of a field. This method accounts for the radius of
      * the circle to make sure the circle doesn't clip the edges of the field.
      *
-     * @return double
+     * @param span - the length of a given dimension in a field.
+     * @return double - resulting coordinate value.
      */
     protected double generateCircleCoord(double span) {
         double radius = circleRadius.getValue();
@@ -66,6 +72,11 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
         return newRadius;
     }
 
+    /**
+     * Main FXML handler for clicks inside the playfield object.
+     * 
+     * @param event
+     */
     @FXML
     protected void handlePlayfieldClick(MouseEvent event) {
         if (logic.getIsGameOn()) {
@@ -92,8 +103,10 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
     }
 
     /**
-     * @param event mouse click event
-     * @return whether the click occured within the circle.
+     * Returns true if the given mouse event occured within a circle.
+     * 
+     * @param event mouse event
+     * @return whether the event occured within the circle.
      */
     protected boolean isInCircle(MouseEvent event) {
         double centerDistance = clickToCenterDistance(event);
@@ -103,10 +116,10 @@ public abstract class BaseAimGameController extends z03.pap22z.controllers.BaseG
     /**
      * Calculates distance between two points.
      *
-     * @param x1
-     * @param y1
-     * @param x2
-     * @param y2
+     * @param x1 - first point's x coordinate.
+     * @param y1 - first point's y coordinate.
+     * @param x2 - second point's x coordinate.
+     * @param y2 - second point's y coordinate.
      * @return the distance between points (x1, y1) and (x2, y2)
      */
     protected static double calculateDistance(double x1, double y1, double x2, double y2) {

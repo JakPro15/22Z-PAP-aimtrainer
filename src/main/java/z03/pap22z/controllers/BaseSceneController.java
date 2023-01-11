@@ -11,15 +11,27 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import z03.pap22z.MusicManager;
 
-public class SceneController {
+public class BaseSceneController {
     protected static Stage stage;
     protected final static String FXML_PATH = "/z03/pap22z/";
 
+    /**
+     * Helper method for use in FXML files as a handler in situations when the
+     * only action that an event triggers is playing the default button sound.
+     */
     @FXML
     protected void playButtonSound() {
         MusicManager.playButtonSound();
     }
 
+    /**
+     * Switches to a new scene. This method searches for a file in the
+     * src/main/resources/z03/pap22z/ directory called {scene_name}.fxml.
+     * 
+     * @param event      - event which triggered the switch
+     * @param scene_name - name of the new scene.
+     * @throws IOException
+     */
     @FXML
     protected void switchToScene(ActionEvent event, String scene_name) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(FXML_PATH + scene_name + ".fxml"));
@@ -32,21 +44,45 @@ public class SceneController {
         stage.show();
     }
 
+    /**
+     * Helper switch method for use in FXML files.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void switchToSettings(ActionEvent event) throws IOException {
         switchToScene(event, "Settings");
     }
 
+    /**
+     * Helper switch method for use in FXML files.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void switchToMenu(ActionEvent event) throws IOException {
         switchToScene(event, "MainMenu");
     }
 
+    /**
+     * Helper switch method for use in FXML files.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void switchToGameMenu(ActionEvent event) throws IOException {
         switchToScene(event, "GameMenu");
     }
 
+    /**
+     * Helper switch method for use in FXML files.
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void switchToScoreboard(ActionEvent event) throws IOException {
         switchToScene(event, "Scoreboard");
