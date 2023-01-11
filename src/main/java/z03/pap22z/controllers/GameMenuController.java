@@ -43,7 +43,7 @@ public class GameMenuController extends z03.pap22z.controllers.BaseSceneControll
         }
         if (event.getSource() == hint3) {
             hintText.setText(
-                    "Sharpshooter: train your reflex by hitting the target as fast as you can, at a random moment and time. You only have 5 tries!");
+                    "Sharpshooter: train your reflex by hitting the target as fast as you can, at a random moment and time. Quick draw!");
         }
         hintText.setVisible(true);
     }
