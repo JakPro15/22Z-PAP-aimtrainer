@@ -14,6 +14,7 @@ public class StringResult {
     /**
      * Creates a StringResult containing all fields of the given result converted to strings.
      * Only id is not converted, but saved as an integer.
+     * The converted result is ready to be displayed in the scoreboard.
      * @param result
      */
     public StringResult(Result result) {

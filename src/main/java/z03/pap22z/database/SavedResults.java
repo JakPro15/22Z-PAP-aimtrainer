@@ -12,6 +12,7 @@ import z03.pap22z.Settings;
 public class SavedResults {
     /**
      * Writes a statistical result and returns the StatResult written.
+     *
      * @param score score achieved in the game
      * @param accuracy accuracy achieved in the game
      * @param gameType type of the game
@@ -44,7 +45,8 @@ public class SavedResults {
     }
 
     /**
-     * Registers a result of a game in the database.
+     * Registers a result of a game in the database, for viewing in the scoreboard.
+     *
      * @param statResult previously written StatResult
      * @param gameTime time of the game
      */
