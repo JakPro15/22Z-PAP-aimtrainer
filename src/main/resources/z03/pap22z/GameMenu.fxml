@@ -73,7 +73,7 @@
                   </VBox>
                   <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="30.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToSharpshooter" text="Sharpshooter" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                        <Button fx:id="sharpshooterButton" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToSharpshooter" text="Sharpshooter" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                            <graphic>
                               <ImageView fitHeight="170.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

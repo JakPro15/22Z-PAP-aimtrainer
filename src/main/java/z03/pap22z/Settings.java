@@ -23,7 +23,7 @@ public class Settings {
      * Will also reset the settings to loaded from database (or default) if called
      * later.
      */
-    static void initialize() {
+    public static void initialize() {
         if (Database.isConnected()) {
             readFromDatabase();
             currentProfile = ProfileSettings.findProfileById(

@@ -19,13 +19,11 @@ public class SavedResultsTest extends TestCase {
     public void setup() throws Exception {
         Database.connect();
         Database.resetDatabase();
-        Settings.readFromDatabase();
     }
 
     @After
     public void cleanup() {
         Database.resetDatabase();
-        Settings.readFromDatabase();
     }
 
     @Test

@@ -70,3 +70,5 @@ SELECT GameType,
        COUNT(*) AS NumberOfGames
 FROM StatResults
 GROUP BY GameType;
+
+COMMIT;

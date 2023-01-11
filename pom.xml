@@ -154,6 +154,7 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <forkCount>0</forkCount>
+                    <runOrder>alphabetical</runOrder>
                 </configuration>
             </plugin>
         </plugins>

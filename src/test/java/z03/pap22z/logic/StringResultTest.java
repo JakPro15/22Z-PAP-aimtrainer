@@ -1,14 +1,19 @@
-package z03.pap22z;
+package z03.pap22z.logic;
 
 import java.time.LocalDateTime;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import junit.framework.TestCase;
+import z03.pap22z.Settings;
+import z03.pap22z.StringResult;
 import z03.pap22z.database.ProfileSettings;
 import z03.pap22z.database.Result;
 import z03.pap22z.database.StatResult;
 
+@RunWith(JUnit4.class)
 public class StringResultTest extends TestCase {
     /**
      * Get a dummy result.

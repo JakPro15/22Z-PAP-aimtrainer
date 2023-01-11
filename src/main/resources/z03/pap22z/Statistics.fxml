@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="z03.pap22z.controllers.StatisticsController">
@@ -30,21 +31,21 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Text fx:id="avgScoreAimSniperLabel" text="    Average score:" textAlignment="CENTER">
+                  <Label fx:id="avgScoreAimSniperLabel" text="    Average score:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
-                  <Text fx:id="avgAccuracyAimSniperLabel" text="    Average accuracy:" textAlignment="CENTER">
+                  </Label>
+                  <Label fx:id="avgAccuracyAimSniperLabel" text="    Average accuracy:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
-                  <Text fx:id="numberOfGamesAimSniperLabel" text="    Number of games:" textAlignment="CENTER">
+                  </Label>
+                  <Label fx:id="numberOfGamesAimSniperLabel" text="    Number of games:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
+                  </Label>
                </children>
                <padding>
                   <Insets left="50.0" />
@@ -57,21 +58,21 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Text fx:id="avgScoreKeyboardWarriorLabel" text="    Average score:" textAlignment="CENTER">
+                  <Label fx:id="avgScoreKeyboardWarriorLabel" text="    Average score:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
-                  <Text fx:id="avgAccuracyKeyboardWarriorLabel" text="    Average accuracy:" textAlignment="CENTER">
+                  </Label>
+                  <Label fx:id="avgAccuracyKeyboardWarriorLabel" text="    Average accuracy:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
-                  <Text fx:id="numberOfGamesKeyboardWarriorLabel" text="    Number of games:" textAlignment="CENTER">
+                  </Label>
+                  <Label fx:id="numberOfGamesKeyboardWarriorLabel" text="    Number of games:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
+                  </Label>
                </children>
                <padding>
                   <Insets left="50.0" />
@@ -84,21 +85,21 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Text fx:id="avgScoreSharpshooterLabel" text="    Average score:" textAlignment="CENTER">
+                  <Label fx:id="avgScoreSharpshooterLabel" text="    Average score:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
-                  <Text fx:id="avgAccuracySharpshooterLabel" text="    Average accuracy:" textAlignment="CENTER">
+                  </Label>
+                  <Label fx:id="avgAccuracySharpshooterLabel" text="    Average accuracy:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
-                  <Text fx:id="numberOfGamesSharpshooterLabel" text="    Number of games:" textAlignment="CENTER">
+                  </Label>
+                  <Label fx:id="numberOfGamesSharpshooterLabel" text="    Number of games:" textAlignment="CENTER" textFill="BLACK">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </Text>
+                  </Label>
                </children>
                <padding>
                   <Insets left="50.0" />

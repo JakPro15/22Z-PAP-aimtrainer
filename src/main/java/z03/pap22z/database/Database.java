@@ -5,6 +5,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+import z03.pap22z.Settings;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -69,8 +71,7 @@ public class Database {
             }
             transaction.commit();
         } catch (IOException e) {
-            System.err.println("Failed to read from %s" + filename);
-            System.err.println("Exception: %s" + e.getMessage());
+            System.err.println("Exception in executeScript: " + e.getMessage());
             transaction.rollback();
         } finally {
             manager.close();
@@ -79,8 +80,10 @@ public class Database {
 
     /**
      * Resets the database to its default state.
+     * Also resets the settings.
      */
     public static void resetDatabase() {
         Database.executeScript("reset_database.sql");
+        Settings.readFromDatabase();
     }
 }

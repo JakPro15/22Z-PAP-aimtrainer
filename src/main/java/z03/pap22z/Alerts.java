@@ -17,7 +17,7 @@ public class Alerts extends Alert {
      */
     private Alerts(AlertType alertType, String contentText, ButtonType... buttons) {
         super(alertType, contentText, buttons);
-        DialogPane dialogPane = this.getDialogPane();
+        DialogPane dialogPane = getDialogPane();
         dialogPane.getStylesheets().add(
                 getClass().getResource("style.css").toExternalForm());
     }

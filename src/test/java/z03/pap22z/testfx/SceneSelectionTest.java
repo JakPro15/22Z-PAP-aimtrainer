@@ -1,4 +1,4 @@
-package z03.pap22z;
+package z03.pap22z.testfx;
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
@@ -8,15 +8,22 @@ import java.util.concurrent.TimeoutException;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
+import z03.pap22z.App;
+import z03.pap22z.database.Database;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class SceneSelectionTest extends ApplicationTest {
     @Before
     public void setup() throws Exception {
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(App.class);
+        Database.closeConnection();
     }
 
     @After
@@ -51,7 +58,7 @@ public class SceneSelectionTest extends ApplicationTest {
         // enter scoreboard scene
         verifyThat("#allResultsButton", hasText("View all results"));
         verifyThat("#myResultsButton", hasText("View your results"));
-        verifyThat("#exitButton", hasText("Exit"));
+        verifyThat("#exitButton", hasText("Back"));
         // go back to main menu
         clickOn("#exitButton");
         verifyThat("#scoreboardButton", hasText("Scoreboard"));
@@ -65,7 +72,7 @@ public class SceneSelectionTest extends ApplicationTest {
         verifyThat("#newProfileButton", hasText("New Profile"));
         verifyThat("#deleteProfileButton", hasText("Delete Profile"));
         verifyThat("#saveButton", hasText("Save"));
-        verifyThat("#exitButton", hasText("Exit"));
+        verifyThat("#exitButton", hasText("Back"));
         // go back to main menu
         clickOn("#exitButton");
         verifyThat("#settingsButton", hasText("Settings"));
