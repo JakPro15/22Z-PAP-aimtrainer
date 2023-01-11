@@ -110,6 +110,10 @@ public class MusicManager {
         playSFX("music/RevolverShot.wav", revolverVolume);
     }
 
+    public static void stopCountDownMusic() {
+        musicCountdown.stop();
+    }
+
     public static void stopAnyGameTheme() {
         musicFirstGameTheme.stop();
         musicSecondGameTheme.stop();

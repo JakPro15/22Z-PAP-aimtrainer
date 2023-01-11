@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import z03.pap22z.MusicManager;
 
 public class SceneController {
-    protected Stage stage;
+    protected static Stage stage;
     protected final static String FXML_PATH = "/z03/pap22z/";
 
     @FXML

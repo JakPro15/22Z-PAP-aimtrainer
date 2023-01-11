@@ -117,8 +117,7 @@ public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameCo
     }
 
     private int calculatePoints(MouseEvent event) {
-        double distanceRatio = Math.pow(
-                1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue(), 2);
+        double distanceRatio = 1.0 - this.clickToCenterDistance(event) / this.circleRadius.doubleValue();
         double timeRatio = 500.0 / ChronoUnit.MILLIS.between(start, LocalDateTime.now());
         return (int) (500 * distanceRatio * timeRatio);
     }

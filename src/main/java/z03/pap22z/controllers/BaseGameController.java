@@ -111,6 +111,7 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
 
     /**
      * This method stops the timeline given to it as a argument
+     * 
      * @param timeline
      */
     protected static void terminateTimeline(Timeline timeline) {
@@ -133,6 +134,7 @@ public abstract class BaseGameController extends z03.pap22z.controllers.SceneCon
     protected void handleExit(ActionEvent event) {
         terminateTimelines();
         try {
+            MusicManager.stopCountDownMusic();
             MusicManager.stopAnyGameTheme();
             MusicManager.playMenuTheme();
             switchToGameMenu(event);
