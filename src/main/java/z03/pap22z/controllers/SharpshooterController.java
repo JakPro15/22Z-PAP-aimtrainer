@@ -16,7 +16,6 @@ import z03.pap22z.database.SavedResults;
 import z03.pap22z.logics.GameLogic;
 
 public class SharpshooterController extends z03.pap22z.controllers.BaseAimGameController {
-
     @Override
     protected void initializeStatics() {
         SharpshooterController.GAME_NAME = "Sharpshooter";

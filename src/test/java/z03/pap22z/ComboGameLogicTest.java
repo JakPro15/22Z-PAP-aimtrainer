@@ -1,10 +1,13 @@
 package z03.pap22z;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import junit.framework.TestCase;
 import z03.pap22z.logics.ComboGameLogic;
 
+@RunWith(JUnit4.class)
 public class ComboGameLogicTest extends TestCase {
     @Test
     public void testConstructor() {

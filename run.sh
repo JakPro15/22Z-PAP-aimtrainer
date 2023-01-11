@@ -17,4 +17,4 @@ java --module-path Others/openjfx/lib \
      -cp AimTrainer.jar z03.pap22z.App
 
 $mysqladmin --host=localhost --socket="$HOME/pap22Z_z03_mysql/mysqld.sock" -u root shutdown
-rm *.log
+rm *.log &> /dev/null

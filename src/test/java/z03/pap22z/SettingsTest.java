@@ -3,10 +3,31 @@ package z03.pap22z;
 import static org.junit.Assert.assertThrows;
 
 import java.util.List;
-import org.junit.Test;
-import junit.framework.TestCase;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import junit.framework.TestCase;
+import z03.pap22z.database.Database;
+
+@RunWith(JUnit4.class)
 public class SettingsTest extends TestCase {
+    @Before
+    public void setup() throws Exception {
+        Database.connect();
+        Database.resetDatabase();
+        Settings.readFromDatabase();
+    }
+
+    @After
+    public void cleanup() {
+        Database.resetDatabase();
+        Settings.readFromDatabase();
+    }
+
     @Test
     public void testAddNewProfile() {
         List<String> currentProfiles = Settings.getProfileNames();

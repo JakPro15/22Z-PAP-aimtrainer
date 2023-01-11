@@ -8,15 +8,21 @@ import java.util.concurrent.TimeoutException;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
+import z03.pap22z.database.Database;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class SceneSelectionTest extends ApplicationTest {
     @Before
     public void setup() throws Exception {
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(App.class);
+        Database.closeConnection();
     }
 
     @After

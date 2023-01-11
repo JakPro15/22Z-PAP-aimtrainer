@@ -7,9 +7,7 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.testfx.api.FxRobotException;
 import org.testfx.api.FxToolkit;
-import org.testfx.framework.junit.ApplicationTest;
 
 import javafx.scene.input.MouseButton;
 import z03.pap22z.database.Database;
@@ -17,12 +15,11 @@ import z03.pap22z.database.Database;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-interface TestFXQueryFunction {
-    void run(String query);
-}
-
-public class SharpshooterTest extends ApplicationTest {
+@RunWith(JUnit4.class)
+public class SharpshooterTest extends BaseTestFXTest {
     @Before
     public void setup() throws Exception {
         FxToolkit.registerPrimaryStage();
@@ -34,27 +31,6 @@ public class SharpshooterTest extends ApplicationTest {
     public void cleanup() throws TimeoutException {
         FxToolkit.hideStage();
         Settings.initialize();
-    }
-
-    /**
-     * Try to click on a node, up to attempts times with the given delay.
-     *
-     * @param query query to find the node to click on
-     * @param delayMillis delay in milliseconds
-     * @param attempts max number of attempts
-     * @return true if clicked, false if didn't
-     */
-    private boolean tryToDo(TestFXQueryFunction runnable, String query, int delayMillis, int attempts) {
-        while(attempts > 0) {
-            try {
-                runnable.run(query);
-                return true;
-            }
-            catch(FxRobotException e) {}
-            --attempts;
-            sleep(delayMillis);
-        }
-        return false;
     }
 
     @Test
@@ -74,22 +50,23 @@ public class SharpshooterTest extends ApplicationTest {
         verifyThat("#attemptsLeftLabel", hasText("10"));
 
         // miss the circle once
-        sleep(10, TimeUnit.SECONDS);
+        assertTrue(tryToDo(query->moveTo(query), "#circle", 500, 30));
+        sleep(4, TimeUnit.SECONDS);
         verifyThat("#attemptsLeftLabel", hasText("9"));
         verifyThat("#scoreValueLabel", hasText("0"));
         // verifyThat("#accuracyValueLabel", hasText("0.00%"));
         // click on circle twice
-        assertTrue(tryToDo(query->clickOn(query), "#circle", 500, 16));
+        assertTrue(tryToDo(query->clickOn(query), "#circle", 500, 30));
         verifyThat("#attemptsLeftLabel", hasText("8"));
         // score depends on how fast the robot clicked, don't check it
         // verifyThat("#accuracyValueLabel", hasText("50.00%"));
 
-        assertTrue(tryToDo(query->clickOn(query), "#circle", 500, 16));
+        assertTrue(tryToDo(query->clickOn(query), "#circle", 500, 30));
         verifyThat("#attemptsLeftLabel", hasText("7"));
         // verifyThat("#accuracyValueLabel", hasText("66.67%"));
 
         // now miss a click
-        assertTrue(tryToDo(query->moveTo(query), "#circle", 500, 16));
+        assertTrue(tryToDo(query->moveTo(query), "#circle", 500, 30));
         moveBy(0, 16);
         press(MouseButton.PRIMARY);
         release(MouseButton.PRIMARY);
@@ -121,7 +98,7 @@ public class SharpshooterTest extends ApplicationTest {
         verifyThat("#scoreValueLabel", hasText("0"));
         verifyThat("#accuracyValueLabel", hasText("0.00%"));
         for(int i = 1; i <= 3; i++) {
-            assertTrue(tryToDo(query->clickOn(query), "#circle", 500, 16));
+            assertTrue(tryToDo(query->clickOn(query), "#circle", 500, 30));
             verifyThat("#attemptsLeftLabel", hasText(String.format("%d", 3 - i)));
             verifyThat("#accuracyValueLabel", hasText("100.00%"));
         }
@@ -152,7 +129,7 @@ public class SharpshooterTest extends ApplicationTest {
         verifyThat("#scoreValueLabel", hasText("0"));
         verifyThat("#accuracyValueLabel", hasText("0.00%"));
         // click on circle once
-        assertTrue(tryToDo(query->clickOn(query), "#circle", 500, 16));
+        assertTrue(tryToDo(query->clickOn(query), "#circle", 500, 30));
         verifyThat("#attemptsLeftLabel", hasText("2"));
         verifyThat("#accuracyValueLabel", hasText("100.00%"));
         // reset the game

@@ -5,32 +5,32 @@ import java.util.Map;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 import z03.pap22z.MusicManager;
 import z03.pap22z.database.Database;
 import z03.pap22z.database.SavedStatistics;
 import z03.pap22z.database.Statistics;
 
 public class StatisticsController extends z03.pap22z.controllers.SceneController {
-    private static final String INDENT = "    ";
+    public static final String INDENT = "    ";
     @FXML
-    private Text avgScoreAimSniperLabel;
+    private Label avgScoreAimSniperLabel;
     @FXML
-    private Text avgAccuracyAimSniperLabel;
+    private Label avgAccuracyAimSniperLabel;
     @FXML
-    private Text numberOfGamesAimSniperLabel;
+    private Label numberOfGamesAimSniperLabel;
     @FXML
-    private Text avgScoreKeyboardWarriorLabel;
+    private Label avgScoreKeyboardWarriorLabel;
     @FXML
-    private Text avgAccuracyKeyboardWarriorLabel;
+    private Label avgAccuracyKeyboardWarriorLabel;
     @FXML
-    private Text numberOfGamesKeyboardWarriorLabel;
+    private Label numberOfGamesKeyboardWarriorLabel;
     @FXML
-    private Text avgScoreSharpshooterLabel;
+    private Label avgScoreSharpshooterLabel;
     @FXML
-    private Text avgAccuracySharpshooterLabel;
+    private Label avgAccuracySharpshooterLabel;
     @FXML
-    private Text numberOfGamesSharpshooterLabel;
+    private Label numberOfGamesSharpshooterLabel;
 
     /**
      * Initialize the statistics UI.
@@ -43,7 +43,7 @@ public class StatisticsController extends z03.pap22z.controllers.SceneController
                 String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore())
             );
             avgAccuracyAimSniperLabel.setText(
-                String.format("%sAverage accuracy: %.2f", INDENT, stat.getAverageAccuracy())
+                String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy())
             );
             numberOfGamesAimSniperLabel.setText(
                 String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames())
@@ -60,7 +60,7 @@ public class StatisticsController extends z03.pap22z.controllers.SceneController
                 String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore())
             );
             avgAccuracyKeyboardWarriorLabel.setText(
-                String.format("%sAverage accuracy: %.2f", INDENT, stat.getAverageAccuracy())
+                String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy())
             );
             numberOfGamesKeyboardWarriorLabel.setText(
                 String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames())
@@ -77,7 +77,7 @@ public class StatisticsController extends z03.pap22z.controllers.SceneController
                 String.format("%sAverage score: %.2f", INDENT, stat.getAverageScore())
             );
             avgAccuracySharpshooterLabel.setText(
-                String.format("%sAverage accuracy: %.2f", INDENT, stat.getAverageAccuracy())
+                String.format("%sAverage accuracy: %.2f%%", INDENT, stat.getAverageAccuracy())
             );
             numberOfGamesSharpshooterLabel.setText(
                 String.format("%sNumber of games: %d", INDENT, stat.getNumberOfGames())
