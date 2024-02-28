@@ -1,4 +1,4 @@
-## PROJEKT PAP-22Z
+## PROJEKT PAP-22Z - AimTrainer
 
 ### Tematyka
 Celem projektu jest stworzenie prostego programu testującego celność, refleks i
@@ -13,7 +13,7 @@ trudności.
 * Krzysztof Pałucki
 * Kamil Michalak
 * Jakub Proboszcz
-* Paweł Kochański.
+* Paweł Kochański
 
 ### Zastosowane technologie:
 * Java
@@ -21,11 +21,13 @@ trudności.
 * Maven
 * Hibernate
 * Lombok
-* MySQL.
+* MySQL
 
-### Instalacja i uruchomienie
+### Instalacja i uruchomienie (na systemie Linux)
 * Należy zainstalować Javę w wersji co najmniej 17, np. komendą `sudo apt-get install openjdk-17-jre`
-oraz OpenJFX, np. komendą `sudo apt-get install openjfx`
+oraz OpenJFX, np. komendą `sudo apt-get install openjfx`. Pliki OpenJFX powinny zostać umieszczone
+w katalogu `Others/openjfx/lib`.
+* Należy zainstalować Apache Maven 3.8.6 oraz uruchomić skrypt `compile.sh`.
 * Należy pobrać MySQL ze strony https://dev.mysql.com/downloads/mysql/ (wariant Linux Generic).  
   Otrzymane archiwum należy zapisać w katalogu ~/pap22Z_z03_mysql pod nazwą mysql.tar.xz  
     Bezpośredni link do pobrania:  

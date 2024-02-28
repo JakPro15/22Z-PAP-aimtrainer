@@ -2,8 +2,6 @@
 # Compile (skipping tests) the AimTrainer program.
 
 cd $(dirname "$0")
-Scripts/check_java_mysql.sh || exit 1
-source Scripts/mysql_variables.sh
 
 mvn clean package -Dmaven.test.skip
 rm dependency-reduced-pom.xml
